@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans  
+http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+	
+	<bean name="cus" class="collection.Customer">
+		<!-- 스트링 타입 리스트 -->
+		<property name="lists">
+			<list>
+				<value>hong</value>
+				<value>kim</value>
+				<value>park</value>
+			</list>
+		</property>
+		<!-- 객체 타입 리스트 -->
+		<property name="vo">
+			<list>
+				<bean class="collection.MemberVO">
+					<property name="name" value="auth1"/>
+					<property name="id" value="kkk123"/>
+				</bean>
+				<bean class="collection.MemberVO">
+					<property name="name" value="auth2"/>
+					<property name="id" value="hhh123"/>
+				</bean>
+			</list>
+		
+		</property>
+		
+		<!-- Object 맵 -->
+		<property name="maps">
+			<map>
+				<entry key="k1" value="홍길동"/>
+				<entry key="k2">
+					<bean class="collection.MemberVO">
+						<property name="name" value="auth1"/>
+						<property name="id" value="kkk123"/>
+					</bean>
+				</entry>
+			</map>
+		
+		</property>
+		
+		
+		
+		
+		
+	</bean>
+	
+	
+
+
+
+
+
+
+
+</beans>

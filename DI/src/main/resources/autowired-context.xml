@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans.xsd
+	 http://www.springframework.org/schema/context 
+	 http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	
+	<!-- 자동주입 태그 -->
+	<!--
+	namespace에서 context추가 
+	beans 설정에 추가
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation= 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	 -->
+	
+	<context:annotation-config /> <!-- 어노테이션을 사용할 수 있게 지원해주는 설정 -->
+	
+	<bean id="docu1" class="day02.ex06.autowired.Document"/>
+	<!-- 동일 객체가 2개 있다면 생성자에선 구분할 수 없습니다-->
+	<bean id="docu2" class="day02.ex06.autowired.Document"/>
+	
+	
+	<bean id="printer" class="day02.ex06.autowired.Printer">
+		<!-- <constructor-arg ref="docu"/> --> <!-- 번거롭고 귀찬다 Autowired를 사용하자 -->
+	</bean>
+	
+	
+	<bean id="printer2" class="day02.ex06.autowired.Printer2">
+		<!-- <property name="doc" ref="docu"/> -->
+	</bean>
+	
+	
+	
+	
+	
+	
+	<!-- 		 
+	<bean id="docu2" class="day02.ex06.autowired.Document">
+		<qualifier value="used"/>
+	</bean>
+	<bean id="docu3" class="day02.ex06.autowired.Document"/>
+	-->
+	
+	
+
+</beans>

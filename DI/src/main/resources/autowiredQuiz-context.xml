@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd"	>
+	
+	<context:annotation-config/> <!-- 어노테이션을 사용하려면 무조건 명시해야함 -->	
+	
+	<bean id="mouse" class="day02.ex07.autowired.quiz.Mouse"/>
+	<bean id="keyboard" class="day02.ex07.autowired.quiz.Keyboard"/>
+	<bean id="monitor" class="day02.ex07.autowired.quiz.Monitor"/>
+
+	<bean id="com" class="day02.ex07.autowired.quiz.Computer"/>
+	
+	
+	
+
+
+	<bean id="bt1" class="day02.ex07.autowired.quiz2.Battery1"/>
+	<bean id="bt2" class="day02.ex07.autowired.quiz2.Battery2"/>
+	<bean id="ApToy" class="day02.ex07.autowired.quiz2.ApToy"/>
+	<bean id="CarToy" class="day02.ex07.autowired.quiz2.CarToy"/>	
+
+	
+	
+	
+	
+	
+	
+</beans>

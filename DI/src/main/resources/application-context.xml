@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans  
+http://www.springframework.org/schema/beans/spring-beans.xsd"
+
+>
+
+
+	<!-- day01 -->
+	<bean id="good" class="day01.SpringTest" scope="prototype"/>
+	
+	<!-- day02 -->
+	<bean id="chef" class="day02.ex01.construct.Chef" />
+	<!-- 생성자 주입 -->
+	<bean id="hotel" class="day02.ex01.construct.Hotel">
+		<constructor-arg ref="chef"></constructor-arg>
+	</bean>
+	<!-- 퀴즈 -->
+	<bean id="restaurant" class="day02.ex01.construct.ResTaurant">
+		<constructor-arg ref="chef"></constructor-arg>
+	</bean>
+	
+	
+	<!-- day02 -->
+	<!-- 세터 주입 -->
+	<bean id="DBdev" class="day02.ex02.setter.DatabaseDev">
+		<property name="url" value="jdbc:mysql://localhost:3306/test"/>
+		<property name="uid" value="jsp"/>
+		<property name="upw" value="jsp"/>
+	</bean>
+	<!-- 퀴즈 -->
+	<bean id="DBdev2" class="day02.ex02.setter.DatabaseDev">
+		<property name="url" value="jdbc:mysql://118.130.22.130:3306/dev"/>
+		<property name="uid" value="auth01"/>
+		<property name="upw" value="1234"/>
+	</bean>
+	<!-- 세터에 빈 주입 -->
+	<bean id="ds" class="day02.ex02.setter.MemberDAO">
+		<property name="ds" ref="DBdev"/><!-- ds세터에 DBdev로 생성된 bean저장 -->
+	</bean>
+	
+	
+		
+	<!-- day02 -->
+	<bean id="bt1" class="day02.ex03.battery.Battery1"/> 
+	<bean id="bt2" class="day02.ex03.battery.Battery2"/>
+
+	<bean id="ApToy" class="day02.ex03.battery.ApToy">
+		<constructor-arg ref="bt1"/> <!-- 생성자에 주입: ref="참조객체명" -->
+	</bean>
+	<bean id="CarToy" class="day02.ex03.battery.CarToy">	
+		<property name="battery" ref="bt2"/> <!-- battery세터에 bt2로 생성된 bean을 저장" -->
+	</bean> 
+	
+
+</beans>
