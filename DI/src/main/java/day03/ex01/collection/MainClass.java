@@ -1,5 +1,7 @@
 package day03.ex01.collection;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,11 +14,9 @@ public class MainClass {
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("collection-context.xml");
 		
 		Customer cus = (Customer)ctx.getBean("cus");
-		
 		//스트링타입 리스트
 		System.out.println(cus.getLists().toString());
-		
-		
+
 		//객체타입 리스트
 		List<MemberVO> list = cus.getVo();
 		
@@ -36,9 +36,22 @@ public class MainClass {
 		System.out.println("vo아이디:" + vo.getId());
 		System.out.println("vo이름:" + vo.getName());
 		
+		System.out.println("------------------------------------");
 		
+		//스프링 컨테이너의 리스트, 맵 가져오기
+		ArrayList<String> myList = (ArrayList<String>)ctx.getBean("myList");
 		
+		System.out.println(myList.toString());
+		myList.add("안녕");
+		myList.add("안녕");
+		myList.add("안녕");
+		System.out.println(myList.toString());
 		
+		HashMap<String, String> myMap = (HashMap<String, String>)ctx.getBean("myMap");
+		
+		myMap.put("1", "안녕");
+		myMap.put("2", "안녕");
+		System.out.println(myMap.toString());
 		
 	}
 }

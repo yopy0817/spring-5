@@ -6,7 +6,6 @@ http://www.springframework.org/schema/beans/spring-beans.xsd"
 >
 	
 	<bean name="cus" class="day03.ex01.collection.Customer">
-		
 		<!-- 스트링 타입 리스트 -->
 		<property name="lists">
 			<list>
@@ -44,5 +43,18 @@ http://www.springframework.org/schema/beans/spring-beans.xsd"
 		</property>
 		
 	</bean>
+
+
+
+	<!-- 이게 왜 가능한가? -->
+	<!-- 해당 클래스는 이미 존재 하자나?, 우리는 이걸 스프링컨테이너에 만들어서 쓰는거야 -->
+	<bean id="myList" class="java.util.ArrayList" />
+	<bean id="myMap" class="java.util.HashMap" />
+	
+
+
+
+
+
 
 </beans>
