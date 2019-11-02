@@ -1,4 +1,4 @@
-package configuration;
+package day03.configuration;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
