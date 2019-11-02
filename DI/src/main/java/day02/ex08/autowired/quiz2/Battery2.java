@@ -1,4 +1,4 @@
-package day02.ex07.autowired.quiz2;
+package day02.ex08.autowired.quiz2;
 
 public class Battery2 implements InterBattery{
 

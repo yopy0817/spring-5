@@ -1,4 +1,4 @@
-package day03.ex02.javaconfig;
+package day03.ex01.javaconfig;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

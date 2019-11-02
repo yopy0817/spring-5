@@ -1,4 +1,4 @@
-﻿package day03.ex02.javaconfig;
+﻿package day03.ex01.javaconfig;
 //XML파일을 자바로 설정하기
 
 import org.springframework.context.annotation.Bean;

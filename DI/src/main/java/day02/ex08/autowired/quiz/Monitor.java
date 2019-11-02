@@ -1,4 +1,4 @@
-package day02.ex07.autowired.quiz;
+package day02.ex08.autowired.quiz;
 
 public class Monitor {
 
