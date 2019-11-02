@@ -1,4 +1,4 @@
-﻿package day03.javaconfing;
+﻿package day03.ex02.javaconfig;
 //XML파일을 자바로 설정하기
 
 import org.springframework.context.annotation.Bean;
@@ -14,10 +14,12 @@ import day02.ex03.battery.Battery1;
 import day02.ex03.battery.Battery2;
 import day02.ex03.battery.CarToy;
 
-//JavaConfig가 스프링 컨테이너를 대신해서 생성할 수 있습니다.(Configuration)
+//해당 어노테이션은 이클래스가, 스프링의 설정 bean이라는 것을 표기합니다
 @Configuration
 public class JavaConfig {
-
+	
+	//@bean이 붙은 메서드를 스프링컨테이너 bean처럼 사용합니다
+	
 	//day01
 	//<bean id="good" class="test01.SpringTest"/>
 	@Bean

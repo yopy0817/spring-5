@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.zerock</groupId>
-	<artifactId>basic</artifactId> <!-- 프로젝트 가동시 톰캣에 지정될 컨택스트 패스가 됩니다 -->
+	<artifactId>Basic</artifactId> <!-- 프로젝트 가동시 톰캣에 지정될 컨택스트 패스가 됩니다 -->
 	<name>Basic</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>

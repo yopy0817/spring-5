@@ -1,4 +1,4 @@
-package collection;
+package day03.ex01.collection;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +11,7 @@ public class MainClass {
 		
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("collection-context.xml");
 		
-		Customer cus = ctx.getBean(Customer.class);
+		Customer cus = (Customer)ctx.getBean("cus");
 		
 		//스트링타입 리스트
 		System.out.println(cus.getLists().toString());

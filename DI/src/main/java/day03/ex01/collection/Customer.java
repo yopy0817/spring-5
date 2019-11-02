@@ -1,4 +1,4 @@
-package collection;
+package day03.ex01.collection;
 
 import java.util.List;
 import java.util.Map;
@@ -8,8 +8,6 @@ public class Customer {
 	private List<String> lists;
 	private List<MemberVO> vo;
 	private Map<String, Object> maps;
-
-	
 	
 	public List<String> getLists() {
 		return lists;
@@ -34,11 +32,7 @@ public class Customer {
 	public void setMaps(Map<String, Object> maps) {
 		this.maps = maps;
 	}
-	
-	
-	
-	
-	
+
 	
 	
 	
