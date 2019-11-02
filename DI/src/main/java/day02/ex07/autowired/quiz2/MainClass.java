@@ -12,7 +12,7 @@ public class MainClass {
 		//2. ApToy, CarToy에선 의존객체 자동주입 하세요
 		
 		GenericXmlApplicationContext ctx = 
-				new GenericXmlApplicationContext("applicationQuiz-context.xml");
+				new GenericXmlApplicationContext("autowiredQuiz-context.xml");
 		
 		ApToy ap = ctx.getBean("ApToy", ApToy.class);
 		ap.button();
