@@ -1,4 +1,4 @@
-package day03.configuration;
+package day03.javaconfing;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -12,6 +12,7 @@ public class MainClass {
 
 	public static void main(String[] args) {
 		
+		
 		AnnotationConfigApplicationContext ctx =
 				new AnnotationConfigApplicationContext(JavaConfig.class);
 		
@@ -19,12 +20,11 @@ public class MainClass {
 		t.method1();
 		t.method2();
 				
-		Hotel h = ctx.getBean("hotel", Hotel.class);
+		Hotel h = (Hotel)ctx.getBean("hotel");
 		h.getChef().cook();
-
 		
 		//퀴즈
-		ResTaurant r = ctx.getBean("rs", ResTaurant.class);
+		ResTaurant r = (ResTaurant)ctx.getBean("rs");
 		r.getChef().cook();
 
 		//퀴즈

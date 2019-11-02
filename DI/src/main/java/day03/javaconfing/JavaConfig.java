@@ -1,4 +1,4 @@
-﻿package day03.configuration;
+﻿package day03.javaconfing;
 //XML파일을 자바로 설정하기
 
 import org.springframework.context.annotation.Bean;
