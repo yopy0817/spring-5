@@ -1,4 +1,4 @@
-package day02.ex06.autowired;
+package day02.ex07.autowired;
 
 import javax.annotation.Resource;
 

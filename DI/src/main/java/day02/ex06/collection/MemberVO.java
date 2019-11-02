@@ -1,4 +1,4 @@
-package day02.ex07.collection;
+package day02.ex06.collection;
 
 public class MemberVO {
 
