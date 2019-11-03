@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- namespace의 경로에는 마이바티스 설정 인터페이스의 경로(동일한 이름)이 들어갑니다. -->
+  <mapper namespace="com.zerock.mapper.ScoreMapper">
+  	
+  	<!-- 마이바티스는 내부적으로 JDBC의 pstmt를 활용하고, ?를 #{속성}으로 처리합니다 -->
+ 	<!-- id태그의 속성은 인터페이스의 메서드 이름과 동일하게 작성합니다 -->
+ 	<!-- 여러 값을 전달하고 싶다면 커맨드 객체 사용 또는 parameterType속성에 Map을 지정합니다. -->
+  	<insert id="insert" keyProperty="true">
+  		insert into score01(num, name, kor, eng, math) values (score01_seq.nextval , #{name}, #{kor}, #{eng}, #{math})
+  	</insert>
+  	
+  	<!-- resultType 속성의 값은 select의 결과를 특정객체로 만들어 반환합니다 -->
+  	<!-- VO에 기술된 멤버변수는 DB의 컬럼명과 정확히 일치해야 합니다 -->
+  	<select id="select" resultType="com.zerock.command.ScoreVO">
+  		select * from score01
+  	
+  	</select>
+  	
+  	<!-- 단일값의 맵핑은 그냥 처리합니다. -->
+  	<delete id="delete">
+  		delete from score01 where num = #{num}
+  	</delete>
+  	
+  
+  </mapper>
+  
+  
