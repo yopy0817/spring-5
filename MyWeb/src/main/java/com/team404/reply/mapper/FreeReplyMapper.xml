@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  <mapper namespace="com.team404.reply.mapper.FreeReplyMapper">
+  
+  	<insert id="regist">
+  		insert into freeReply (rno, bno, reply, replyId, replyPw)
+  		values (freeReply_seq.nextval, #{bno}, #{reply}, #{replyId}, #{replyPw})
+  	</insert>
+  	
+  	<!-- 마이바티스 컨피그에 등록 -->
+  	<!-- 
+  	<select id="getList" resultType="ReplyVO">
+  		select * from freereply where bno = #{bno} order by rno desc
+  	</select>
+  	 -->
+  	<!-- 더보기 -->
+  	<select id="getList" resultType="ReplyVO" >
+  		<![CDATA[
+  		select * 
+			from(select  rownum as rn, rno, bno, reply, replyId, replyPw, replyDate  
+			     from(select * 
+			          from freereply 
+			          where bno = #{bno} 
+			          order by rno desc
+			          )
+		) where rn > (#{cri.pageNum}-1)*#{cri.amount} and rn <= #{cri.pageNum} * #{cri.amount}
+		]]>
+  	</select>
+  	<select id="getCount" resultType="int">
+  		select count(*) from freereply where bno = #{bno}
+  	</select>
+  	
+  	
+  	
+  	<!-- 댓글삭제 비밀번호 체크 -->
+  	<select id="pwCheck" resultType="int">
+  		select count(*) as result 
+  		from freereply where rno = #{rno} and replyPw = #{replyPw}
+  	</select>
+  	
+  	<!-- 댓글삭제  -->
+  	<delete id="delete">
+  		delete from freereply where rno = #{rno}
+  	</delete>
+  	
+  	<!-- 댓글수정 -->
+  	<update id="update">
+  		update freereply set reply = #{reply}, updatedate = sysdate where rno = ${rno} 
+  	</update>
+  	
+  </mapper>
+  
+  
+  
+  
+  
+  

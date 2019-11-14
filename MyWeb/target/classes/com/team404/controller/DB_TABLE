@@ -1,0 +1,46 @@
+create table freeboard(
+    bno number(10,0), 
+    title varchar(200) not null,
+    content varchar2(2000) not null,
+    writer varchar2(50) not null,
+    regdate date DEFAULT sysdate,
+    updatedate date DEFAULT sysdate
+);
+alter table freeboard add CONSTRAINT freeboard_pk PRIMARY key (bno);
+create SEQUENCE freeboard_seq;
+
+
+/////페이징 쿼리/////
+select * 
+from (select rownum as rn, bno, writer, title, content, regdate, updatedate
+      from (select * 
+            from freeboard 
+            order by bno desc
+            )
+) where rn > 0 and rn <= 10;
+
+
+/////댓글/////
+create table freereply (
+
+    rno number(10,0),
+    bno number(10,0),
+    reply varchar2(1000),
+    replyId varchar2(50),
+    replyPw varchar2(50),
+    replydate date default sysdate,
+    updatedate date default sysdate
+);
+create SEQUENCE freereply_seq;
+alter table freereply add CONSTRAINT freereply_pk PRIMARY KEY (rno);
+
+
+/////댓글 더보기 처리//////
+//0. getList메서드는(cri, 게시글번호)매개변수로 받는다
+//1. page쿼리로 변경
+//2. 화면getList함수의 더보기 보이기 조건생성
+//3. 화면getList함수의 str을 전역변수로 선언
+//4. 더보기 클릭시 page번호를 getList함수로 전달
+
+
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+  <!-- doctype 을 반드시 configuration으로 설정 -->
+  <!-- 설정 관련 mapper부분을 전부다 confg로 선언 -->
+  <!-- 마이바티스 설정관련 파일이 됩니다 -->
+  <configuration>
+  	<typeAliases>
+  		<typeAlias type="com.team404.command.FreeBoardVO" alias="FreeBoardVO"/>
+  		<typeAlias type="com.team404.command.ReplyVO" alias="ReplyVO"/>  
+  	</typeAliases>
+  </configuration>

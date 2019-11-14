@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- classpath:/ 는 src/main/resources파일 아래의 파일 경로가 들어갑니다 -->
+	<!-- DB설정파일을 작성한다면 classes폴더경로 기준으로 경로설정을 하도록 합니다 -->
+ 	<bean id="DBproperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
+ 		<property name="location" value="classpath:/db-config/Hikari.properties"/> 
+ 	</bean> 
+ 	
+ 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig"> 
+ 		<property name="driverClassName" value="${ds.driverClassName}"/> 
+ 		<property name="jdbcUrl" value="${ds.url}"/> 
+ 		<property name="username" value="${ds.username}"/> 
+ 		<property name="password" value="${ds.password}"/> 
+ 		<property name="maximumPoolSize" value="10"/> 
+ 	</bean>
+ 	
+	<!-- 히카리 커넥션 DB설정 -->
+	<!-- 
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig" >
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="spring" />
+		<property name="password" value="spring" />
+		<property value="10" name="maximumPoolSize"/>
+	</bean>
+ 	-->
+	<!-- 커넥션 풀 적용(의존성 주입) -->
+	<bean id="ds" class="com.zaxxer.hikari.HikariDataSource" >
+		<constructor-arg ref="hikariConfig" />
+	</bean>
+
+	<!-- MyBatis의 사용의 핵심 객체 sessionFactory 추가 -->
+	<!-- 세션 팩토리는 내부적으로 디비와의 연결을 해주고 SQL문도 전달도 해주기때문에 개발자의 코드량을 줄이며 효율적으로 작업처리를 
+		할 수 있게 해줍니다. -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="ds"></property>
+		
+		<!-- configLocation은 마이바티스 설정파일에 대한 로드 입니다 -->
+		<!-- classpath:/ 는 src/main/resources파일 아래의 파일 경로가 들어갑니다 -->
+		<!-- 아래코드는 세션팩토리 생성시 마이바티스 설정 파일을 로드 시킵니다 -->
+		<property name="configLocation" value="classpath:/mybatis-config/mybatis-config.xml"/>
+	</bean>
+	
+	
+	<mybatis-spring:scan base-package="com.team404.*"/>
+	<!-- 
+	<mybatis-spring:scan base-package="com.team404.frboard.mapper"/>
+	<mybatis-spring:scan base-package="com.team404.reply.mapper"/>
+	<mybatis-spring:scan base-package="com.team404.testmapper"/>
+	 -->
+</beans>

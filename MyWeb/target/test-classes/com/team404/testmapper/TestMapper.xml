@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<!--위 설정을 추가 -->
+	<mapper namespace="com.team404.testmapper.TestMapper">
+		
+		<select id="getTime" resultType="String"> 
+			select sysdate from dual
+		</select>
+		
+		<select id="getPaging" resultType="com.team404.command.FreeBoardVO">
+			<![CDATA[
+				select * 
+				from (select rownum as rn, bno, writer, title, content, regdate, updatedate
+				      from (select * 
+				            from freeboard 
+				            order by bno desc
+				            )
+				) where rn > 0 and rn <= 10
+			]]>
+		</select>
+		<!-- 페이징 쿼리 -->
+		<select id="getList" resultType="FreeBoardVO">
+		<![CDATA[
+		select * 
+		from (select rownum as rn, bno, writer, title, content, regdate, updatedate
+		      from (select * 
+		            from freeboard
+		            where
+		]]>
+					<if test="searchType == null or searchName == null">1 = 1</if>
+					<if test="searchType == 'title' ">title like '%'||#{searchName}||'%'</if>
+					<if test="searchType == 'content' ">content like '%'||#{searchName}||'%'</if>
+					<if test="searchType == 'writer' ">writer like '%'||#{searchName}||'%'</if>
+					<if test="searchType == 'titcont' ">title like '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'</if>							
+						            
+		<![CDATA[	             
+		            order by bno desc
+		            )
+		) where rn > (#{pageNum}-1) * #{amount} and rn <= (#{pageNum}* #{amount})	
+		]]>
+	</select>
+		
+		
+		
+	
+	</mapper>
+	  
