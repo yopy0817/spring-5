@@ -8,28 +8,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/user")
 public class UserController {
 
-	@RequestMapping(value= "/join", method = RequestMethod.GET)
+	@RequestMapping(value= "/userJoin", method = RequestMethod.GET)
 	public String join() {
 		
-		return "user/join";
+		return "user/userJoin";
 	}
 	
-	@RequestMapping(value= "/login", method = RequestMethod.GET)
+	@RequestMapping(value= "/userLogin", method = RequestMethod.GET)
 	public String login() {
 		
-		return "user/login";
+		return "user/userLogin";
 	}
 	
-	@RequestMapping(value= "/mypage", method = RequestMethod.GET)
+	@RequestMapping(value= "/userMypage", method = RequestMethod.GET)
 	public String mypage() {
 		
-		return "user/mypage";
+		return "user/userMypage";
 	}
 	
-	@RequestMapping(value= "/mypageCheck", method = RequestMethod.GET)
+	@RequestMapping(value= "/userCheck", method = RequestMethod.GET)
 	public String mypageCheck() {
 		
-		return "user/mypageCheck";
+		return "user/userCheck";
 	}
 	
 }
