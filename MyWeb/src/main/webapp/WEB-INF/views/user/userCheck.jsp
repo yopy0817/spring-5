@@ -33,7 +33,7 @@
                         <ul>
                             <li>
                                 <span class="lab">아이디</span>
-                                <input type="id" class="form-control" readonly>
+                                <input type="text" class="form-control" readonly>
                             </li>
                             <li>
                                 <span class="lab">비밀번호</span>

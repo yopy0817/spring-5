@@ -18,7 +18,6 @@ public class RestBasicController {
 	
 	//1. RestController는 기본적으로 return에 실린값이 리졸버로 전달되는 것이 아닌
 	//   요청이 들어온 주소로 반환됩니다.
-	
 	//나 문자열 보낼게
 	@RequestMapping(value = "/getText", produces = "text/plain; charset=utf-8")
 	public String getText() {

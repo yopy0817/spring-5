@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -32,7 +32,7 @@
                             <div class="input-group"><!--input2탭의 input-addon을 가져온다 -->
                                 <input type="text" class="form-control" id="id" placeholder="아이디를 (영문포함 4~12자 이상)">
                                 <div class="input-group-addon">
-                                    <button type="button" class="btn btn-primary">아이디중복체크</button>
+                                    <button type="button" class="btn btn-primary" id="idConfirmBtn">아이디중복체크</button>
                                 </div>
                             </div>
                             <span id="msgid"></span><!--자바스크립트에서 추가-->
@@ -44,7 +44,7 @@
                         </div>
                         <div class="form-group">
                             <label for="password-confrim">비밀번호 확인</label>
-                            <input type="password" class="form-control" id="pw-confirm" placeholder="비밀번호를 확인해주세요.">
+                            <input type="password" class="form-control" id="pwConfirm" placeholder="비밀번호를 확인해주세요.">
                              <span id="msgpw-c"></span><!--자바스크립트에서 추가-->
                         </div>
                         <div class="form-group">
@@ -55,7 +55,7 @@
                         <div class="form-group">
                             <label for="hp">휴대폰번호</label>
                             <div class="input-group">
-                                <input type="tel" class="form-control" id="hp" placeholder="휴대폰번호를 입력하세요.">
+                                <input type="tel" class="form-control" id="phone" placeholder="휴대폰번호를 입력하세요.">
                                 <div class="input-group-addon">
                                     <button type="button" class="btn btn-primary">본인인증</button>
                                 </div>
@@ -65,17 +65,17 @@
                         <div class="form-group">
                             <label for="addr-num">주소</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="addr-num" placeholder="우편번호" readonly>
+                                <input type="text" class="form-control" id="addrZipNum" placeholder="우편번호" readonly>
                                 <div class="input-group-addon">
-                                     <button type="button" class="btn btn-primary" id="addBtn">주소찾기</button>
+                                    <button type="button" class="btn btn-primary" id="addBtn">주소찾기</button>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="addr-basic" placeholder="기본주소">
+                            <input type="text" class="form-control" id="addrBasic" placeholder="기본주소">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="addr-detail" placeholder="상세주소">
+                            <input type="text" class="form-control" id="addrDetail" placeholder="상세주소">
                         </div>
 
                         <!--button탭에 들어가서 버튼종류를 확인한다-->
@@ -102,7 +102,7 @@
             var regex = /^[A-Za-z0-9+]{4,12}$/; 
             if(regex.test(document.getElementById("id").value )) {
                 document.getElementById("id").style.borderColor = "green";
-                document.getElementById("msgid").innerHTML = "사용가능합니다";
+                document.getElementById("msgid").innerHTML = "아이디중복체크는 필수 입니다";
 
             } else {
                 document.getElementById("id").style.borderColor = "red";
@@ -122,35 +122,61 @@
             }
         }
         /*비밀번호 확인검사*/
-        var pwConfirm = document.getElementById("pw-confirm");
+        var pwConfirm = document.getElementById("pwConfirm");
         pwConfirm.onkeyup = function() {
             var regex = /^[A-Za-z0-9+]{8,16}$/;
-            if(document.getElementById("pw-confirm").value == document.getElementById("pw").value ) {
-                document.getElementById("pw-confirm").style.borderColor = "green";
+            if(document.getElementById("pwConfirm").value == document.getElementById("pw").value ) {
+                document.getElementById("pwConfirm").style.borderColor = "green";
                 document.getElementById("msgpw-c").innerHTML = "비밀번호가 일치합니다";
             } else {
-                document.getElementById("pw-confirm").style.borderColor = "red";
+                document.getElementById("pwConfirm").style.borderColor = "red";
                 document.getElementById("msgpw-c").innerHTML = "비밀번호 확인란을 확인하세요";
             }
         }        
     </script>
     
+    	<script>
+		$("#idConfirmBtn").click(function(){
 
-    
-    
-    
-    
-    
+			if( $("#id").val() == '' || $("#id").css("border-color") == 'rgb(255, 0, 0)') {
+				alert("아이디 규칙을 확인해주세요");
+				return;
+			} 
+			
+			var id = $("#id").val(); //아이디를 얻음
+			$.ajax({
+				
+				type:"post",
+				url:"idConfirm",
+				data:JSON.stringify({"id": id }),
+				contentType : "application/json; charset=utf-8",
+				success: function(result) {
+					alert("result");
+				}
+			})
+			
+		});
+	
+	
+	
+	</script>	
+
+	
+
+
+
+
+	<!-- 주소API -->
     <script>
     var addBtn = document.getElementById("addBtn");
-    addBtn.onclick = function() {
+    addBtn.onclick = function() { 
    		goPopup();
    	} 
 
     function goPopup(){
     	// 주소검색을 수행할 팝업 페이지를 호출합니다.
     	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
-    	var pop = window.open("${pageContext.request.contextPath }/resources/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+    	var pop = window.open("${pageContext.request.contextPath }/resources/pop/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
     	
     	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
         //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
@@ -159,9 +185,9 @@
     function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
     		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
     		
-    		document.getElementById("addr-basic").value = roadAddrPart1;
-    		document.getElementById("addr-detail").value = addrDetail + roadAddrPart2;
-    		document.getElementById("addr-num").value = zipNo;
+    		document.getElementById("addrBasic").value = roadAddrPart1;
+    		document.getElementById("addrDetail").value = addrDetail + roadAddrPart2;
+    		document.getElementById("addrZipNum").value = zipNo;
     		/* 
     		document.form.roadFullAddr.value = roadFullAddr;
     		document.form.roadAddrPart1.value = roadAddrPart1;
@@ -194,7 +220,5 @@
     }
     
     </script>
-    
-    
 </body>
 </html>
