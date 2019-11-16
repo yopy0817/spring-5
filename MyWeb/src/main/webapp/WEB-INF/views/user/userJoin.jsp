@@ -67,7 +67,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" id="addr-num" placeholder="우편번호" readonly>
                                 <div class="input-group-addon">
-                                    <button type="button" class="btn btn-primary">주소찾기</button>
+                                    <button type="button" class="btn btn-primary" >주소찾기</button>
                                 </div>
                             </div>
                         </div>
@@ -134,5 +134,9 @@
             }
         }        
     </script>
+    
+
+    
+    
 </body>
 </html>
