@@ -12,7 +12,7 @@
     <!--개인 디자인 추가-->
     <link href="${pageContext.request.contextPath }/resources/css/style.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath }/resources/js/bootstrap.js"></script>
-
+	
 </head>
 <body>
 	
@@ -24,7 +24,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-9 col-sm-12 join-form">
-                    <h2>회원가입</h2>
+                    <div class="titlebox">
+                       	 회원가입
+                    </div>
                     <form action="joinForm" id="regForm" method="post">
                         <div class="form-group"><!--사용자클래스선언-->
                             <label for="id">아이디</label>
@@ -54,7 +56,13 @@
                         <div class="form-group">
                             <label for="hp">휴대폰번호</label>
                             <div class="input-group">
-                                <input type="tel" class="form-control" name="userPhone" id="userPhone" placeholder="휴대폰번호를 입력하세요.">
+								<select class="form-control phone1" name="userPhone1" id="userPhone1">
+									<option>010</option>
+									<option>011</option>
+									<option>017</option>
+									<option>018</option>
+								</select> 
+								<input type="text" class="form-control phone2" name="userPhone2" id="userPhone2" placeholder="휴대폰번호를 입력하세요.">
                                 <div class="input-group-addon">
                                     <button type="button" class="btn btn-primary">본인인증</button>
                                 </div>
@@ -192,7 +200,7 @@
 				alert("비밀번호 확인란을 확인하세요");
 			} else if( $("#userName").val() == '') {
 				alert("이름은 필수사항입니다");
-			} else if( $("#userPhone").val() == '') {
+			} else if( $("#userPhone2").val() == '') {
 				alert("연락처는 필수사항입니다");
 			} else if( $("#userEmail1").val() == '') {	
 				alert("이메일은 필수사항입니다");

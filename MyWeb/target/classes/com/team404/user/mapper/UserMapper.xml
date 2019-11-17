@@ -13,11 +13,12 @@
   	</select>
   	
   	<insert id="join">
-  		insert into users(userId, userPw, userName, userPhone, userEmail1, userEmail2, addrZipNum, addrBasic, addrDetail, regDate)
+  		insert into users(userId, userPw, userName, userPhone1, userPhone2, userEmail1, userEmail2, addrZipNum, addrBasic, addrDetail, regDate)
   		values(#{userId}, 
   			   #{userPw}, 
-  			   #{userName}, 
-  			   replace(#{userPhone}, '-', ''),
+  			   #{userName},
+  			   #{userPhone1}, 
+  			   replace(#{userPhone2}, '-', ''),
   			   #{userEmail1},
   			   #{userEmail2}, 
   		  	   #{addrZipNum}, 

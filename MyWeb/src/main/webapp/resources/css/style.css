@@ -206,6 +206,13 @@ footer .footer-menu li a {
         .form-control:focus {
             border-color: #555;
         }
+        /* 핸드폰폼 디자인 */
+        .input-group .phone1 {
+			width: 33.3333%;
+		}
+		.input-group .phone2 {
+			width: 66.6666%;
+		}
         /*이메일폼 디자인 */
         .email-form {
 			box-sizing: border-box;
