@@ -206,6 +206,20 @@ footer .footer-menu li a {
         .form-control:focus {
             border-color: #555;
         }
+        /*이메일폼 디자인 */
+        .email-form {
+			box-sizing: border-box;
+			overflow: hidden;;
+		}
+		.email-form input{
+			width: 33.33%;
+			float: left;;
+		}
+		.email-form select {
+			width: 66.66%;
+			float: left;;
+		}
+        
 /*=========로그인 디자인==========*/ 
         .login-form {
             margin: 0 auto;

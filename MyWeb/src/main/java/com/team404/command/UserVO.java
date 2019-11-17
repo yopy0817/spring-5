@@ -1,17 +1,23 @@
 package com.team404.command;
 
+import java.sql.Timestamp;
+
 import lombok.Data;
 
 @Data
 public class UserVO {
 
-	private String id;
-	private String pw;
-	private String name;
-	private String phone;
+	private String userId;
+	private String userPw;
+	private String userName;
+	private String userPhone;
+	private String userEmail1;
+	private String userEmail2;
 	
-	private String addrDetail;
-	private String addrBasic;
-	private String addrZipNum;
+	private String addrZipNum; //우편번호
+	private String addrBasic;//기본주소
+	private String addrDetail; //상세주소
+		
+	private Timestamp regDate; //등록일
 	
 }

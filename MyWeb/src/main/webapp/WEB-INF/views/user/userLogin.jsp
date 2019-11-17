@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>인덱스를 만들어 보자</title>
@@ -16,101 +15,65 @@
 	
 </head>
 <body>
+	
     <%@ include file="../include/header.jsp" %>
+
     <section>
         <div class="container">
             <div class="row">
-                <!--join-form을 적용한다 float해제 margin:0 auto-->
-                <div class="col-xs-12 col-md-9 join-form">
+                <div class="col-lg-6 col-md-7 col-xs-10 login-form">
                     <div class="titlebox">
-                        MEMBER INFO                    
+                       	 로그인
                     </div>
-                    
-                    <p>*표시는 필수 입력 표시입니다</p>
-                    <table class="table">
-                        <tbody class="m-control">
-                            <tr>
-                                <td class="m-title">*ID</td>
-                                <td><input class="form-control input-sm"></td>
-                            </tr>
-                            <tr>
-                                <td class="m-title">*이름</td>
-                                <td><input class="form-control input-sm"></td>
-                            </tr>
-                            <tr>
-                                <td class="m-title">*비밀번호</td>
-                                <td><input class="form-control input-sm"></td>
-                            </tr>
-                            <tr>
-                                <td class="m-title">*비밀번호확인</td>
-                                <td><input class="form-control input-sm"></td>
-                            </tr>
-                            <tr>
-                                <td class="m-title">*생일</td>
-                                <td>
-                                    <select class="form-control input-sm sel">
-                                        <option>2019</option>
-                                        <option>2018</option>
-                                        <option>2017</option>
-                                    </select>
-                                    	년
-                                    <select class="form-control input-sm sel">
-                                        <option>12</option>
-                                        <option>11</option>
-                                        <option>10</option>
-                                    </select>
-                                    	월
-                                    <select class="form-control input-sm sel">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select>
-                                    	일
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="m-title">*E-mail</td>
-                                <td>
-                                    <input class="form-control input-sm">@
-                                    <select class="form-control input-sm sel">
-                                        <option>naver.com</option>
-                                        <option>gmail.com</option>
-                                        <option>daum.net</option>
-                                    </select>
-                                    <button class="btn btn-info">중복확인</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="m-title">*휴대폰</td>
-                                <td>
-                                    <input class="form-control input-sm sel">-
-                                    <input class="form-control input-sm sel">-
-                                    <input class="form-control input-sm sel">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="m-title">*주소</td>
-                                <td><input class="form-control input-sm add"></td>
-                            </tr>
-                            <tr>
-                                <td class="m-title">*상세주소</td>
-                                <td><input class="form-control input-sm add"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                    <div class="titlefoot">
-                        <button class="btn">수정</button>
-                        <button class="btn">목록</button>
-                    </div>
-                    
+                    <form action="loginForm" id="loginForm" method="post">
+                        <div class="form-group"><!--사용자클래스선언-->
+                            <label for="id">아이디</label>
+                            <input type="text" class="form-control" name="userId" id="userId" placeholder="아이디">
+                         </div>
+                         <div class="form-group"><!--사용자클래스선언-->
+                            <label for="pw">비밀번호</label>
+                            <input type="password" class="form-control" name="userPw" id="userPw" placeholder="비밀번호">
+                         </div>
+                         <div class="form-group">
+                            <button type="button" class="btn btn-info btn-block" id="loginBtn">로그인</button>
+                            <button type="button" class="btn btn-primary btn-block" id="joinBtn">회원가입</button>
+                         </div>
+                    </form>                
                 </div>
             </div>
         </div>
-
     </section>
-    
     <%@ include file="../include/footer.jsp" %>
-    
+
+	<script>
+		$(document).ready(function() {
+			//즉시 실행함수로 처리합니다
+			(function() {
+				var msg = '${msg}';				
+				if(msg != '') {
+					alert(msg);
+				}
+			})();
+			
+			$("#loginBtn").click(function() {
+				if( $("#userId").val() == '' ) {
+					alert("아이디를 입력하세요");
+				} else if( $("#userPw").val() == '' ) {
+					alert("비밀번호를 입력하세요");
+				} else {
+					$("#loginForm").submit();
+				}
+			})
+			//로그인페이지로 이동
+			$("#joinBtn").click(function() {
+				location.href = "userJoin";
+			})
+			
+		})
+	
+	</script>
+
+
+
 </body>
 </html>

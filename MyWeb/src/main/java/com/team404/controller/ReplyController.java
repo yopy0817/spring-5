@@ -1,12 +1,11 @@
 package com.team404.controller;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team404.command.ReplyPageVO;
@@ -24,6 +23,7 @@ public class ReplyController {
 	
 	//등록작업(제이슨데이터로 처리하기 위해 RequestBody
 	@RequestMapping("/new")
+	@ResponseBody
 	public int regist(@RequestBody ReplyVO vo) {
 		
 		int result = freeReply.regist(vo);
@@ -50,6 +50,7 @@ public class ReplyController {
 	}
 	*/
 	@RequestMapping("/getReply/{bno}/{pageNum}")
+	@ResponseBody
 	public ReplyPageVO getList(
 			@PathVariable("bno") int bno,
 			@PathVariable("pageNum") int pageNum
@@ -76,6 +77,7 @@ public class ReplyController {
 	
 	//게시물 삭제
 	@RequestMapping("/delete")
+	@ResponseBody
 	public int delete(@RequestBody ReplyVO vo) {
 		System.out.println(vo.toString());//확인
 		
@@ -91,6 +93,7 @@ public class ReplyController {
 	}
 	//수정처리
 	@RequestMapping("/update")
+	@ResponseBody
 	public int update(@RequestBody ReplyVO vo) {
 		System.out.println(vo.toString());//확인
 		
