@@ -7,16 +7,21 @@
   <!-- VO의 등록을 마이바티스 설정파일에 하세요 -->
   <mapper namespace="com.team404.user.mapper.UserMapper">
   	
-  	<!-- 아이디중복확인 -->
+  	<!-- 아이디중복확인 --><!-- 닉네임중복확인 -->
   	<select id="idConfirm" resultType="int">
-  		select count(*) as total from users where userId = #{userId}
+  		select count(*) as total from users where 
+  		<choose>
+	  		<when test="userId != null">userId = #{userId}</when>
+	  		<otherwise>userNick = #{userNick}</otherwise>
+  		</choose>
   	</select>
   	
   	<insert id="join">
-  		insert into users(userId, userPw, userName, userPhone1, userPhone2, userEmail1, userEmail2, addrZipNum, addrBasic, addrDetail, regDate)
+  		insert into users(userId, userPw, userName, userNick, userPhone1, userPhone2, userEmail1, userEmail2, addrZipNum, addrBasic, addrDetail, regDate)
   		values(#{userId}, 
   			   #{userPw}, 
   			   #{userName},
+  			   #{userNick},
   			   #{userPhone1}, 
   			   replace(#{userPhone2}, '-', ''),
   			   #{userEmail1},
@@ -33,7 +38,9 @@
   		from users where userId = #{userId} and userPw = #{userPw}
   	</select>
   
-  
+  	<select id="userInfo">
+  		select sysdate from dual
+  	</select>
   
   
   

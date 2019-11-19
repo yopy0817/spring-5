@@ -52,6 +52,11 @@
                             <label for="name">이름</label>
                             <input type="text" class="form-control" name="userName" id="userName" placeholder="이름을 입력하세요.">
                         </div>
+                        <div class="form-group">
+                            <label for="nick">닉네임</label>
+                            <input type="text" class="form-control" name="userNick" id="userNick" placeholder="사용할 닉네임을 입력하세요(8글자 이하)">
+                            <span id="msgNick"></span>
+                        </div>
                         <!--input2탭의 input-addon을 가져온다 -->
                         <div class="form-group">
                             <label for="hp">휴대폰번호</label>
@@ -181,6 +186,40 @@
         		}
 			})
 		});
+		//닉네임 중복체크
+		//1. blur제이쿼리를 이용해서 nickConfirm으로 에이잭스 요청을 보내 중복여부를 확인합니다.
+		//2. nickConfirm에서는 idConfirm메서드를 재활용하여 처리합니다
+		//3. 맵퍼에서는 idConfrim의 동적쿼리를 이용해서 처리합니다
+		//4. 중복이라면 border색상을 빨강색 msgNick에 "중복된닉네임입니다"
+		//	 중복이 아니라면 border색상을 그린, msgNick에 "사용가능합니다" 출력
+		$("#userNick").blur(function() {
+			
+			if( $("#userNick").val() == '') { //공백이라면 종료
+				return;
+			}
+			var userNick = $("#userNick").val();
+			$.ajax({
+				type:"post",
+				url:"nickConfirm",
+				data: JSON.stringify({"userNick": userNick}),
+				contentType : "application/json; charset=utf-8",
+				success: function(result) {
+					if(result == 0) { //중복된 닉네임이 없음
+						$("#userNick").css("border-color", "green");
+						$("#msgNick").html("사용 가능한 닉네임입니다");
+					} else {
+						$("#userNick").css("border-color", "red");
+						$("#msgNick").html("중복된 닉네임입니다");
+					}
+				},
+				error: function(status) {
+					
+				}
+			})
+		})
+		
+		
+		
 		//회원가입버튼
 		$("#joinBtn").click(function(){
 	  		//attr(속성, 변경할값) 함수는 선택자의 내부속성을 변경하는 함수 입니다.
@@ -200,6 +239,10 @@
 				alert("비밀번호 확인란을 확인하세요");
 			} else if( $("#userName").val() == '') {
 				alert("이름은 필수사항입니다");
+			} else if( $("#userNick").val().length >= 9
+					|| $("#userNick").val() == ''
+					|| $("#userNick").css("border-color") == 'rgb(255, 0, 0)' ){
+				alert("닉네임은 8글자 이하 또는 중복 일 수 없습니다");
 			} else if( $("#userPhone2").val() == '') {
 				alert("연락처는 필수사항입니다");
 			} else if( $("#userEmail1").val() == '') {	

@@ -49,6 +49,17 @@ public class UserController {
 		int result = userService.idConfirm(vo);
 		return result;
 	}
+	
+	@RequestMapping(value = "/nickConfirm")
+	@ResponseBody
+	public int nickConfirm(@RequestBody UserVO vo) {
+		
+		int result = userService.idConfirm(vo);
+		
+		return result;
+	}
+	
+	
 	//회원가입요청
 	@RequestMapping("/joinForm")
 	public String joinForm(UserVO vo, RedirectAttributes RA) {
@@ -68,7 +79,7 @@ public class UserController {
 	//로그인처리요청
 	@RequestMapping("/loginForm")
 	public String loginForm(UserVO vo, RedirectAttributes RA, HttpSession session) {
-		
+		System.out.println("로그인탔어");
 		int result = userService.login(vo);
 		
 		if(result == 1) { //1개의 카운트가 나왔다는 것은 로그인 성공
@@ -79,20 +90,20 @@ public class UserController {
 			return "redirect:/user/userLogin";
 		}
 	}
-	/*
+
 	//로그아웃 요청
 	@RequestMapping("/userLogout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("user_id");
 		return "redirect:/";
 	}
-	*/
-
+	
 	//마이페이지화면처리
 	@RequestMapping(value= "/userMypage", method = RequestMethod.GET)
-	public String mypage() {
+	public String mypage(HttpSession session) {
 		
-		//userService.userInfo();
+		String userId = (String)session.getAttribute("user_id");	
+		userService.userInfo(userId);
 		
 		return "user/userMypage";
 	}

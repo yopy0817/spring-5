@@ -1,4 +1,4 @@
-package com.team404.util;
+package com.team404.security;
 
 import java.io.IOException;
 import java.io.PrintWriter;
