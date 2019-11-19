@@ -37,6 +37,7 @@
                          <div class="form-group">
                             <button type="button" class="btn btn-info btn-block" id="loginBtn">로그인</button>
                             <button type="button" class="btn btn-primary btn-block" id="joinBtn">회원가입</button>
+                            <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
                          </div>
                     </form>                
                 </div>

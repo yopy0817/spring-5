@@ -33,12 +33,6 @@ public class UserController {
 		
 		return "user/userLogin";
 	}
-	//마이페이지화면처리
-	@RequestMapping(value= "/userMypage", method = RequestMethod.GET)
-	public String mypage() {
-		
-		return "user/userMypage";
-	}
 	//유저체크화면처리
 	@RequestMapping(value= "/userCheck", method = RequestMethod.GET)
 	public String mypageCheck() {
@@ -85,10 +79,24 @@ public class UserController {
 			return "redirect:/user/userLogin";
 		}
 	}
+	/*
 	//로그아웃 요청
 	@RequestMapping("/userLogout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("user_id");
 		return "redirect:/";
 	}
+	*/
+
+	//마이페이지화면처리
+	@RequestMapping(value= "/userMypage", method = RequestMethod.GET)
+	public String mypage() {
+		
+		//userService.userInfo();
+		
+		return "user/userMypage";
+	}
+	
+	
+	
 }
