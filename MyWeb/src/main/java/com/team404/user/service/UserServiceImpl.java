@@ -1,5 +1,7 @@
 package com.team404.user.service;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.team404.command.UserVO;
@@ -27,7 +29,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int userInfo(String userId) {
+	public UserVO userInfo(String userId) {
 		
 		return userMapper.userInfo(userId);
 	}

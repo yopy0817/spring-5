@@ -46,11 +46,11 @@
                                 <tbody class="m-control">
                                     <tr>
                                         <td class="m-title">*ID</td>
-                                        <td><input class="form-control input-sm"></td>
+                                        <td><input class="form-control input-sm" value="${userVO.userId }" readonly></td>
                                     </tr>
                                     <tr>
                                         <td class="m-title">*이름</td>
-                                        <td><input class="form-control input-sm"></td>
+                                        <td><input class="form-control input-sm" value=${userVO.userName }></td>
                                     </tr>
                                     <tr>
                                         <td class="m-title">*비밀번호</td>
@@ -63,11 +63,11 @@
                                     <tr>
                                         <td class="m-title">*E-mail</td>
                                         <td>
-                                            <input class="form-control input-sm">@
+                                            <input class="form-control input-sm" value="${userVO.userEmail1 }">@
                                             <select class="form-control input-sm sel">
-                                                <option>naver.com</option>
-                                                <option>gmail.com</option>
-                                                <option>daum.net</option>
+                                                <option ${userVO.userEmail2 == 'naver.com' ? 'selected' : '' }>naver.com</option>
+                                                <option ${userVO.userEmail2 == 'gmail.com' ? 'selected' : '' }>gmail.com</option>
+                                                <option ${userVO.userEmail2 == 'daum.net' ? 'selected' : '' }>daum.net</option>
                                             </select>
                                             <button class="btn btn-primary">중복확인</button>
                                         </td>
@@ -81,22 +81,22 @@
                                                 <option>017</option>
                                                 <option>018</option>
                                             </select>
-                                            <input class="form-control input-sm">
+                                            <input class="form-control input-sm" value="${userVO.userPhone2 }">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="m-title">*우편번호</td>
-                                        <td><input class="form-control input-sm" id="addrZipNum" readonly>
-                                        	<button class="btn btn-primary" id="addBtn">중복확인</button>
+                                        <td><input class="form-control input-sm" id="addrZipNum" value="${userVO.addrZipNum }" readonly>
+                                        	<button class="btn btn-primary" id="addBtn">주소찾기</button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="m-title">*주소</td>
-                                        <td><input class="form-control input-sm add" id="addrBasic"></td>
+                                        <td><input class="form-control input-sm add" id="addrBasic" value="${userVO.addrBasic }"></td>
                                     </tr>
                                     <tr>
                                         <td class="m-title">*상세주소</td>
-                                        <td><input class="form-control input-sm add" id="addrDetail"></td>
+                                        <td><input class="form-control input-sm add" id="addrDetail" value="${userVO.addrDetail }"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -119,18 +119,15 @@
                                         <td>작성일</td>
                                     </tr>
                                 </thead>
+                                <c:forEach var="vo" items="${userVO.userBoardList }">
                                 <tbody>
                                     <tr>
-                                        <td>1</td>
-                                        <td><a href="##">첫글</a></td>
-                                        <td>~~~~~</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td><a href="##">두글</a></td>
-                                        <td>~~~~~</td>
+                                        <td>${vo.bno }</td>
+                                        <td><a href="../freeBoard/freeDetail?bno=${vo.bno }">${vo.title }</a></td>
+                                        <td><fmt:formatDate value="${vo.regdate }" pattern="yyyy-mm-dd"/></td>
                                     </tr>
                                 </tbody>
+                                </c:forEach>
                             </table>
                             </form>
                         </div>

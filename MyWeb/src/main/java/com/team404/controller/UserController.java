@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -100,10 +101,13 @@ public class UserController {
 	
 	//마이페이지화면처리
 	@RequestMapping(value= "/userMypage", method = RequestMethod.GET)
-	public String mypage(HttpSession session) {
+	public String mypage(HttpSession session, Model model) {
 		
 		String userId = (String)session.getAttribute("user_id");	
-		userService.userInfo(userId);
+		//userVO에 list<FreeBoardVO>를 추가한다
+		UserVO userVO = userService.userInfo(userId);
+		
+		model.addAttribute("userVO", userVO);
 		
 		return "user/userMypage";
 	}

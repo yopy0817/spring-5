@@ -6,10 +6,13 @@
   <!-- doctype 을 반드시 configuration으로 설정 -->
   <!-- 설정 관련 mapper부분을 전부다 confg로 선언 -->
   <!-- 마이바티스 설정관련 파일이 됩니다 -->
+  <!-- DB-context에 클래스패스 설정을 합니다 -->
+  <!-- 타입 별칭은 자바 타입에 대한 짧은 이름이다. 오직 XML 설정에서만 사용되며, 타이핑을 줄이기 위해 존재한다. -->
   <configuration>
   	<typeAliases>
   		<typeAlias type="com.team404.command.FreeBoardVO" alias="FreeBoardVO"/>
   		<typeAlias type="com.team404.command.ReplyVO" alias="ReplyVO"/>
   		<typeAlias type="com.team404.command.UserVO" alias="UserVO"/>  
   	</typeAliases>
+
   </configuration>
