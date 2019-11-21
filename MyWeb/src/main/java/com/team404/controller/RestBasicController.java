@@ -62,7 +62,6 @@ public class RestBasicController {
 	//확인은 구글확장프로그램 Rest Client사용
 	//http://localhost:8181/컨패스/RestControl/getJson
 	@RequestMapping("/getJson")
-	
 	public ArrayList<TestVO> getJson(@RequestBody TestVO vo) {
 		
 		ArrayList<TestVO> list = new ArrayList<TestVO>();

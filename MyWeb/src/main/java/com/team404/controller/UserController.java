@@ -51,16 +51,6 @@ public class UserController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/nickConfirm")
-	@ResponseBody
-	public int nickConfirm(@RequestBody UserVO vo) {
-		
-		int result = userService.idConfirm(vo);
-		
-		return result;
-	}
-	
-	
 	//회원가입요청
 	@RequestMapping("/joinForm")
 	public String joinForm(UserVO vo, RedirectAttributes RA) {
@@ -111,6 +101,21 @@ public class UserController {
 		
 		return "user/userMypage";
 	}
+	
+	//마이페이지 업데이트요청
+	@RequestMapping(value="/updateUser")
+	@ResponseBody
+	public UserVO updateUser(@RequestBody UserVO vo) {
+		System.out.println(vo.toString());
+		
+		int result = userService.update(vo);
+		System.out.println(result);
+		
+		return null;
+	}
+	
+	
+	
 	
 	
 	

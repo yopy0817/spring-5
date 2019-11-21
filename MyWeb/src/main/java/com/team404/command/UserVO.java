@@ -11,7 +11,6 @@ public class UserVO {
 	private String userId;
 	private String userPw;
 	private String userName;
-	private String userNick;
 	private String userPhone1;
 	private String userPhone2;
 	private String userEmail1;
@@ -22,7 +21,7 @@ public class UserVO {
 	private String addrDetail; //상세주소
 		
 	private Timestamp regDate; //등록일
-	
+	//마이페이지 때 추가
 	private ArrayList<FreeBoardVO> userBoardList;
 	
 }

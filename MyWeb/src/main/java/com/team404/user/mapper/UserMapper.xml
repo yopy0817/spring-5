@@ -17,11 +17,10 @@
   	</select>
   	<!-- 회원가입  -->
   	<insert id="join">
-  		insert into users(userId, userPw, userName, userNick, userPhone1, userPhone2, userEmail1, userEmail2, addrZipNum, addrBasic, addrDetail, regDate)
+  		insert into users(userId, userPw, userName, userPhone1, userPhone2, userEmail1, userEmail2, addrZipNum, addrBasic, addrDetail, regDate)
   		values(#{userId}, 
   			   #{userPw}, 
   			   #{userName},
-  			   #{userNick},
   			   #{userPhone1}, 
   			   replace(#{userPhone2}, '-', ''),
   			   #{userEmail1},
@@ -68,7 +67,6 @@
   		select userid,
 		       userpw,
 		       username,
-		       usernick,
 		       userphone1,
 		       userphone2,
 		       useremail1,
@@ -80,11 +78,27 @@
 		       f.title as title,
 		       f.regdate as regdate
 		from users u left outer join freeboard f 
-		on u.usernick = f.writer
+		on u.userid = f.writer
 		where u.userid = #{userId}
 		order by f.bno desc
 	</select>
-  
+  	
+  	<update id="update">
+  		update users
+  		set userpw = #{userPw},
+  		    username = #{userName},
+  		    userphone1 = #{userPhone1},
+  			userphone2 = #{userPhone2},
+  			useremail1 = #{userEmail1},
+  			useremail2 = #{userEmail2},
+  			addrzipnum = #{addrZipNum},
+  			addrbasic = #{addrBasic},
+  			addrdetail = #{addrDetail}
+  		where userid = #{userId}
+  	
+  	</update>
+  	
+  	
   
   
   </mapper>

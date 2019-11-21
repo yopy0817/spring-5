@@ -8,5 +8,6 @@ public interface UserService {
 	public int join(UserVO vo); //회원가입
 	public int login(UserVO vo); //로그인
 	public UserVO userInfo(String userId); //유저정보
+	public int update(UserVO vo); //유저업데이트
 	
 }
