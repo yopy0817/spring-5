@@ -10,7 +10,7 @@
 	<!-- 5.0에서 에러가 발생하기 때문에 xsi:schemaLocation 5.0삭제 -->
 	
 	<!-- 에러처리를 위한 어세스 핸들러 빈설정 -->
-	<bean id="AccessHandler" class="com.team404.security.AccessHandler"/>
+	<bean id="AccessHandler" class="com.team404.util.security.AccessHandler"/>
 	
 	<!-- 시큐리티의 시작지점 -->
 	<!-- 요청시 web-xml의 필터 설정을 거치게 되며 security-intercepter가 요청을 가로채 먼저 처리합니다 -->

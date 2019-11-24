@@ -27,27 +27,27 @@
                             <p>상세보기</p>
                         </div>
                         
-                        <form>
+                        <form action="freeModify" method="post" name="regForm">
                             <div>
                                 <label>DATE</label>
                                 <p>${boardVO.updatedate }</p>
                             </div>   
                             <div class="form-group">
                                 <label>번호</label>
-                                <input class="form-control" value="${boardVO.bno }" name='##' readonly>
+                                <input class="form-control" value="${boardVO.bno }" name='bno' readonly>
                             </div>
                             <div class="form-group">
                                 <label>작성자</label>
-                                <input class="form-control" value="${boardVO.writer }" name='##' readonly>
+                                <input class="form-control" value="${boardVO.writer }" name='writer' readonly>
                             </div>    
                             <div class="form-group">
                                 <label>제목</label>
-                                <input class="form-control" value="${boardVO.title }"name='##' readonly>
+                                <input class="form-control" value="${boardVO.title }"name='title' readonly>
                             </div>
 
                             <div class="form-group">
                                 <label>내용</label>
-                                <textarea class="form-control" rows="10" name='##' readonly>${boardVO.content }</textarea>
+                                <textarea class="form-control" rows="10" name='content' readonly>${boardVO.content }</textarea>
                             </div>
 							
 							<!-- 반드시 타입-버튼 id추가 -->
@@ -115,7 +115,8 @@
         <script>
         	var freeModify = document.getElementById("freeModify");
         	freeModify.onclick = function() {
-        		location.href = "freeModify?bno=${boardVO.bno} ";
+        		//location.href = "freeModify?bno=${boardVO.bno} ";
+        		document.regForm.submit();
         	}
         	
         	var freeList = document.getElementById("freeList");

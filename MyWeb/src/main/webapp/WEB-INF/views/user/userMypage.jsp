@@ -131,7 +131,7 @@
                                     <tr>
                                         <td>${vo.bno }</td>
                                         <td><a href="../freeBoard/freeDetail?bno=${vo.bno }">${vo.title }</a></td>
-                                        <td><fmt:formatDate value="${vo.regdate }" pattern="yyyy-mm-dd"/></td>
+                                        <td><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/></td>
                                     </tr>
                                 </tbody>
                                 </c:forEach>
@@ -200,15 +200,19 @@
 					data: JSON.stringify(jsonData),
 					contentType: "application/json; charset=utf-8",
 					success: function(result) {
-						alert(result)
+						if(result == 1) {
+							alert("정보가 수정되었습니다");
+							$("#userPw").val("");
+							$("#pwConfirm").val("");
+						} else {
+							alert("정보 수정에 실패했습니다");
+						}
 					},
 					error: function(status) {
-						
+						alert("잠시후에 다시 시도하세요");
 					}
 				})
 			}
-			
-				
 		})
 
 	</script>

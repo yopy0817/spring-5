@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team404.command.UserVO;
@@ -69,10 +70,10 @@ public class UserController {
 	
 	//로그인처리요청
 	@RequestMapping("/loginForm")
-	public String loginForm(UserVO vo, RedirectAttributes RA, HttpSession session) {
+	public String loginForm(UserVO vo, RedirectAttributes RA, HttpSession session, Model model) {
 		System.out.println("로그인탔어");
 		int result = userService.login(vo);
-		
+		/*기존의 방식
 		if(result == 1) { //1개의 카운트가 나왔다는 것은 로그인 성공
 			session.setAttribute("user_id", vo.getUserId() ); //세션에 아이디 저장
 			return "redirect:/"; //홈화면으로 
@@ -80,12 +81,23 @@ public class UserController {
 			RA.addFlashAttribute("msg", "아이디 비밀번호를 확인하세요"); //1회성 데이터에 msg저장
 			return "redirect:/user/userLogin";
 		}
+		*/
+		if(result == 1) {
+			session.setAttribute("user_id", vo.getUserId() ); //세션에 아이디 저장
+			return "home"; //중복 리다이렉트는 처리가 불가하기 때문에 메인화면으로 지정후 인터셉터가 가로챔
+		} else {
+			RA.addFlashAttribute("msg", "아이디 비밀번호를 확인하세요"); //1회성 데이터에 msg저장
+			return "redirect:/user/userLogin";
+		}
+				
+		
 	}
 
 	//로그아웃 요청
 	@RequestMapping("/userLogout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("user_id");
+		session.invalidate();
 		return "redirect:/";
 	}
 	
@@ -105,13 +117,17 @@ public class UserController {
 	//마이페이지 업데이트요청
 	@RequestMapping(value="/updateUser")
 	@ResponseBody
-	public UserVO updateUser(@RequestBody UserVO vo) {
+	public int updateUser(@RequestBody UserVO vo) {
 		System.out.println(vo.toString());
 		
 		int result = userService.update(vo);
-		System.out.println(result);
 		
-		return null;
+		if(result == 1) {
+			return 1;
+		} else {
+			return 0;
+		}
+		
 	}
 	
 	

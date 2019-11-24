@@ -63,6 +63,7 @@
 	</resultMap>
 	  	
 	<!-- 조인의 결과로 하나의 데이터에 부가적인 데이터를 처리하는 경우 1:N관계를 처리할 수 있는 reseltMap태그를 이용할수 있습니다-->
+	<!-- 조인을 통해 필요한 데이터만 저장합니다 -->
   	<select id="userInfo" resultMap="userBoardList">
   		select userid,
 		       userpw,
