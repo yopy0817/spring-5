@@ -32,7 +32,7 @@
                         <tbody class="t-control">
                             <tr>
                                 <td class="t-title">NAME</td>
-                                <td><input class="form-control input-sm" name="writer"></td>
+                                <td><input class="form-control input-sm" name="writer" value=${sessionScope.user_id } readonly></td>
                             </tr>
                             <tr>
                                 <td class="t-title">TITLE</td>

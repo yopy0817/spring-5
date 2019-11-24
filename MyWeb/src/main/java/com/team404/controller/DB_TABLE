@@ -56,5 +56,5 @@ create table users(
     addrBasic varchar2(300) not null,
     addrDetail varchar2(300) not null,
     regDate date default sysdate
-);
+); 
 alter table users add constraint userId_pk primary key (userId);

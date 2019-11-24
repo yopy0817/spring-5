@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 테스트의 인터셉터 적용 -->
+	<!-- 
+	<interceptors>
+		<interceptor >
+			<mapping path="/session/updatePage" />
+			<mapping path="/session/myPage" />
+			<beans:bean class="com.team404.util.intercepter.TestIntercepter" />
+		</interceptor>
+	</interceptors>
+	 -->
+	
+	<!-- 빈생성후 주입 -->
+	<beans:bean id="userIntercepter" class="com.team404.util.intercepter.UserIntercepter"/>
+	<beans:bean id="loginFormIntercepter" class="com.team404.util.intercepter.LoginFormIntercepter"/>
+	<beans:bean id="boardIntercepter" class="com.team404.util.intercepter.BoardIntercepter"/>
+	
+	<interceptors>
+		<!-- 유저 권한 -->
+		<interceptor>
+			<mapping path="/user/userMypage"/>
+			<mapping path="/freeBoard/freeRegist"/>
+			<beans:ref bean="userIntercepter" />
+		</interceptor>
+		
+		<!-- 로그인폼 요청시 post핸들러 -->
+		<interceptor>
+			<mapping path="/user/loginForm"/>
+			<beans:ref bean="loginFormIntercepter"/>
+		</interceptor>
+		
+		<!-- 게시판 권한 -->
+		<interceptor>
+			<mapping path="/freeBoard/freeModify"/>
+			<mapping path="/freeBoard/freeUpdate"/>
+			<mapping path="/freeBoard/freeDelete"/>
+			<beans:ref bean="boardIntercepter" />
+		</interceptor>
+		
+		
+	</interceptors>
+	
+	
+	
+	
+
+</beans:beans>

@@ -8,7 +8,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			/WEB-INF/spring/appServlet/DB-context.xml
-			/WEB-INF/spring/appServlet/security-context.xml
+			<!-- /WEB-INF/spring/appServlet/security-context.xml -->
 		</param-value>
 	</context-param>
 	
@@ -24,8 +24,8 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				/WEB-INF/spring/appServlet/servlet-context01.xml
-				/WEB-INF/spring/appServlet/servlet-context02.xml
+				/WEB-INF/spring/appServlet/servlet-context.xml
+				/WEB-INF/spring/appServlet/intercepter-context.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
@@ -60,6 +60,7 @@
 	<!-- 적용시 에러가 발생한다면, bean이 제대로 생성되지 않았기 때문이다.  -->
 	<!-- 1.context-param에 추가해서 스프링시작시 로드시키도록 설정합니다 -->
 	<!-- 2.security설정 파일에 최소한의 설정을 하도록 처리 -->
+	<!-- 
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -68,6 +69,6 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>	
-	
+	 -->
 	
 </web-app>

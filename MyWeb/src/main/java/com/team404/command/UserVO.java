@@ -1,6 +1,7 @@
 package com.team404.command;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import lombok.Data;
 
@@ -20,5 +21,7 @@ public class UserVO {
 	private String addrDetail; //상세주소
 		
 	private Timestamp regDate; //등록일
+	//마이페이지 때 추가
+	private ArrayList<FreeBoardVO> userBoardList;
 	
 }
