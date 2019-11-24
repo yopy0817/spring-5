@@ -26,6 +26,8 @@ public class RestBasicController {
 		
 		return "안녕하세요";
 	}
+	
+
 	//잭슨-데이터바인딩 다운
 	//나 객체 보낼게! 다만,화면에서 객체를 어떻게 처리해야해? 잭슨-데이터바인딩이 모든화면에서 공용으로 사용되는 JSON형식으로 변환
 	@RequestMapping(value = "/getObject") //, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -61,6 +63,8 @@ public class RestBasicController {
 	//JSON객체로 받고 TestVO에 값에 자동 맵핍 -> 그리고 list로 보낼게!
 	//확인은 구글확장프로그램 Rest Client사용
 	//http://localhost:8181/컨패스/RestControl/getJson
+	//기본적으로 POST요청으로 내용을 바디에 숨겨 전송해야 하며
+	//{"num": 1, "name": "홍길동", "id": "aaa123"}
 	@RequestMapping("/getJson")
 	public ArrayList<TestVO> getJson(@RequestBody TestVO vo) {
 		

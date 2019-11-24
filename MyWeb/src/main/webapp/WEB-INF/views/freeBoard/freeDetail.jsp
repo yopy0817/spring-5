@@ -265,9 +265,9 @@
         			var replyPw = $("#modalPw").val();
       			
         			$.ajax({
-        				type: "delete",
-                		url:"../reply/delete",
-                		data: JSON.stringify({"rno": rno, "replyPw": replyPw}),
+        				type: "delete", 
+                		url:"../reply/" + rno + "/" + replyPw , //url:"../reply/delete",
+                		//data: JSON.stringify({"rno": rno, "replyPw": replyPw}),
                 		contentType : "application/json; charset=utf-8",
                 		success : function(result, status) {
                 			if(result == 1) {//삭제 성공

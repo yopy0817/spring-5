@@ -75,11 +75,15 @@ public class ReplyController {
 	}
 	
 	
-	//게시물 삭제
-	@RequestMapping("/delete")
+	//게시물 삭제 //@RequestMapping("/delete")
+	@RequestMapping("/{rno}/{replyPw}")
 	@ResponseBody
-	public int delete(@RequestBody ReplyVO vo) {
-		System.out.println(vo.toString());//확인
+	public int delete(@PathVariable("rno") int rno, //@RequestBody ReplyVO vo) {
+					@PathVariable("replyPw") String replyPw ) {	
+
+		ReplyVO vo = new ReplyVO();
+		vo.setRno(rno);
+		vo.setReplyPw(replyPw);
 		
 		int result = freeReply.pwCheck(vo);//비밀번호가 맞다면 1, 같지 않다면 0이 리턴된다
 		System.out.println("성공실패:" + result);
@@ -106,12 +110,5 @@ public class ReplyController {
 			return 0;
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
