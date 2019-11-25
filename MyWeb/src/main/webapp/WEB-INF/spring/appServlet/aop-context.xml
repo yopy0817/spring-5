@@ -11,7 +11,7 @@
 
 	<!-- namespce에서 aop설정 추가 -->
 	<!-- 스캔명령을 통해 AOP설정파일이 빈으로 등록 -->
-	<context:component-scan base-package="com.team404.util.aop"/>
+	<context:component-scan base-package="com.team404.aop"/>
 	<!-- proxy방법으로 어노테이션이 동작 -->
 	<aop:aspectj-autoproxy/>
 	

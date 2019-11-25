@@ -1,4 +1,4 @@
-package com.team404.aop;
+package com.team404.util.aop;
 
 import java.util.Arrays;
 
@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 public class LogAdvice {
 	
 	private static final Logger log = LoggerFactory.getLogger(LogAdvice.class);
-	
 	/*
 	//맨앞 *는 접근제한자를 의미 맨 뒤 *는 메서드를 의미
 	@Before("execution(* com.team404.service.memberServiceImpl*.*(..))")
@@ -42,10 +41,15 @@ public class LogAdvice {
 	}
 	*/
 	
+	
+	//log설정
+	//<logger name="com.team404.util.aop">
+	//	<level value="info" />
+	//</logger>
 	//이 모든것을 한번에 처리하는 강력한 기능 around
 	//메서드 실행 권한을 가지고 , 실행 전, 실행 후 처리가 가능
 	//@Around가 적용되는 메서드(어드바이스)는 반드시 리턴이 있어야 합니다.
-	@Around("execution(* com.team404.service.memberServiceImpl.*(..))")
+	@Around("execution(* com.team404.*.service.*ServiceImpl.*(..))")
 	public Object aroundLog(ProceedingJoinPoint jp) {
 		long start = System.currentTimeMillis();
 		//해당 기능을 통해 메서드 실행전 결과를 확인할 수 있습니다.
@@ -54,6 +58,7 @@ public class LogAdvice {
 		log.info("적용클래스:" + jp.getTarget());
 		log.info("적용메서드:" + jp.getSignature().toString() );
 		log.info("적용파리미터:" + Arrays.toString(jp.getArgs()) );
+		
 		
 		Object result = null;
 		
