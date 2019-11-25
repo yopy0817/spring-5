@@ -26,6 +26,7 @@
 	
 	
 	<!-- 파일업로드 -->
+	<!-- 반드시 꼭 백번 id를 multipartResolver선언  -->
 	<beans:bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
          <!-- 최대업로드 가능한 바이트크기 -->
          <beans:property name="maxUploadSize" value="52428800" />
