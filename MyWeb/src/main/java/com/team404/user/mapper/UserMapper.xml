@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- VO의 등록을 마이바티스 설정파일에 하세요 -->
+  <mapper namespace="com.team404.user.mapper.UserMapper">
+  	
+  	<!-- 아이디중복확인 --><!-- 닉네임중복확인 -->
+  	<select id="idConfirm" resultType="int">
+  		select count(*) as total from users where 
+  		<choose>
+	  		<when test="userId != null">userId = #{userId}</when>
+	  		<otherwise>userNick = #{userNick}</otherwise>
+  		</choose>
+  	</select>
+  	<!-- 회원가입  -->
+  	<insert id="join">
+  		insert into users(userId, userPw, userName, userPhone1, userPhone2, userEmail1, userEmail2, addrZipNum, addrBasic, addrDetail, regDate)
+  		values(#{userId}, 
+  			   #{userPw}, 
+  			   #{userName},
+  			   #{userPhone1}, 
+  			   replace(#{userPhone2}, '-', ''),
+  			   #{userEmail1},
+  			   #{userEmail2}, 
+  		  	   #{addrZipNum}, 
+  		  	   #{addrBasic}, 
+  		  	   #{addrDetail}, 
+  		  	   sysdate
+  		  	   )
+  	</insert>
+  	<!-- 로그인 -->
+  	<select id="login" resultType="int">
+  		select count(*) as count 
+  		from users where userId = #{userId} and userPw = #{userPw}
+  	</select>
+  	
+  	<!-- 마이페이지 -->
+  	<!-- type속성에는  실제클래스의 경로 id는 사용할 이름이 들어갑니다.-->
+  	<!-- property에는 변수명이 들어가며 대소문자가 동일해야 합니다 -->
+  	<!-- column에는 DB의 컬럼명이 들어갑니다 -->
+  	<resultMap type="UserVO" id="userBoardList">
+  		<result property="userId" column="userid"/>
+  		<result property="userPw" column="userpw"/>
+  		<result property="userName" column="username"/>
+  		<result property="userNick" column="usernick"/>
+  		<result property="userPhone1" column="userphone1"/>
+  		<result property="userPhone2" column="userphone2"/>
+  		<result property="userEmail1" column="useremail1"/>
+  		<result property="userEmail2" column="useremail2"/>
+  		<result property="addrZipNum" column="addrzipnum"/>
+  		<result property="addrBasic" column="addrbasic"/>
+  		<result property="addrDetail" column="addrdetail"/>
+  		<result property="userEmail2" column="useremail2"/>
+  		<collection property="userBoardList" resultMap="list"/>
+  	</resultMap>
+	<resultMap type="FreeBoardVO" id="list">
+		<result property="bno" column="bno"/>
+		<result property="title" column="title"/>
+		<result property="regdate" column="regdate"/>
+	</resultMap>
+	  	
+	<!-- 조인의 결과로 하나의 데이터에 부가적인 데이터를 처리하는 경우 1:N관계를 처리할 수 있는 reseltMap태그를 이용할수 있습니다-->
+	<!-- 조인을 통해 필요한 데이터만 저장합니다 -->
+  	<select id="userInfo" resultMap="userBoardList">
+  		select userid,
+		       userpw,
+		       username,
+		       userphone1,
+		       userphone2,
+		       useremail1,
+		       useremail2,
+		       addrzipnum,
+		       addrbasic,
+		       addrdetail,
+		       f.bno as bno,
+		       f.title as title,
+		       f.regdate as regdate
+		from users u left outer join freeboard f 
+		on u.userid = f.writer
+		where u.userid = #{userId}
+		order by f.bno desc
+	</select>
+  	
+  	<update id="update">
+  		update users
+  		set userpw = #{userPw},
+  		    username = #{userName},
+  		    userphone1 = #{userPhone1},
+  			userphone2 = #{userPhone2},
+  			useremail1 = #{userEmail1},
+  			useremail2 = #{userEmail2},
+  			addrzipnum = #{addrZipNum},
+  			addrbasic = #{addrBasic},
+  			addrdetail = #{addrDetail}
+  		where userid = #{userId}
+  	
+  	</update>
+  	
+  	
+  
+  
+  </mapper>

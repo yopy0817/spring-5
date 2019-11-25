@@ -187,6 +187,24 @@
 		    <version>2.9.8</version>
 		</dependency>
 		
+		<!-- 스프링시큐리티 -->
+		<!-- core, web, config 3가지를 받습니다 -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>5.0.7.RELEASE</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>5.0.7.RELEASE</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>5.0.7.RELEASE</version>
+		</dependency>
+		
 		        
 	</dependencies>
     <build>

@@ -38,7 +38,7 @@
                             </div>
                             <div class="form-group">
                                 <label>작성자</label>
-                                <input class="form-control" value="${boardVO.writer }" name='writer'>
+                                <input class="form-control" value="${boardVO.writer }" name='writer' readonly>
                             </div>    
                             <div class="form-group">
                                 <label>제목</label>

@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+<web-app version="3.1" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_3_1.xsd">
 
 	<!-- 변경하자 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/appServlet/DB-context.xml</param-value>
+		<param-value>
+			/WEB-INF/spring/appServlet/DB-context.xml
+			<!-- /WEB-INF/spring/appServlet/security-context.xml -->
+		</param-value>
 	</context-param>
 	
 	<!-- 스프링 설정파일 시작 -->
@@ -21,8 +24,8 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				/WEB-INF/spring/appServlet/servlet-context01.xml
-				/WEB-INF/spring/appServlet/servlet-context02.xml
+				/WEB-INF/spring/appServlet/servlet-context.xml
+				/WEB-INF/spring/appServlet/intercepter-context.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
@@ -53,6 +56,19 @@
 	    <url-pattern>/*</url-pattern>
   	</filter-mapping>
 	
-	
+	<!-- 시큐리티 -->
+	<!-- 적용시 에러가 발생한다면, bean이 제대로 생성되지 않았기 때문이다.  -->
+	<!-- 1.context-param에 추가해서 스프링시작시 로드시키도록 설정합니다 -->
+	<!-- 2.security설정 파일에 최소한의 설정을 하도록 처리 -->
+	<!-- 
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>	
+	 -->
 	
 </web-app>

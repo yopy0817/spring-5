@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 1.pom.xml에 core, web,config 3가지 받기 -->
+	<!-- web.xml필터의 설정을 통해서 스프링에 첫번째 단계에서 동작하도록 설정 -->
+	<!-- 5.0에서 에러가 발생하기 때문에 xsi:schemaLocation 5.0삭제 -->
+	
+	<!-- 에러처리를 위한 어세스 핸들러 빈설정 -->
+	<bean id="AccessHandler" class="com.team404.util.security.AccessHandler"/>
+	
+	<!-- 시큐리티의 시작지점 -->
+	<!-- 요청시 web-xml의 필터 설정을 거치게 되며 security-intercepter가 요청을 가로채 먼저 처리합니다 -->
+	<!-- pattern에는 가로챌 요청 주소가 들어가고 access에는 permitAll, ROLE_MEMBER, ROLE_ADMIN와 같이 지정된 접근 권한이 들어갑니다 -->
+<!-- 
+	<security:http>
+		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/user/userMypage" access="hasRole('ROLE_MEMBER')" />
+		<security:form-login />권한이 없을때 스프링에서 제공하는 기본페이지로 자동이동
+		<security:form-login login-page="/user/userLogin"/>권한이없을때 이동할 페이지 지정
+	<security:access-denied-handler ref="AccessHandler"/>접근제한시 실행되는 클래스 주입
+	</security:http>
+
+	시큐리티에 반드시 필요한 태그
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				{noop은 시큐리티 5.0에서 반드시 해야하는 패스워드암호화(인코딩)처리를 무시하겠다는 선언 } 
+				<security:user name="yopy" password="{noop}1234" authorities="ROLE_MEMBER"/>
+				<security:user name="admin" password="{noop}1234" authorities="ROLE_ADMIN"/>
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>
+ -->
+</beans>
