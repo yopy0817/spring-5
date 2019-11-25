@@ -178,8 +178,7 @@
 		    <version>1.16</version>
 		</dependency>
 		<!-- MyBatis 관련 라이브러리 끝 -->    
-		
-		
+
 		<!-- 제이슨타입을 자동맵핑시켜주는 라이브러리 -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
@@ -187,6 +186,13 @@
 		    <version>2.9.8</version>
 		</dependency>
 		
+		<!-- aop관련 설정은 위쪽에 있으며, aop위버 라이브러리를 통해 동작함 반드시 추가 -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>
+
 		<!-- 스프링시큐리티 -->
 		<!-- core, web, config 3가지를 받습니다 -->
 		<dependency>
