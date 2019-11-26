@@ -192,6 +192,22 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>
+	
+		<!-- 서블릿 3.0이상 이전 사용가능 파일 업로드 API -->
+		<!-- 스프링설정파일에 반드시 multipartResorver설정 -->
+		<dependency>
+	        <groupId>commons-fileupload</groupId>
+	        <artifactId>commons-fileupload</artifactId>
+	        <version>1.2.1</version>
+		</dependency>
+		<dependency>
+         	<groupId>commons-io</groupId>
+         	<artifactId>commons-io</artifactId>
+         	<version>1.4</version>
+		</dependency>
+
+
+
 
 		<!-- 스프링시큐리티 -->
 		<!-- core, web, config 3가지를 받습니다 -->
@@ -210,8 +226,7 @@
 		    <artifactId>spring-security-config</artifactId>
 		    <version>5.0.7.RELEASE</version>
 		</dependency>
-		
-		        
+	
 	</dependencies>
     <build>
         <plugins>
