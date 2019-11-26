@@ -14,9 +14,6 @@
     <link href="${pageContext.request.contextPath }/resources/css/style.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath }/resources/js/bootstrap.js"></script>
 	<style type="text/css">
-	    body {
-            background-color: white;
-        }
         section {
             margin-top: 70px;
         }
@@ -47,7 +44,7 @@
         }
         
         .title-inner .profile{
-            position: absolute;/*부모기준으로 위치지정(릴레이티브 줘야함)*/
+            position: absolute;/*부모기준으로 위치지정 릴레이티브*/
             top:15px;
             left: 0;
             
@@ -97,7 +94,7 @@
  		/* 파일업로드 버튼 바꾸기 */
  		.filebox label {
 		  display: inline-block;
-		  padding: .5em .75em;
+		  padding: 6px 10px;
 		  color: #fff;
 		  font-size: inherit;
 		  line-height: normal;
@@ -125,6 +122,19 @@
 		  clip: rect(0, 0, 0, 0);
 		  border: 0;
 		}
+		
+		/* sns파일 업로드시 미리보기  */
+		.fileDiv {
+			height: 100px;
+			width: 200px;
+			display: none;
+			margin-bottom: 10px;
+		}
+		.fileDiv img {
+			width: 100%;
+			height: 100%;
+		}
+		
 	</style>
 	
 </head>
@@ -158,18 +168,23 @@
 					</div>
 				</aside>
 				<div class="col-xs-12 col-sm-8 section-inner">
-					<h3>생각대로 이루어 지리라</h3>
+					<h4>게시글을 등록하세요</h4>
+					<!-- 파일 업로드 폼입니다 -->
+					<div class="fileDiv">
+						<img id="fileImg" src="#">
+					</div>
 					<div class="reply-content">
-						<textarea class="form-control" rows="3"></textarea>
+						<textarea class="form-control" rows="3" name="content"
+							id="content"></textarea>
 						<div class="reply-group">
 							<div class="filebox pull-left">
-							  <label for="ex_file">업로드</label>
-							  <input type="file" id="ex_file">
+								<label for="file">이미지업로드</label> 
+								<input type="file" name="file" id="file">
 							</div>
-							<button class="right btn btn-info">등록하기</button>
+							<button type="button" class="right btn btn-info" id="uploadBtn">등록하기</button>
 						</div>
-						<div></div>
 					</div>
+					<!-- 파일 업로드 폼 끝 -->
 
 					<div class="title-inner">
 						<!--제목영역-->
@@ -218,6 +233,66 @@
 			</div>
 		</div>
 	</section>
+	
+	
 	<%@ include file="../include/footer.jsp" %>
+	
+	<script>
+		$(document).ready(function(){
+			
+			$("#uploadBtn").click(function() {
+				//ajax폼전송의 핵심 FormData객체
+				var formData = new FormData();
+				var data = $("#file")
+				console.log("폼데이터:" + formData);
+				console.log(data);
+				console.log(data[0]);
+				console.log(data[0].files)
+				console.log(data[0].files[0]);
+				formData.append("file", data[0].files[0]); //폼데이터에 추가
+				console.log("폼데이터:" + formData);
+				//content값을 얻어옴 폼데이터에 추가
+				var content = $("#content").val();
+				formData.append("content", content);
+
+				$.ajax({
+					url: "upload",
+					processData: false, //폼을 &변수=값 형식으로 자동으로 변경되는 것을 막는 요소
+					contentType: false, //ajax방식에서는 반드시 false로 처리  "multipart/form-data"로 선언됨
+					data: formData, //폼데이터객체를 넘깁니다
+					type: "POST",
+					success: function(result) {
+						alert(result);
+					}
+				})
+				
+			})
+		})
+	</script>
+	<script>
+		//자바 스크립트 파일 미리보기 기능
+		function readURL(input) {
+        	if (input.files && input.files[0]) {
+        		
+            	var reader = new FileReader(); //비동기처리를 위한 파읽을 읽는 자바스크립트 객체
+            	//readAsDataURL 메서드는 컨텐츠를 특정 Blob 이나 File에서 읽어 오는 역할 (MDN참조)
+	        	reader.readAsDataURL(input.files[0]); 
+            	//파일업로드시 화면에 숨겨져있는 클래스fileDiv를 보이게한다
+	            $(".fileDiv").css("display", "block");
+            	
+            	reader.onload = function(event) { //읽기 동작이 성공적으로 완료 되었을 때 실행되는 익명함수
+                	$('#fileImg').attr("src", event.target.result); 
+                	console.log(event.target)//event.target은 이벤트로 선택된 요소를 의미
+	        	}
+        	}
+	    }
+		$("#file").change(function() {
+	        readURL(this); //this는 #file자신 태그를 의미
+	        
+	    });
+	</script>
+	
+	
+	
 </body>
 </html>
