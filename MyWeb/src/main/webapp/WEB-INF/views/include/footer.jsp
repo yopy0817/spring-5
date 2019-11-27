@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-7 col-sm-12">
                     <div class="copyright">
-                        <a href="">
+                        <a href="#">
                             <img width="20" src="${pageContext.request.contextPath }/resources/img/logo.svg" alt="Brand">
                         </a>
                         Bootstrap | 대표자 : 홍길동 | E-MAIL : info&#64;info.com<br>
