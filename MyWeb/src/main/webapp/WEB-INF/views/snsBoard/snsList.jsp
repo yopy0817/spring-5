@@ -183,8 +183,7 @@
 						<img id="fileImg" src="../resources/img/img_ready.png">
 					</div>
 					<div class="reply-content">
-						<textarea class="form-control" rows="3" name="content"
-							id="content"></textarea>
+						<textarea class="form-control" rows="3" name="content" id="content"></textarea>
 						<div class="reply-group">
 							<div class="filebox pull-left">
 								<label for="file">이미지업로드</label> 
@@ -193,12 +192,14 @@
 							<button type="button" class="right btn btn-info" id="uploadBtn">등록하기</button>
 						</div>
 					</div>
+					
+					
 					<!-- 파일 업로드 폼 끝 -->
-
+					<div id="contentDiv">
 					<div class="title-inner">
 						<!--제목영역-->
 						<div class="profile">
-							<img src="../resources/img/profile.png" alt="">
+							<img src="../resources/img/profile.png">
 						</div>
 						<div class="title">
 							<p>테스트</p>
@@ -211,17 +212,18 @@
 					</div>
 					<div class="image-inner">
 						<!-- 이미지영역 -->
-						<!-- <img src="../resources/img/facebook.jpg" alt=""> -->
-						<img src="display?fileLoca=20191128&fileName=b33fa5affba84595aa7b69006079e283.jpg" alt="">
+						<!-- <img src="../resources/img/facebook.jpg"> -->
+						<img src="display?fileLoca=20191129&fileName=9f08b55b36724aa7895d60f5e5f716e2.jpg" alt="">
 					</div>
 					<div class="like-inner">
 						<!--좋아요-->
-						<img src="../resources/img/icon.jpg" alt=""> <span>522</span>
+						<img src="../resources/img/icon.jpg"><span>522</span>
 					</div>
 					<div class="link-inner">
 						<span><i class="glyphicon glyphicon-thumbs-up"></i>좋아요</span> <span><i
 							class="glyphicon glyphicon-comment"></i>댓글달기</span> <span><i
 							class="glyphicon glyphicon-share-alt"></i>공유하기</span>
+					</div>
 					</div>
 				</div>
 				<!--우측 어사이드-->
@@ -250,11 +252,19 @@
 		$(document).ready(function(){
 			
 			$("#uploadBtn").click(function() {
+				regist();	
+			});
+			function regist() {
+				//세션값
 				var user_id = '${sessionScope.user_id}';
-				if( $("#file").val() == '') { //파일 태그의 value가 없다면
-					alert("이미지 파일(jpg, pmp, bmp)중 하나를 등록하세요");
-					return;
-				} else if( /*user_id == ''*/ false ) { //세션이 없다면
+				//자바스크립트 파일확장자 체크 검색
+				var file = $("#file").val(); //var fileSize = $("#file")[0].files[0].size);
+				file = file.slice(file.indexOf(".") + 1).toLowerCase();
+				if(file != "jpg" && file != "png" && file != "bmp") {
+					alert("이미지 파일(jpg, pmp, bmp)만 등록 가능합니다");
+					$("#file").val("");
+					return; //종료
+				} else if( user_id == '' /* false */ ) { //세션이 없다면
 					alert("로그인이 필요한 서비스 입니다");
 					return;
 				}
@@ -280,10 +290,88 @@
 					data: formData, //폼데이터객체를 넘깁니다
 					type: "POST",
 					success: function(result) {
-						alert(result);
-					}
+						if(result == 'success') {
+							getList(true); //리스트 호출(str초기화 여부)
+						} else {
+							alert("업로드에 실패했습니다. 관리자에게 문의해주세요");
+						}
+					},
+            		error: function(status, er) {
+            			alert("업로드에 실패했습니다. 관리자에게 문의해주세요");
+            		}
 				}) 
-			})
+			} //등록작업끝
+			
+			//리스트 작업(화면에서 src에 display를 걸고 화면에서 확인후 실행)
+			getList();
+			var str='';
+			function getList(reset) {
+				if(reset == true) {
+					str = ''; //리셋여부 true라면 str초기화
+				}
+				
+				$.getJSON(
+					"getList",
+					function(list) {
+						console.log( JSON.stringify(list) );
+						
+						for(var i = 0; i < list.length; i++) {
+							str += "<div class='title-inner'>";
+							str += "<div class='profile'>";
+							str += "<img src='../resources/img/profile.png' >"; 	
+							str += "</div>";
+							str += "<div class='title'>";
+							str += "<p>"+ list[i].writer +"</p>";
+							str += "<small>"+ timeStamp(list[i].regdate) +"</small>";
+							str += "</div>";
+							str += "<div class='content-inner'>"
+							str += "<p>"+ list[i].content +"</p>";
+							str += "</div>";
+							/* 이미지 영역 */
+							str += "<div class='image-inner'>";
+							str += "<img src='display?fileLoca="+list[i].fileLoca +"&fileName="+list[i].fileName +"'>";
+							str += "</div>";
+							str += "<div class='like-inner'>"; 						
+							str += "<img src='../resources/img/icon.jpg'><span>522</span>";						
+							str += "</div>";
+							str += "<div class='link-inner'>";							
+							str += "<span><i class='glyphicon glyphicon-thumbs-up'></i>좋아요</span>";
+							str += "<span><i class='glyphicon glyphicon-comment'></i>댓글달기</span>";
+							str += "<span><i class='glyphicon glyphicon-share-alt'></i>공유하기</span>";
+							str += "</div>";
+							$("#contentDiv").html(str);
+						}
+					}
+				)
+			} //리스트 가져오기 끝
+			
+    		//날짜 처리
+    		function timeStamp(millis) {
+    	        var date = new Date();//오늘날짜
+    			var gap = date.getTime() - millis; //시간차이
+    	        console.log("경과밀리초:" + gap);
+
+    	        var time; //리턴할 시간
+    	        if(gap < 1000 * 60 * 60 * 24) {  //1일 이하인 경우
+    	            if(gap < 1000 * 60 * 60) { //1시간 이하인 경우
+    	                time = "방금전";
+    	            } else {
+    	                time = parseInt( gap / (1000 * 60 * 60) ) + "시간전";
+    	            }
+    	        } else { //1일 이상인 경우
+    	            
+    	            var today = new Date(millis);
+    	            var year  = today.getFullYear();//년
+    	            var month = today.getMonth() + 1;//월
+    	            var day = today.getDate();//일
+    	            var hour = today.getHours();//시
+    	            var minute = today.getMinutes();//분
+    	            var second = today.getSeconds();//초
+    	            time = year +"년"+month+"월"+day+"일" +hour+":"+minute+":"+second;
+    	        }
+    	        console.log(time);
+    	        return time;
+    		}
 		})
 	</script>
 	<script>
@@ -301,23 +389,23 @@
             	reader.onload = function(event) { //읽기 동작이 성공적으로 완료 되었을 때 실행되는 익명함수
                 	event.preventDefault();
             		$('#fileImg').attr("src", event.target.result); 
-                	console.log(event.target)//event.target은 이벤트로 선택된 요소를 의미
+                	//console.log(event.target)//event.target은 이벤트로 선택된 요소를 의미
 	        	}
         	}
 	    }
 		$("#file").change(function() {
-			//자바스크립트 파일확장자 체크 검색
-			var file = document.getElementById("file").value; 
-			file = file.slice(file.indexOf(".") + 1).toLowerCase();
-			if(file != "jpg" && file != "png" && file != "bmp") {
-				alert("이미지 파일(jpg, pmp, bmp)만 등록 가능합니다");
-				return; //종료
-			}
-			
 	        readURL(this); //this는 #file자신 태그를 의미
-	        
 	    })
-		
+	    
+	    //이거무한스크롤
+	    var page = 1;
+		$(window).scroll(function() {
+		    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+		      console.log(++page);
+		      $("#contentDiv").append("<h1>Page " + page + "</h1><BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~");
+		      
+		}
+});
 	</script>
 	
 	

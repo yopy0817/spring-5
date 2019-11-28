@@ -20,7 +20,8 @@
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="${pageContext.request.contextPath }/">Main</a></li>
                                 <li><a href="${pageContext.request.contextPath }/freeBoard/freeList">자유게시판</a></li>
-                                <li><a href="#">자료실</a></li>
+                                <li><a href="${pageContext.request.contextPath }/snsBoard/snsList">강의</a></li>
+                                
                                 <!-- 
                                 <li><a href="#">Form</a></li>
                                 <li><a href="#">Board</a></li>
