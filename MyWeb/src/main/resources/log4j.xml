@@ -11,9 +11,11 @@
 	</appender>
 	
 	<!-- Application Loggers -->
+	
 	<logger name="com.team404.controller">
 		<level value="info" />
 	</logger>
+	
 	<!-- 스프링 aop로그설정 -->
 	<logger name="com.team404.util.aop">
 		<level value="info" />

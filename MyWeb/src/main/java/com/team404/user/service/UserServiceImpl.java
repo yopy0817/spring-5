@@ -9,7 +9,6 @@ import com.team404.user.mapper.UserMapper;
 
 @Repository("userService")
 public class UserServiceImpl implements UserService{
-
 	@Autowired
 	private UserMapper userMapper;
 	
@@ -30,7 +29,6 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public UserVO userInfo(String userId) {
-		
 		return userMapper.userInfo(userId);
 	}
 

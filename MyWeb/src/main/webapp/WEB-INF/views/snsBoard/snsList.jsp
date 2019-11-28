@@ -91,7 +91,9 @@
                 display: none;
             }
         }
+        
  		/* 파일업로드 버튼 바꾸기 */
+ 		
  		.filebox label {
 		  display: inline-block;
 		  padding: 6px 10px;
@@ -146,14 +148,21 @@
 				<aside class="col-sm-2">
 					<div class="aside-inner">
 						<div class="menu1">
+							<c:choose>
+							<c:when test="${sessionScope.user_id != null }">	
 							<p>
-								<img src="../resources/img/profile.png">박인욱
+								<img src="../resources/img/profile.png">${userVO.userName }
 							</p>
 							<ul>
-								<li>뉴스피드</li>
-								<li>메신저</li>
-								<li>watch동영상</li>
+								<li>내정보</li>
+								<li>내쿠폰</li>
+								<li>내좋아요게시물</li>
 							</ul>
+							</c:when>
+							<c:otherwise>
+								<button type="button" class="btn btn-info" onclick="location.href='../user/userLogin'">로그인</button>
+							</c:otherwise>
+							</c:choose>
 						</div>
 						<div class="menu2">
 							<p>둘러보기</p>
@@ -171,7 +180,7 @@
 					<h4>게시글을 등록하세요</h4>
 					<!-- 파일 업로드 폼입니다 -->
 					<div class="fileDiv">
-						<img id="fileImg" src="#">
+						<img id="fileImg" src="../resources/img/img_ready.png">
 					</div>
 					<div class="reply-content">
 						<textarea class="form-control" rows="3" name="content"
@@ -202,8 +211,8 @@
 					</div>
 					<div class="image-inner">
 						<!-- 이미지영역 -->
-						<img src="../resources/img/facebook.jpg" alt="">
-						
+						<!-- <img src="../resources/img/facebook.jpg" alt=""> -->
+						<img src="display?fileName=1.jpg" alt="">
 					</div>
 					<div class="like-inner">
 						<!--좋아요-->
@@ -241,13 +250,22 @@
 		$(document).ready(function(){
 			
 			$("#uploadBtn").click(function() {
+				var user_id = '${sessionScope.user_id}';
+				if( $("#file").val() == '') { //파일 태그의 value가 없다면
+					alert("이미지 파일(jpg, pmp, bmp)중 하나를 등록하세요");
+					return;
+				} else if( user_id == '' ) { //세션이 없다면
+					alert("로그인이 필요한 서비스 입니다");
+					return;
+				}
+				
 				//ajax폼전송의 핵심 FormData객체
 				var formData = new FormData();
 				var data = $("#file")
 				console.log("폼데이터:" + formData);
 				console.log(data);
-				console.log(data[0]);
-				console.log(data[0].files)
+				console.log(data[0]); 
+				console.log(data[0].files); //파일태그의 담긴 파일을 확인하는 키값
 				console.log(data[0].files[0]);
 				formData.append("file", data[0].files[0]); //폼데이터에 추가
 				console.log("폼데이터:" + formData);
@@ -264,12 +282,12 @@
 					success: function(result) {
 						alert(result);
 					}
-				})
-				
+				}) 
 			})
 		})
 	</script>
 	<script>
+		
 		//자바 스크립트 파일 미리보기 기능
 		function readURL(input) {
         	if (input.files && input.files[0]) {
@@ -281,15 +299,25 @@
 	            $(".fileDiv").css("display", "block");
             	
             	reader.onload = function(event) { //읽기 동작이 성공적으로 완료 되었을 때 실행되는 익명함수
-                	$('#fileImg').attr("src", event.target.result); 
+                	event.preventDefault();
+            		$('#fileImg').attr("src", event.target.result); 
                 	console.log(event.target)//event.target은 이벤트로 선택된 요소를 의미
 	        	}
         	}
 	    }
 		$("#file").change(function() {
+			//자바스크립트 파일확장자 체크 검색
+			var file = document.getElementById("file").value; 
+			file = file.slice(file.indexOf(".") + 1).toLowerCase();
+			if(file != "jpg" && file != "png" && file != "bmp") {
+				alert("이미지 파일(jpg, pmp, bmp)만 등록 가능합니다");
+				return; //종료
+			}
+			
 	        readURL(this); //this는 #file자신 태그를 의미
 	        
-	    });
+	    })
+		
 	</script>
 	
 	

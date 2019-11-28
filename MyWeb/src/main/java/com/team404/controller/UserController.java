@@ -35,12 +35,6 @@ public class UserController {
 		
 		return "user/userLogin";
 	}
-	//유저체크화면처리
-	@RequestMapping(value= "/userCheck", method = RequestMethod.GET)
-	public String mypageCheck() {
-		
-		return "user/userCheck";
-	}
 
 	//일반 컨트롤러에서 @ResponseBody어노테이션을 적어주면 메소드의 리턴값은 view리졸버로가지 않고
 	//해당메서드를 호출한 곳으로 결과를 반환합니다.
