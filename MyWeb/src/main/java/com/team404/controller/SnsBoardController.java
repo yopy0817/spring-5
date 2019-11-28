@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -60,25 +61,41 @@ public class SnsBoardController {
 			//날짜별폴더생성
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			Date date = new Date();
-			String str = sdf.format(date);
-			System.out.println(str);
-			File folder = new File("C:\\Users\\Park\\Desktop\\spring\\upload\\" + str);
+			String fileLoca = sdf.format(date);
+			//File folder = new File("C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileLoca); //날짜별 파일생성
+			File folder = new File("D:\\jsp\\upload\\" + fileLoca); //날짜별 파일생성
 			if(!folder.exists()) {
 				folder.mkdir();
 			}
-			
-			String originFilename = file.getOriginalFilename(); // 파일 정보
-			Long size = file.getSize(); //파일사이즈
-			// 서버에서 저장 할 파일 이름
-			String saveFileName = originFilename.substring(originFilename.lastIndexOf("."), originFilename.length());
-			String uploadFolder = "C:\\Users\\Park\\Desktop\\spring\\upload"; //저장할폴더
-						
-			System.out.println("originFilename : " + originFilename);
-			System.out.println("size : " + size);
-			System.out.println("saveFileName : " + saveFileName);
 
+			//서버에서 저장 할 파일 이름
+			String originFileName = file.getOriginalFilename(); // 파일 정보
+			Long size = file.getSize(); //파일사이즈
+			
+			//파일명
+			UUID uuid = UUID.randomUUID();
+			String fileName = uuid.toString().replaceAll("-", "");
+			System.out.println(fileName);
+			
+			//확장자
+			String fileExtension = originFileName.substring(originFileName.lastIndexOf("."), originFileName.length());
+
+			//저장할폴더
+			//String uploadFolder = "C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileLoca;
+			String uploadFolder = "D:\\jsp\\upload\\" + fileLoca;
+			
+			System.out.println("실제파일명 : " + originFileName);
+			System.out.println("사이즈 : " + size);
+			System.out.println("폴더명:" + fileLoca);
+			System.out.println("확장자 : " + fileExtension);
+			System.out.println("uuid명:" + fileName);
+			
+			String saveFileName = fileName + fileExtension;
+			System.out.println("변경해서저장할파일명:" + saveFileName);
+			
+			
 			File saveFile = new File(uploadFolder + "\\" + saveFileName);
-			file.transferTo(saveFile); //실제 파일 저장 메서드(fileWriter작업을 손쉽게 한방에 처리해준다)
+			file.transferTo(saveFile); //실제 파일 저장 메서드(FileWriter작업을 손쉽게 한방에 처리해준다)
 			
 		} catch (Exception e) {
 			System.out.println("업로드중 에러발생:" + e.getMessage());
@@ -89,10 +106,13 @@ public class SnsBoardController {
 	//1st	
 	@RequestMapping("/display")
 	@ResponseBody
-	public byte[] getFile(String fileName) {
+	public byte[] getFile(@RequestParam("fileLoca") String fileLoca,
+						  @RequestParam("fileName")String fileName) {
 
 		System.out.println("fileName: " + fileName);
-		File file = new File("C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileName);
+		System.out.println("fileLoca: " + fileLoca);
+		//File file = new File("C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileLoca + "\\" + fileName);
+		File file = new File("D:\\jsp\\upload\\" + fileLoca + "\\" + fileName);
 		System.out.println("file: " + file);
 
 		byte[] result = null;

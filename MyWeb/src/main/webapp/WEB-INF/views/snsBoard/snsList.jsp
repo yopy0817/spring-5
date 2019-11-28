@@ -212,7 +212,7 @@
 					<div class="image-inner">
 						<!-- 이미지영역 -->
 						<!-- <img src="../resources/img/facebook.jpg" alt=""> -->
-						<img src="display?fileName=1.jpg" alt="">
+						<img src="display?fileLoca=20191128&fileName=b33fa5affba84595aa7b69006079e283.jpg" alt="">
 					</div>
 					<div class="like-inner">
 						<!--좋아요-->
@@ -254,7 +254,7 @@
 				if( $("#file").val() == '') { //파일 태그의 value가 없다면
 					alert("이미지 파일(jpg, pmp, bmp)중 하나를 등록하세요");
 					return;
-				} else if( user_id == '' ) { //세션이 없다면
+				} else if( /*user_id == ''*/ false ) { //세션이 없다면
 					alert("로그인이 필요한 서비스 입니다");
 					return;
 				}
