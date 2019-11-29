@@ -58,3 +58,18 @@ create table users(
     regDate date default sysdate
 ); 
 alter table users add constraint userId_pk primary key (userId);
+
+
+//////sns게시판//////
+create table snsboard(
+    bno number(10,0) not null,
+    writer varchar2(50) not null,
+    uploadpath varchar2(100) not null,
+    fileloca varchar2(100) not null,
+    fileName varchar2(50) not null,
+    filerealName varchar2(50) not null,
+    content varchar2(500),
+    regdate date default sysdate
+);
+alter table snsboard add constraint snsboard_bno_pk primary key (bno);
+create SEQUENCE snsboard_seq;

@@ -206,21 +206,20 @@
                    				console.log(list[i]);
 								
 								
-                   				str +=
-                   				"<div class='reply-wrap'>" +
-                            		"<div class='reply-image'>" +
-                                		"<img src='../resources/img/profile.png'>" +
-                            		"</div>" +
-                            			"<div class='reply-content'>" +
-                                		"<div class='reply-group'>" +
-                                			"<strong class='left'>"+ list[i].replyId +"</strong> " +
-                                    		"<small class='left'>"+ timeStamp(list[i].replydate) +"</small>" +
-                                    		"<a href='"+ list[i].rno+"' class='right' id='replyModify'><span class='glyphicon glyphicon-pencil'></span>수정</a>"+
-                                    		"<a href='"+ list[i].rno+"' class='right' id='replyDelete'><span class='glyphicon glyphicon-remove'></span>삭제</a>"+
-                                    	"</div>" +
-                                		"<p class='clearfix'>"+list[i].reply +"</p>"+
-                            		"</div>" +
-                        		"</div>";
+                   				str += "<div class='reply-wrap'>";
+                   				str += "<div class='reply-image'>";
+                   				str += "<img src='../resources/img/profile.png'>";
+                   				str += "</div>";
+                   				str += "<div class='reply-content'>";
+                            	str += "<div class='reply-group'>";
+                            	str += "<strong class='left'>"+ list[i].replyId +"</strong> ";
+                                str += "<small class='left'>"+ timeStamp(list[i].replydate) +"</small>";			 
+                                str += "<a href='"+ list[i].rno+"' class='right' id='replyModify'><span class='glyphicon glyphicon-pencil'></span>수정</a>";    		 
+								str += "<a href='"+ list[i].rno+"' class='right' id='replyDelete'><span class='glyphicon glyphicon-remove'></span>삭제</a>";                                    		
+                                str += "</div>";
+                                str += "<p class='clearfix'>"+list[i].reply +"</p>";    	 
+                                str += "</div>";
+                            	str += "</div>";
                    			}
                    			$("#replyList").html(str); //문자열을 통째로 추가한다
                    			
