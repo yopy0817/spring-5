@@ -174,12 +174,12 @@
 		//검색처리(페이징 클릭시 폼전송)
 		function page(num) {
 			event.preventDefault(); //이벤트의 실행을 막는다
-			var pageNum = document.querySelectorAll("#pageNum"); //페이징 클릭시 페이지번호를 num으로 바꾼다
-			for(var i = 0; i < pageNum.length; i++) {
-				pageNum[i].setAttribute("value", num);
-			}//document.getElementById("pageNum").setAttribute("value", num);
-					
-			document.getElementById("pageForm").submit();
+			//var pageNum = document.querySelectorAll("#pageNum"); //페이징 클릭시 페이지번호를 num으로 바꾼다
+			//for(var i = 0; i < pageNum.length; i++) {
+			//	pageNum[i].setAttribute("value", num);
+			//}
+			document.querySelector("#pageForm #pageNum").setAttribute("value", num)	//페이지 폼의 값을 value를 세팅한다
+			document.getElementById("pageForm").submit(); //폼 서브밋
 		}
 
 
