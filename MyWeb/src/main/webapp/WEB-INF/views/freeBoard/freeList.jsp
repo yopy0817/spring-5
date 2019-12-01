@@ -98,17 +98,17 @@
                         </c:if>
                     </ul>
                     --%>
-                    <ul class="pagination pagination-sm">
+                    <ul class="pagination pagination-sm" id="page">
                     	<c:if test="${pageVO.prev }">
-                        <li><a href="${pageVO.startPage-1 }" onclick="page(${pageVO.startPage-1 })">이전</a></li>
+                        	<li><a href="${pageVO.startPage-1 }">이전</a></li> <!-- onclick="page(${pageVO.startPage-1})" -->
                         </c:if>
                         <c:forEach var="num" begin="${pageVO.startPage }" end="${pageVO.endPage }">
-                        <li class="${pageVO.pageNum eq num ? 'active':'' }"> 
-                        	<a href="${num }" onclick="page('${num }')">${num }</a>
-                        </li>
+	                        <li class="${pageVO.pageNum eq num ? 'active':'' }"> 
+	                        	<a href="${num }">${num }</a> <!-- onclick="page(${num})" -->
+	                        </li>
                         </c:forEach>
                         <c:if test="${pageVO.next }">
-                        <li><a href="${pageVO.endPage+1}" onclick="page(${pageVO.endPage+1})">다음</a></li>
+                        	<li><a href="${pageVO.endPage+1}">다음</a></li> <!-- onclick="page(${pageVO.endPage+1})" -->
                         </c:if>
                     </ul>
                     
@@ -171,17 +171,29 @@
 			
 			document.getElementById("searchForm").submit();
 		}
-		//검색처리(페이징 클릭시 폼전송)
+		//검색처리(페이징 클릭시 폼전송) 1st
+		/* 
 		function page(num) {
 			event.preventDefault(); //이벤트의 실행을 막는다
-			//var pageNum = document.querySelectorAll("#pageNum"); //페이징 클릭시 페이지번호를 num으로 바꾼다
-			//for(var i = 0; i < pageNum.length; i++) {
-			//	pageNum[i].setAttribute("value", num);
-			//}
+
 			document.querySelector("#pageForm #pageNum").setAttribute("value", num)	//페이지 폼의 값을 value를 세팅한다
 			document.getElementById("pageForm").submit(); //폼 서브밋
 		}
-
+		*/
+		//이벤트 위임방식 2nd - 부모에 이벤트를 걸어놓고 자식태그 클릭시 이벤트를 위임하여 적용하는 방법
+		var page = document.getElementById("page");
+		page.onclick = function(event) {
+			event.preventDefault();
+			console.log(event.target);
+			console.log(event.target.innerHTML);
+			console.log(event.target.getAttribute("href"));
+			
+			var value = event.target.getAttribute("href");
+			document.querySelector("#pageForm #pageNum").setAttribute("value", value) //페이지 폼의 값을 value를 세팅한다
+			document.getElementById("pageForm").submit();
+		}
+		
+		
 
 		//페이징 클릭시 폼전송(제이쿼리)
 		/* 
