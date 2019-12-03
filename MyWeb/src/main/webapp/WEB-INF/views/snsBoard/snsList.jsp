@@ -47,7 +47,6 @@
             position: absolute;/*부모기준으로 위치지정 릴레이티브*/
             top:15px;
             left: 0;
-            
         }
         .title-inner .title {
             padding-left: 50px;
@@ -56,6 +55,10 @@
         .content-inner {
             padding:10px 0;
         }
+        /* 이미지영역  */
+        .image-inner img {
+			width:100%;
+		}
         /*좋아요*/
         .like-inner {
             padding:10px 0;
@@ -68,18 +71,17 @@
             width:20px;
             height: 20px;
         }
-        
         .link-inner {
             overflow: hidden;
             padding:10px 0;
         }
-        
-        .link-inner span {
+        .link-inner a {
             float: left;
             width: 33.3333%;
             text-align: center;
+            text-decoration: none;
+            color: #333333;
         }
-        
         .link-inner i {
             margin: 0 5px;
         }
@@ -93,7 +95,6 @@
         }
         
  		/* 파일업로드 버튼 바꾸기 */
- 		
  		.filebox label {
 		  display: inline-block;
 		  padding: 6px 10px;
@@ -136,7 +137,33 @@
 			width: 100%;
 			height: 100%;
 		}
-		
+		/* 모달창 조절 */
+		.modal-body {
+			padding: 0px;
+		}
+		.modal-content > .row {
+			margin: 0px;
+		}
+		.modal-body > .modal-img {
+			padding: 0px;
+		}
+		.modal-body > .modal-con {
+			padding: 15px;
+		}
+		.modal-inner {
+            position: relative;
+        }
+        .modal-inner .profile{
+            position: absolute;/*부모기준으로 위치지정 릴레이티브*/
+            top: 0px;
+            left: 0px;
+        }
+        .modal-inner .title {
+            padding-left: 50px;
+        }
+		.modal-inner p {
+			margin: 0px;
+		}
 	</style>
 	
 </head>
@@ -177,13 +204,13 @@
 					</div>
 				</aside>
 				<div class="col-xs-12 col-sm-8 section-inner">
-					<h4>게시글을 등록하세요</h4>
+					<h4>게시물 만들기</h4>
 					<!-- 파일 업로드 폼입니다 -->
 					<div class="fileDiv">
 						<img id="fileImg" src="../resources/img/img_ready.png">
 					</div>
 					<div class="reply-content">
-						<textarea class="form-control" rows="3" name="content" id="content"></textarea>
+						<textarea class="form-control" rows="3" name="content" id="content" placeholder="무슨 생각을 하고 계신가요?"></textarea>
 						<div class="reply-group">
 							<div class="filebox pull-left">
 								<label for="file">이미지업로드</label> 
@@ -213,16 +240,16 @@
 					<div class="image-inner">
 						<!-- 이미지영역 -->
 						<!-- <img src="../resources/img/facebook.jpg"> -->
-						<img src="display?fileLoca=20191129&fileName=9f08b55b36724aa7895d60f5e5f716e2.jpg" alt="">
+						<img src="display?fileLoca=20191129&fileName=9f08b55b36724aa7895d60f5e5f716e2.jpg">
 					</div>
 					<div class="like-inner">
 						<!--좋아요-->
 						<img src="../resources/img/icon.jpg"><span>522</span>
 					</div>
 					<div class="link-inner">
-						<span><i class="glyphicon glyphicon-thumbs-up"></i>좋아요</span> <span><i
-							class="glyphicon glyphicon-comment"></i>댓글달기</span> <span><i
-							class="glyphicon glyphicon-share-alt"></i>공유하기</span>
+						<a href="##"><i class="glyphicon glyphicon-thumbs-up"></i>좋아요</a>
+						<a href="##"><i class="glyphicon glyphicon-comment"></i>댓글달기</a> 
+						<a href="##"><i class="glyphicon glyphicon-remove"></i>삭제하기</a>
 					</div>
 					</div>
 				</div>
@@ -238,6 +265,7 @@
 								<li>목록4</li>
 								<li>목록5</li>
 							</ul>
+							<button type="button" onclick="$('#snsDetail').modal('show')">테스트</button>
 						</div>
 					</div>
 				</aside>
@@ -245,8 +273,39 @@
 		</div>
 	</section>
 	
-	
 	<%@ include file="../include/footer.jsp" %>
+
+	<!-- 모달 -->
+	<div class="modal fade" id="snsModal" role="dialog">
+			<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-body row">
+					<div class="modal-img col-sm-8 col-xs-6" >
+						<img src="테스트입니다" id="snsImg" width="100%">
+					</div>
+					<div class="modal-con col-sm-4 col-xs-6">
+						<div class="modal-inner">
+						<div class="profile">
+							<img src="../resources/img/profile.png">
+						</div>
+						<div class="title">
+							<p id="snsWriter">테스트</p>
+							<small id="snsRegdate">21시간전</small>
+						</div>
+						<div class="content-inner">
+							<p id="snsContent">삶이 우리를 끝없이 시험하기에 고어텍스는 한계를 테스트합니다</p>
+						</div>
+						<div class="link-inner">
+							<a href="##"><i class="glyphicon glyphicon-thumbs-up"></i>좋아요</a>
+							<a href="##"><i class="glyphicon glyphicon-comment"></i>댓글달기</a> 
+							<a href="##"><i class="glyphicon glyphicon-share-alt"></i>공유하기</a>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 	<script>
 		$(document).ready(function(){
@@ -291,6 +350,9 @@
 					type: "POST",
 					success: function(result) {
 						if(result == 'success') {
+							$("#file").val(""); //파일업로드 비우기
+							$("#content").val(""); //글영역 비우기
+							$(".fileDiv").css("display", "none"); //디스플레이 감추기
 							getList(true); //리스트 호출(str초기화 여부)
 						} else {
 							alert("업로드에 실패했습니다. 관리자에게 문의해주세요");
@@ -309,7 +371,6 @@
 				if(reset == true) {
 					str = ''; //리셋여부 true라면 str초기화
 				}
-				
 				$.getJSON(
 					"getList",
 					function(list) {
@@ -325,25 +386,87 @@
 							str += "<small>"+ timeStamp(list[i].regdate) +"</small>";
 							str += "</div>";
 							str += "<div class='content-inner'>"
-							str += "<p>"+ list[i].content +"</p>";
+							str += "<p>"+ (list[i].content== null?'':list[i].content)  +"</p>";
 							str += "</div>";
 							/* 이미지 영역 */
 							str += "<div class='image-inner'>";
+							str += "<a href='" + list[i].bno + "'>"; ///////추가
 							str += "<img src='display?fileLoca="+list[i].fileLoca +"&fileName="+list[i].fileName +"'>";
+							str += "</a>" ////////추가
 							str += "</div>";
 							str += "<div class='like-inner'>"; 						
 							str += "<img src='../resources/img/icon.jpg'><span>522</span>";						
 							str += "</div>";
 							str += "<div class='link-inner'>";							
-							str += "<span><i class='glyphicon glyphicon-thumbs-up'></i>좋아요</span>";
-							str += "<span><i class='glyphicon glyphicon-comment'></i>댓글달기</span>";
-							str += "<span><i class='glyphicon glyphicon-share-alt'></i>공유하기</span>";
+							str += "<a href='##'><i class='glyphicon glyphicon-thumbs-up'></i>좋아요</a>";
+							str += "<a href='##'><i class='glyphicon glyphicon-comment'></i>댓글달기</a>";
+							str += "<a href='"+ list[i].bno +"'><i class='glyphicon glyphicon-remove'></i>삭제하기</a>";
 							str += "</div>";
 							$("#contentDiv").html(str);
 						}
 					}
 				)
 			} //리스트 가져오기 끝
+			
+			//상세보기 처리
+			$("#contentDiv").on("click", ".image-inner a", function() {
+				event.preventDefault();
+				
+				var bno = $(this).attr("href");
+				$.getJSON(
+					"../snsBoard/getDetail/" + bno,
+					function(data) {
+						console.log(data)
+						var img = "display?fileLoca="+data.fileLoca +"&fileName="+data.fileName;
+						$("#snsImg").attr("src", img); //이미지경로처리
+						$("#snsWriter").html(data.writer); //글쓴이처리
+						$("#snsRegdate").html( timeStamp(data.regdate) );//날짜처리
+						$("#snsContent").html( data.content ); //내용처리
+						$("#snsModal").modal("show"); //모달오픈
+						//1st
+						//var src = $(this).attr("src"); //src속성얻기
+						//console.log($(this))
+						//$("#detailImg").attr("src", src); //detailImg src속성 변경
+						//$('#snsModal').modal('show'); //모달창팝업
+						//2nd
+						//$(".modal-img").children().remove(); //자식노드삭제
+						//$(this).css("width", "100%");
+						//var img = $(this)[0]; //제이쿼리 this로 취득
+						//$(".modal-img").append(img); //추가
+						//$('#snsModal').modal('show'); //모달창팝업
+					}
+				)
+			})
+			
+			//삭제처리
+			$("#contentDiv").on("click", ".link-inner a", function() {
+				event.preventDefault();
+				console.log( $(this).attr("href") );
+				
+				var bno = $(this).attr("href");
+				
+				$.ajax({
+					type: "delete",
+					url: "../snsBoard/delete/" + bno,
+					contentType : "application/json; charset=utf-8",
+            		success : function(result) {
+            			if(result == 'noAuth') {
+            				alert("권한이 없습니다");
+            			} else if(result == 'fail') {
+            				alert("삭제에 실패했습니다. 다시 시도하세요");
+            			} else {
+            				alert("게시물이 정상적으로 삭제되었습니다");
+            				getList(true); //파일 목록메서드 호출(str형식을 다시 초기화)
+            			}
+            			
+            		},
+            		error: function(status) {
+            			alert("삭제에 실패했습니다. 다시 시도하세요." + status);
+            		}
+				})
+				
+			})
+			
 			
     		//날짜 처리
     		function timeStamp(millis) {
@@ -407,6 +530,10 @@
 		}
 });
 	</script>
+	
+	
+	
+	
 	
 	
 	

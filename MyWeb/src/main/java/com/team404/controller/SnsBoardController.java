@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -172,6 +173,35 @@ public class SnsBoardController {
 //		}
 //		return result;
 //	}
+	
+	//상세보기 처리
+	@RequestMapping("/getDetail/{bno}")
+	@ResponseBody
+	public SnsBoardVO getDetail(@PathVariable("bno") int bno) {
+		
+		SnsBoardVO vo = snsBoardService.getDetail(bno);
+		return vo;
+	}
+	
+	//삭제처리
+	@RequestMapping("/delete/{bno}")
+	@ResponseBody
+	public String delete(@PathVariable("bno") int bno, HttpSession session) {
+		
+		SnsBoardVO vo = snsBoardService.getDetail(bno); //게시물정보얻기
+		if(session.getAttribute("user_id") == null || !session.getAttribute("user_id").equals(vo.getWriter()) ) {
+			return "noAuth"; //작성자와 글쓴이가 맞지않으면 noAuth 리턴
+		}
+
+		boolean result = snsBoardService.delete(bno);//DB삭제메서드 실행
+		if(result) {
+			File file = new File(vo.getUploadPath() + "\\" + vo.getFileName());
+			return file.delete() ? "success" : "fail"; //파일삭제 메서드
+		} else {
+			return "fail"; //DB삭제 실패시 fail리턴
+		}
+	}
+
 	
 	
 }

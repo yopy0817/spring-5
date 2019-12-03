@@ -4,14 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
   <mapper namespace="com.team404.snsboard.mapper.SnsBoardMapper">
-  	
+  	<!-- 등록하기 -->
   	<insert id="insert">
   		insert into snsboard(bno, writer, uploadPath, fileLoca, fileName, fileRealName, content)
   			values(snsboard_seq.nextval, #{writer}, #{uploadPath}, #{fileLoca}, #{fileName}, #{fileRealName}, #{content})
   	</insert>	
-  
+  	<!-- 전체목록 -->
   	<select id="getList" resultType="SnsBoardVO">
   		select * from snsboard order by bno desc
   	</select>
-  
+  	
+  	<!-- 상세보기 -->
+  	<select id="getDetail" resultType="SnsBoardVO">
+  		select * from snsboard where bno = #{bno}
+  	</select>
+  	<!-- 삭제 -->
+  	<delete id="delete">
+  		delete from snsboard where bno = #{bno}
+  	</delete>
+  	
   </mapper>

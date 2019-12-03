@@ -26,4 +26,16 @@ public class SnsBoardServiceImpl implements SnsBoardService{
 		return snsBoardMapper.getList();
 	}
 
+	@Override
+	public SnsBoardVO getDetail(int bno) {
+		
+		return snsBoardMapper.getDetail(bno);
+	}
+
+	@Override
+	public boolean delete(int bno) {
+		
+		return snsBoardMapper.delete(bno);
+	}
+
 }

@@ -68,7 +68,7 @@ create table snsboard(
     fileloca varchar2(100) not null,
     fileName varchar2(50) not null,
     filerealName varchar2(50) not null,
-    content varchar2(500),
+    content varchar2(2000),
     regdate date default sysdate
 );
 alter table snsboard add constraint snsboard_bno_pk primary key (bno);
