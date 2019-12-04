@@ -18,6 +18,30 @@ from (select rownum as rn, bno, writer, title, content, regdate, updatedate
             order by bno desc
             )
 ) where rn > 0 and rn <= 10;
+/////게시글 목록시 페이징과 함께 댓글개수 조인 쿼리/////
+select * 
+from(
+    select rownum as rn,
+           bno,
+           title,
+           content, 
+           writer,
+           regdate,
+           updatedate,
+           total
+           from (select a.bno,
+                        title,
+                        content,
+                        writer,
+                        regdate,
+                        updatedate,
+                        NVL(total, 0) as total
+                        from freeboard a LEFT OUTER JOIN (select count(*) as total, bno from freereply group by bno) b on a.bno = b.bno
+                        where writer like '%ㅋ%'
+                        order by bno desc
+                )        
+) where rn > 0 and rn <= 10;
+
 
 
 /////댓글/////

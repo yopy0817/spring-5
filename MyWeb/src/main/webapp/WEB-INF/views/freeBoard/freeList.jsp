@@ -64,7 +64,9 @@
                         <tbody>
                             <tr>
                                 <td>${vo.bno }</td>
-                                <td><a href="freeDetail?bno=${vo.bno }">${vo.title }</a></td>
+                                <td>
+                                <a href="freeDetail?bno=${vo.bno }">${vo.title }<span class="badge">${vo.total }</span></a>
+                                </td>
                                 <td>${vo.writer }</td>
                                 <td>${vo.regdate }</td>
                                 <td>${vo.updatedate }</td>

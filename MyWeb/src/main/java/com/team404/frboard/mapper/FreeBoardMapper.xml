@@ -23,7 +23,6 @@
   		select * from freeboard order by bno desc
   	</select>
 	-->
-	
 	<!-- 
 	<select id="getList" resultType="FreeBoardVO">
 		<![CDATA[
@@ -37,6 +36,7 @@
 		]]>
 	</select>
 	 -->
+	<!--  
 	<select id="getList" resultType="FreeBoardVO">
 		<![CDATA[
 		select * 
@@ -50,7 +50,7 @@
 					<if test="searchType == 'writer' ">writer like '%'||#{searchName}||'%'</if>
 					<if test="searchType == 'titcont' ">title like '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'</if>							
 					<if test="searchType == null or searchType == '' ">1=1</if>
-					<!-- 
+					
 					<choose>
 						<when test="searchType == 'title' ">title like '%'||#{searchName}||'%'</when>
 						<when test="searchType == 'content' ">content like '%'||#{searchName}||'%'</when>
@@ -58,13 +58,48 @@
 						<when test="searchType == 'titcont' ">title like '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'</when>
 						<otherwise>1 = 1</otherwise>
 					</choose>
-					 -->	            
+						            
 		<![CDATA[	             
 		            order by bno desc
 		            )
 		) where rn > (#{pageNum}-1) * #{amount} and rn <= (#{pageNum}* #{amount})	
 		]]>
 	</select>
+	-->
+	<select id="getList" resultType="FreeBoardVO">
+		<![CDATA[
+		select * 
+		from(select rownum as rn,
+           	 bno,
+			 title,
+           	 content, 
+           	 writer,
+           	 regdate,
+           	 updatedate,
+           	 total
+           	 from (select a.bno,
+                          title,
+                          content,
+                          writer,
+                          regdate,
+                          updatedate,
+                          NVL(total, 0) as total
+                   from freeboard a LEFT OUTER JOIN (select count(*) as total, bno from freereply group by bno) b on a.bno = b.bno
+				   where
+		]]>
+				   <if test="searchType == 'title' ">title like '%'||#{searchName}||'%'</if>
+				   <if test="searchType == 'content' ">content like '%'||#{searchName}||'%'</if>
+				   <if test="searchType == 'writer' ">writer like '%'||#{searchName}||'%'</if>
+			       <if test="searchType == 'titcont' ">title like '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'</if>							
+				   <if test="searchType == null or searchType == '' ">1=1</if>
+		<![CDATA[	             
+		           order by bno desc
+		           )
+		) where rn > (#{pageNum}-1) * #{amount} and rn <= (#{pageNum}* #{amount})	
+		]]>
+	</select>
+	
+	
 	<select id="getTotal" resultType="int">
 		select count(*) as total from freeboard 
 		where

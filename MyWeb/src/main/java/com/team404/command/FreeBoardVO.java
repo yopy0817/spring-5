@@ -15,4 +15,7 @@ public class FreeBoardVO {
 	private Timestamp regdate;
 	private Timestamp updatedate;
 	
+	//게시글에 따른 댓글 처리시 추가
+	private int total;
+	
 }

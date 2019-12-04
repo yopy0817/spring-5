@@ -34,7 +34,6 @@ public class UserIntercepter extends HandlerInterceptorAdapter{
 			return true; //컨트롤러 실행
 		}
 	}
-
 	
 	
 }

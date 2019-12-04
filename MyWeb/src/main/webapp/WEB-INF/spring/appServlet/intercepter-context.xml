@@ -21,7 +21,7 @@
 	<beans:bean id="userIntercepter" class="com.team404.util.intercepter.UserIntercepter"/>
 	<beans:bean id="loginFormIntercepter" class="com.team404.util.intercepter.LoginFormIntercepter"/>
 	<beans:bean id="boardIntercepter" class="com.team404.util.intercepter.BoardIntercepter"/>
-	
+
 	<interceptors>
 		<!-- 유저 권한 -->
 		<interceptor>
@@ -43,8 +43,7 @@
 			<mapping path="/freeBoard/freeDelete"/>
 			<beans:ref bean="boardIntercepter" />
 		</interceptor>
-		
-		
+
 	</interceptors>
 	
 	
