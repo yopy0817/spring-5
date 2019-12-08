@@ -8,12 +8,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.print.attribute.standard.Media;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -121,7 +125,7 @@ public class SnsBoardController {
 			return "fail"; //에러시에도 실패를 반환한다
 		}
 	}
-	//목록
+	//비동기통신후 가져올 목록
 	@RequestMapping("/getList")
 	@ResponseBody
 	public ArrayList<SnsBoardVO> getList() {
@@ -156,19 +160,23 @@ public class SnsBoardController {
 //	//2nd
 //	@RequestMapping("/display")
 //	@ResponseBody
-//	public ResponseEntity<byte[]> getFile(String fileName) {
+//	public ResponseEntity<byte[]> getFile(@RequestParam("fileLoca") String fileLoca,
+//										  @RequestParam("fileName")String fileName) {
 //		
 //		System.out.println("fileName: " + fileName);
-//		File file = new File("C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileName);
+//		System.out.println("fileLoca: " + fileLoca);
+//		File file = new File("C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileLoca + "\\" + fileName);
+//		//File file = new File("D:\\jsp\\upload\\" + fileLoca + "\\" + fileName);
 //		System.out.println("file: " + file);
-//
+//		
+//		
 //		ResponseEntity<byte[]> result = null;
 //		try {
 //			HttpHeaders header = new HttpHeaders();
-//			header.add("Content-Type", Files.probeContentType(file.toPath()));
+//			//header.add("Content-Type", Files.probeContentType(file.toPath()));
+//			//ResponseEntity<>(바디에담을내용, 헤더에담을 내용, 상태메세지)
 //			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
 //		} catch (IOException e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
 //		return result;
@@ -192,7 +200,7 @@ public class SnsBoardController {
 		if(session.getAttribute("user_id") == null || !session.getAttribute("user_id").equals(vo.getWriter()) ) {
 			return "noAuth"; //작성자와 글쓴이가 맞지않으면 noAuth 리턴
 		}
-
+		
 		boolean result = snsBoardService.delete(bno);//DB삭제메서드 실행
 		if(result) {
 			File file = new File(vo.getUploadPath() + "\\" + vo.getFileName());
@@ -201,7 +209,43 @@ public class SnsBoardController {
 			return "fail"; //DB삭제 실패시 fail리턴
 		}
 	}
-
 	
+	//다운로드(1.화면에서 클릭시 a태그를통해 download를 타도록 처리)
+	@RequestMapping(value = "/download") //, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
+	@ResponseBody
+	public ResponseEntity<byte[]> download(@RequestParam("fileLoca") String fileLoca,
+											@RequestParam("fileName")String fileName) {
+		File file = new File("C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileLoca + "\\" + fileName);
+
+		ResponseEntity<byte[]> result = null;
+		try {
+			//응답 본문을 브라우저가 어떻게 표시해야 할지 알려주는 헤더입니다. inline인 경우 웹페이지 화면에 표시되고, attachment인 경우 다운로드됩니다.
+			//Content-Disposition: inline
+			//Content-Disposition: attachment; filename='filename.csv'
+			//파일명한글처리라면
+			//header.add("Content-Disposition", "attachment; filename=" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") );
+			HttpHeaders header = new HttpHeaders();
+			header.add("Content-Disposition", "attachment; filename=" + fileName );
+			
+			byte[] fileCopy = FileCopyUtils.copyToByteArray(file); 
+			result = new ResponseEntity<>(fileCopy, header, HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace(); 
+		}
+		return result;
+		
+		
+		//헤더설정이 안되서 처리가 안됌
+//		byte[] result = null;
+//		try {
+//			//스프링의 파일데이터를 읽어서 바이트배열형으로 리턴하는 메서드 (매개변수로 File타입을 받는다)
+//			result = FileCopyUtils.copyToByteArray(file); 
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		return result;
+				
+	}
 	
 }

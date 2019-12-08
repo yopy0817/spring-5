@@ -12,12 +12,12 @@ public class UserIntercepter extends HandlerInterceptorAdapter{
 	public void saveURI(HttpServletRequest request) {
 		
 		String uri = request.getRequestURI();
-		System.out.println(uri); //요청정보를 받아옴
 		String query = request.getQueryString();
+		System.out.println(uri); //요청정보를 받아옴
 		System.out.println(query); //매개값을 받아옴
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("uri", uri + "?" + query); //세션에 uri요청과 데이터값을 세션에 저장
+		session.setAttribute("uri", uri + ( query == null ? "": "?"+query )); //세션에 uri요청과 데이터값을 세션에 저장
 	}
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)

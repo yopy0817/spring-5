@@ -13,13 +13,12 @@ public class LoginFormIntercepter extends HandlerInterceptorAdapter{
 			ModelAndView modelAndView) throws Exception {
 
 		//로그인 처리후 핸들러
-		
 		String uri = (String)request.getSession().getAttribute("uri"); 
 		System.out.println("유알아이는:" + uri);
 
 		String user_id = (String)request.getSession().getAttribute("user_id");
 		
-		if(uri != null) { //기존 접근하려는 유알아이가 있는경우 유알아이로 이동
+		if(uri != null && user_id != null) { //기존 접근하려는 유알아이가 있는경우 유알아이로 이동
 			response.sendRedirect(uri);
 		
 		} else if(user_id != null) { //일반적인 로그인 성공의 경우 메인화면으로 이동

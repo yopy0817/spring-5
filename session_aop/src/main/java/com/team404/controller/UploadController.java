@@ -24,17 +24,17 @@ public class UploadController {
 
 		try {
 			
-			String originFilename = file.getOriginalFilename(); // 파일 정보
+			String fileRealName = file.getOriginalFilename(); // 파일 정보
 			Long size = file.getSize(); //파일사이즈
 			// 서버에서 저장 할 파일 이름
-			String saveFileName = originFilename.substring(originFilename.lastIndexOf("."), originFilename.length());
+			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
 			String uploadFolder = "C:\\Users\\Park\\Desktop\\spring\\upload"; //저장할폴더
 						
-			System.out.println("originFilename : " + originFilename);
+			System.out.println("fileRealName : " + fileRealName);
 			System.out.println("size : " + size);
-			System.out.println("saveFileName : " + saveFileName);
+			System.out.println("fileExtension : " + fileExtension);
 
-			File saveFile = new File(uploadFolder + "\\" + saveFileName);
+			File saveFile = new File(uploadFolder + "\\" + fileRealName);
 			file.transferTo(saveFile); //실제 파일 저장 메서드(fileWriter작업을 손쉽게 한방에 처리해준다)
 			
 		} catch (Exception e) {

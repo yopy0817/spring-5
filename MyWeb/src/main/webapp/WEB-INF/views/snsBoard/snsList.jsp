@@ -51,6 +51,10 @@
         .title-inner .title {
             padding-left: 50px;
         }
+        .title > a {
+        	float: right;
+        }
+        
         /*내용*/
         .content-inner {
             padding:10px 0;
@@ -318,14 +322,14 @@
 				var user_id = '${sessionScope.user_id}';
 				//자바스크립트 파일확장자 체크 검색
 				var file = $("#file").val(); //var fileSize = $("#file")[0].files[0].size);
-				file = file.slice(file.indexOf(".") + 1).toLowerCase();
+				file = file.slice(file.indexOf(".") + 1).toLowerCase(); //소문자처리작업
 				if(file != "jpg" && file != "png" && file != "bmp") {
 					alert("이미지 파일(jpg, pmp, bmp)만 등록 가능합니다");
 					$("#file").val("");
-					return; //종료
+					return false; //종료
 				} else if( user_id == '' /* false */ ) { //세션이 없다면
 					alert("로그인이 필요한 서비스 입니다");
-					return;
+					return false;
 				}
 				
 				//ajax폼전송의 핵심 FormData객체
@@ -384,6 +388,9 @@
 							str += "<div class='title'>";
 							str += "<p>"+ list[i].writer +"</p>";
 							str += "<small>"+ timeStamp(list[i].regdate) +"</small>";
+							//파일다운로드
+							str += "<a href='download?fileLoca="+list[i].fileLoca +"&fileName="+list[i].fileName +"'>이미지다운로드</a>";
+							//파일다운로드끝
 							str += "</div>";
 							str += "<div class='content-inner'>"
 							str += "<p>"+ (list[i].content== null?'':list[i].content)  +"</p>";
@@ -448,7 +455,7 @@
 				$.ajax({
 					type: "delete",
 					url: "../snsBoard/delete/" + bno,
-					contentType : "application/json; charset=utf-8",
+					//contentType : "application/json; charset=utf-8",
             		success : function(result) {
             			if(result == 'noAuth') {
             				alert("권한이 없습니다");
@@ -458,7 +465,6 @@
             				alert("게시물이 정상적으로 삭제되었습니다");
             				getList(true); //파일 목록메서드 호출(str형식을 다시 초기화)
             			}
-            			
             		},
             		error: function(status) {
             			alert("삭제에 실패했습니다. 다시 시도하세요." + status);
@@ -466,8 +472,7 @@
 				})
 				
 			})
-			
-			
+
     		//날짜 처리
     		function timeStamp(millis) {
     	        var date = new Date();//오늘날짜
@@ -520,6 +525,7 @@
 	        readURL(this); //this는 #file자신 태그를 의미
 	    })
 	    
+	    
 	    //이거무한스크롤
 	    var page = 1;
 		$(window).scroll(function() {
@@ -527,8 +533,8 @@
 		      console.log(++page);
 		      $("#contentDiv").append("<h1>Page " + page + "</h1><BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~");
 		      
-		}
-});
+			}
+		});
 	</script>
 	
 	
