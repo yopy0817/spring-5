@@ -303,6 +303,7 @@
 							<a href="##"><i class="glyphicon glyphicon-thumbs-up"></i>좋아요</a>
 							<a href="##"><i class="glyphicon glyphicon-comment"></i>댓글달기</a> 
 							<a href="##"><i class="glyphicon glyphicon-share-alt"></i>공유하기</a>
+							
 						</div>
 						</div>
 					</div>

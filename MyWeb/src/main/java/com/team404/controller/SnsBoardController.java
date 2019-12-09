@@ -2,6 +2,7 @@ package com.team404.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.web.header.Header;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -135,52 +137,53 @@ public class SnsBoardController {
 		return list;
 	}
 
-	//1st	
-	@RequestMapping("/display")
-	@ResponseBody
-	public byte[] getFile(@RequestParam("fileLoca") String fileLoca,
-						  @RequestParam("fileName")String fileName) {
-
-		System.out.println("fileName: " + fileName);
-		System.out.println("fileLoca: " + fileLoca);
-		File file = new File("C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileLoca + "\\" + fileName);
-		//File file = new File("D:\\jsp\\upload\\" + fileLoca + "\\" + fileName);
-		System.out.println("file: " + file);
-
-		byte[] result = null;
-		try {
-			//스프링의 파일데이터를 읽어서 바이트배열형으로 리턴하는 메서드 (매개변수로 File타입을 받는다)
-			result = FileCopyUtils.copyToByteArray(file); 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-	
-//	//2nd
+//	//1st	
 //	@RequestMapping("/display")
 //	@ResponseBody
-//	public ResponseEntity<byte[]> getFile(@RequestParam("fileLoca") String fileLoca,
-//										  @RequestParam("fileName")String fileName) {
-//		
+//	public byte[] getFile(@RequestParam("fileLoca") String fileLoca,
+//						  @RequestParam("fileName")String fileName) {
+//
 //		System.out.println("fileName: " + fileName);
 //		System.out.println("fileLoca: " + fileLoca);
 //		File file = new File("C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileLoca + "\\" + fileName);
 //		//File file = new File("D:\\jsp\\upload\\" + fileLoca + "\\" + fileName);
 //		System.out.println("file: " + file);
-//		
-//		
-//		ResponseEntity<byte[]> result = null;
+//
+//		byte[] result = null;
 //		try {
-//			HttpHeaders header = new HttpHeaders();
-//			//header.add("Content-Type", Files.probeContentType(file.toPath()));
-//			//ResponseEntity<>(바디에담을내용, 헤더에담을 내용, 상태메세지)
-//			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+//			//스프링의 파일데이터를 읽어서 바이트배열형으로 리턴하는 메서드 (매개변수로 File타입을 받는다)
+//			result = FileCopyUtils.copyToByteArray(file); 
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
 //		return result;
 //	}
+	
+	//2nd
+	@RequestMapping("/display")
+	@ResponseBody
+	public ResponseEntity<byte[]> getFile(@RequestParam("fileLoca") String fileLoca,
+										  @RequestParam("fileName")String fileName) {
+		
+		System.out.println("fileName: " + fileName);
+		System.out.println("fileLoca: " + fileLoca);
+		File file = new File("C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileLoca + "\\" + fileName);
+		//File file = new File("D:\\jsp\\upload\\" + fileLoca + "\\" + fileName);
+		System.out.println("file: " + file);
+		
+		
+		ResponseEntity<byte[]> result = null;
+		try {
+			HttpHeaders header = new HttpHeaders();
+			header.add("Content-Type", Files.probeContentType(file.toPath()) );
+
+			//ResponseEntity<>(바디에담을내용, 헤더에담을 내용, 상태메세지)
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	//상세보기 처리
 	@RequestMapping("/getDetail/{bno}")
@@ -210,7 +213,7 @@ public class SnsBoardController {
 		}
 	}
 	
-	//다운로드(1.화면에서 클릭시 a태그를통해 download를 타도록 처리)
+	//다운로드 비동기처리(1.화면에서 클릭시 a태그를통해 download를 타도록 처리)
 	@RequestMapping(value = "/download") //, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
 	@ResponseBody
 	public ResponseEntity<byte[]> download(@RequestParam("fileLoca") String fileLoca,
@@ -222,12 +225,16 @@ public class SnsBoardController {
 			//응답 본문을 브라우저가 어떻게 표시해야 할지 알려주는 헤더입니다. inline인 경우 웹페이지 화면에 표시되고, attachment인 경우 다운로드됩니다.
 			//Content-Disposition: inline
 			//Content-Disposition: attachment; filename='filename.csv'
-			//파일명한글처리라면
+			//파일명한글처리(Chrome browser) 크롬
 			//header.add("Content-Disposition", "attachment; filename=" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") );
+			//파일명한글처리(Edge) 엣지 
+			//header.add("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8"));
+			//파일명한글처리(Trident) IE
+			//Header.add("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", " "));
 			HttpHeaders header = new HttpHeaders();
 			header.add("Content-Disposition", "attachment; filename=" + fileName );
 			
-			byte[] fileCopy = FileCopyUtils.copyToByteArray(file); 
+			byte[] fileCopy = FileCopyUtils.copyToByteArray(file); //해당경로의 파일의 바이트데이터를 읽는다
 			result = new ResponseEntity<>(fileCopy, header, HttpStatus.OK);
 			
 		} catch (Exception e) {
