@@ -13,19 +13,26 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="${pageContext.request.contextPath }/"><img width="30" src="${pageContext.request.contextPath }/resources/img/logo.svg" alt="Brand"></a>
+                            <a class="navbar-brand" href="${pageContext.request.contextPath }"><img width="30" src="${pageContext.request.contextPath }/resources/img/logo.svg" alt="Brand"></a>
                         </div>
 
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="${pageContext.request.contextPath }/">Main</a></li>
+                                <li class="active"><a href="${pageContext.request.contextPath }">Main</a></li>
                                 <li><a href="${pageContext.request.contextPath }/freeBoard/freeList">자유게시판</a></li>
-                                <li><a href="${pageContext.request.contextPath }/snsBoard/snsList">강의</a></li>
-                                
-                                <!-- 
-                                <li><a href="#">Form</a></li>
-                                <li><a href="#">Board</a></li>
- 								-->
+                                <li><a href="${pageContext.request.contextPath }/snsBoard/snsList">페이스북</a></li>
+                            	
+                            	<li class="dropdown drophover" ><!--drophover클래스를 주면 호버기능이 들어갑니다-->
+                                    <a class="dropdown-toggle" id="dropdownMenu1" href="#">강의</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="${pageContext.request.contextPath }/lecture/java">강의</a></li>
+                                        <li><a href="${pageContext.request.contextPath }/lecture/java">강의</a></li>
+                                        <li><a href="${pageContext.request.contextPath }/lecture/java">강의</a></li>
+                                        <li><a href="${pageContext.request.contextPath }/lecture/java">강의</a></li>
+                                        <li><a href="${pageContext.request.contextPath }/lecture/java">강의</a></li>
+                                    </ul>
+                                </li>
+                            
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <!--드롭다운으로 로그인 추가 -->

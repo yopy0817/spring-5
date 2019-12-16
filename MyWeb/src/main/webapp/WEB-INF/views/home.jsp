@@ -91,7 +91,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2>상품 그리드 레이아웃 <small>(쿠팡참조)</small></h2>
+                    <h2>강의<small>강의 준비중입니다</small></h2>
                 </div>
             </div>
             <!--새로운 그리드 잡기-->
@@ -101,44 +101,43 @@
                     <!--sm사이즈에서는 6칸을 잡는다 (2개씩보임)-->
                     <li class="col-sm-6">
                         <a href="##" class="prod-link">
-                            <img src="resources/img/box1.jpg">
+                            <img src="resources/img/box1.jpg" alt="자바">
                             <span class="arrow"><i class="glyphicon glyphicon-menu-right"></i></span>
                             <span class="arrow hover">상세보기<i class="glyphicon glyphicon-menu-right"></i></span>
                         </a>
                     </li>
                     <li class="col-sm-6">
                         <a href="##" class="prod-link">
-                            <img src="resources/img/box2.jpg">
+                            <img src="resources/img/box2.jpg" alt="jsp">
                             <span class="arrow"><i class="glyphicon glyphicon-menu-right"></i></span>
                             <span class="arrow hover">상세보기<i class="glyphicon glyphicon-menu-right"></i></span>
                         </a>
                     </li>
-                    <!--하나를 잡앗으면 다음부터는 쉽다-->
                     <!--md사이즈에서는 3칸씩 잡는다. sm사이즈에서는 6칸씩 잡는다-->
                     <li class="col-md-3 col-sm-6">
                         <a href="##" class="prod-link">
-                            <img src="resources/img/box3.jpg">
+                            <img src="resources/img2/img_ready.png">
                             <span class="arrow"><i class="glyphicon glyphicon-menu-right"></i></span>
                             <span class="arrow hover">상세보기<i class="glyphicon glyphicon-menu-right"></i></span>
                         </a>
                     </li>
                     <li class="col-md-3 col-sm-6">
                         <a href="##" class="prod-link">
-                            <img src="resources/img/box4.jpg">
+                            <img src="resources/img2/img_ready.png">
                             <span class="arrow"><i class="glyphicon glyphicon-menu-right"></i></span>
                             <span class="arrow hover">상세보기<i class="glyphicon glyphicon-menu-right"></i></span>
                         </a>
                     </li>
                     <li class="col-md-3 col-sm-6">
                         <a href="##" class="prod-link">
-                            <img src="resources/img/box5.jpg">
+                            <img src="resources/img2/img_ready.png">
                             <span class="arrow"><i class="glyphicon glyphicon-menu-right"></i></span>
                             <span class="arrow hover">상세보기<i class="glyphicon glyphicon-menu-right"></i></span>
                         </a>
                     </li>
                     <li class="col-md-3 col-sm-6">
                         <a href="##" class="prod-link">
-                            <img src="resources/img/box6.jpg">
+                            <img src="resources/img2/img_ready.png">
                             <span class="arrow"><i class="glyphicon glyphicon-menu-right"></i></span>
                             <span class="arrow hover">상세보기<i class="glyphicon glyphicon-menu-right"></i></span>
                         </a>
@@ -146,7 +145,7 @@
                     <!--이번 에는 md사이즈에서 6칸 (2개씩). sm사이즈에서 12칸 (1개씩)-->
                     <li class="col-md-6 col-sm-12">
                         <a href="##" class="prod-link">
-                            <img src="resources/img/box7.jpg">
+                            <img src="resources/img2/img_ready.png">
                             <span class="arrow"><i class="glyphicon glyphicon-menu-right"></i></span>
                             <span class="arrow hover">상세보기<i class="glyphicon glyphicon-menu-right"></i></span>
                         </a>
@@ -154,14 +153,14 @@
                     <!--md사이즈에서 (4개씩), sm사이즈에서 (2개씩) -->
                     <li class="col-md-3 col-sm-6">
                         <a href="##" class="prod-link">
-                            <img src="resources/img/box8.jpg">
+                            <img src="resources/img2/img_ready.png">
                             <span class="arrow"><i class="glyphicon glyphicon-menu-right"></i></span>
                             <span class="arrow hover">상세보기<i class="glyphicon glyphicon-menu-right"></i></span>
                         </a>
                     </li>
                     <li class="col-md-3 col-sm-6">
                         <a href="##" class="prod-link">
-                            <img src="resources/img/box9.jpg">
+                            <img src="resources/img2/img_ready.png">
                             <span class="arrow"><i class="glyphicon glyphicon-menu-right"></i></span>
                             <span class="arrow hover">상세보기<i class="glyphicon glyphicon-menu-right"></i></span>
                         </a>

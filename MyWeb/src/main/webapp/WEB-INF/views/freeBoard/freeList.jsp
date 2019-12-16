@@ -46,8 +46,8 @@
                        </select>
                     </div>
                     <!-- 검색의 클릭시 pageNum은 1부터 시작하게 함 -->
-                    <input type="hidden" name="pageNum" id="pageNum" value="1">
-                    <input type="hidden" name="amount" id="amount" value="${pageVO.cri.amount }">
+                    <input type="hidden" name="pageNum"  value="1">
+                    <input type="hidden" name="amount"  value="${pageVO.cri.amount }">
                     </form>
                     
                     <table class="table table-bordered">

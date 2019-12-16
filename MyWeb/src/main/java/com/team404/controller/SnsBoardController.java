@@ -78,11 +78,11 @@ public class SnsBoardController {
 			Date date = new Date();
 			String fileLoca = sdf.format(date);
 			//저장할폴더
-			String uploadPath = "C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileLoca;
-			//String uploadFolder = "D:\\jsp\\upload\\" + fileLoca;
+			//String uploadPath = "C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileLoca;
+			String uploadPath = "D:\\jsp\\upload\\" + fileLoca;
 						
-			File folder = new File(uploadPath); //날짜별 파일생성
-			//File folder = new File("D:\\jsp\\upload\\" + fileLoca); //날짜별 파일생성
+			//File folder = new File(uploadPath); //날짜별 파일생성
+			File folder = new File("D:\\jsp\\upload\\" + fileLoca); //날짜별 파일생성
 			if(!folder.exists()) {
 				folder.mkdir();
 			}
@@ -167,8 +167,8 @@ public class SnsBoardController {
 		
 		System.out.println("fileName: " + fileName);
 		System.out.println("fileLoca: " + fileLoca);
-		File file = new File("C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileLoca + "\\" + fileName);
-		//File file = new File("D:\\jsp\\upload\\" + fileLoca + "\\" + fileName);
+		//File file = new File("C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileLoca + "\\" + fileName);
+		File file = new File("D:\\jsp\\upload\\" + fileLoca + "\\" + fileName);
 		System.out.println("file: " + file);
 		
 		
@@ -218,8 +218,9 @@ public class SnsBoardController {
 	@ResponseBody
 	public ResponseEntity<byte[]> download(@RequestParam("fileLoca") String fileLoca,
 											@RequestParam("fileName")String fileName) {
-		File file = new File("C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileLoca + "\\" + fileName);
-
+		//File file = new File("C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileLoca + "\\" + fileName);
+		File file = new File("D:\\jsp\\upload\\" + fileLoca + "\\" + fileName);
+		
 		ResponseEntity<byte[]> result = null;
 		try {
 			//응답 본문을 브라우저가 어떻게 표시해야 할지 알려주는 헤더입니다. inline인 경우 웹페이지 화면에 표시되고, attachment인 경우 다운로드됩니다.

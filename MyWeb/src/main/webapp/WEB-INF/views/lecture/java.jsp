@@ -163,6 +163,22 @@
 		.modal-inner p {
 			margin: 0px;
 		}
+		
+		/* 강의디자인 */
+		.section-inner .contentDiv,
+		.section-inner .write-wrap {
+			margin: 0 40px;
+			margin-bottom: 60px;
+		}
+		
+		@media (max-width:767px){
+            .section-inner .contentDiv,
+			.section-inner .write-wrap {
+				margin: 0;
+				margin-bottom: 60px;
+			}
+        }
+		
 	</style>
 	
 </head>
@@ -191,88 +207,84 @@
 							</c:choose>
 						</div>
 						<div class="menu2">
-							<p>둘러보기</p>
+							<p>강의목록</p>
 							<ul>
 								<li>기부 캠페인</li>
-								<li>페이지</li>
-								<li>그룹</li>
-								<li>이벤트</li>
-								<li>친구리스트</li>
+								<li>기부 캠페인</li>
+								<li>기부 캠페인</li>
+								<li>기부 캠페인</li>
+								<li>기부 캠페인</li>
+								<li>기부 캠페인</li>
+								<li>기부 캠페인</li>
 							</ul>
 						</div>
 					</div>
 				</aside>
-				<div class="col-xs-12 col-sm-8 section-inner">
-					
-					<!-- 파일 업로드 폼입니다 -->
-					<h4>게시물 만들기</h4>
-					<div class="fileDiv">
-						<img id="fileImg" src="../resources/img/img_ready.png">
-					</div>
-					<div class="reply-content">
-						<textarea class="form-control" rows="3" name="content" id="content" placeholder="무슨 생각을 하고 계신가요?"></textarea>
-						<div class="reply-group">
-							<div class="filebox pull-left">
-								<label for="file">이미지업로드</label> 
-								<input type="file" name="file" id="file">
-							</div>
-							<button type="button" class="right btn btn-info" id="uploadBtn">등록하기</button>
+				
+				<div class="col-xs-12 col-sm-10 section-inner">
+					<!-- 강의영역 -->
+					<div class="contentDiv" id="contentDiv">
+	                    <div class="titlebox">
+	                    	<p>강의</p>
+	                    	<small>날짜....</small>                    
+	                    </div>
+						<div class="content-inner">
+							<p>삶이 우리를 끝없이 시험하기에 고어텍스는 한계를 테스트합니다</p>
+						</div>
+						<div class="image-inner">
+							<!-- 이미지영역 -->
+							<img src="../resources/img2/img_ready.png">
+							<!-- <img src="display?fileLoca=20191129&fileName=9f08b55b36724aa7895d60f5e5f716e2.jpg"> -->
+						</div>
+						<div class="like-inner">
+							<!--좋아요-->
+							<img src="../resources/img/icon.jpg"><span>522</span>
 						</div>
 					</div>
-					<!-- 파일 업로드 폼 끝 -->
-					
-					
-					<div id="contentDiv">
-					<div class="title-inner">
-						<!--제목영역-->
-						<div class="profile">
+					<!-- 강의영역 끝 -->
+					<!-- 댓글영역 -->
+					<div class="write-wrap">
+					<form class="reply-wrap">
+						<div class="reply-image">
 							<img src="../resources/img/profile.png">
 						</div>
-						<div class="title">
-							<p>테스트</p>
-							<small>21시간</small>
+						<div class="reply-content">
+							<textarea class="form-control" rows="3" name="reply" id="reply"></textarea>
+							<!--여기에-->
+							<div class="reply-group">
+								<div class="reply-input">
+									<input type="text" class="form-control" placeholder="이름" name="replyId" id="replyId"> 
+									<input type="password" class="form-control" placeholder="비밀번호" name="replyPw"	id="replyPw">
+								</div>
+								<button type="button" class="right btn btn-info" id="replyRegist">등록하기</button>
+							</div>
+						</div>
+					</form>
+					<div id="replyList">
+						<div class='reply-wrap'>
+							<div class='reply-image'>
+								<img src='../resources/img/profile.png'>
+							</div>
+							<div class='reply-content'>
+								<div class='reply-group'>
+									<strong class='left'>honggildong</strong> <small class='left'>2019/12/10</small>
+									<a href='#' class='right' id="replyModify"><span
+										class='glyphicon glyphicon-pencil'></span>수정</a> <a href='#'
+										class='right' id="replyDelete"><span
+										class='glyphicon glyphicon-remove'></span>삭제</a>
+								</div>
+								<p class='clearfix'>여기는 댓글영역</p>
+							</div>
 						</div>
 					</div>
-					<div class="content-inner">
-						<!--내용영역-->
-						<p>삶이 우리를 끝없이 시험하기에 고어텍스는 한계를 테스트합니다</p>
-					</div>
-					<div class="image-inner">
-						<!-- 이미지영역 -->
-						<!-- <img src="../resources/img/facebook.jpg"> -->
-						<img src="display?fileLoca=20191129&fileName=9f08b55b36724aa7895d60f5e5f716e2.jpg">
-					</div>
-					<div class="like-inner">
-						<!--좋아요-->
-						<img src="../resources/img/icon.jpg"><span>522</span>
-					</div>
-					<div class="link-inner">
-						<a href="##"><i class="glyphicon glyphicon-thumbs-up"></i>좋아요</a>
-						<a href="##"><i class="glyphicon glyphicon-comment"></i>댓글달기</a> 
-						<a href="##"><i class="glyphicon glyphicon-remove"></i>삭제하기</a>
-					</div>
-					</div>
+					<button type="button" class="form-control" id="moreList">더보기</button>
 				</div>
-				<!--우측 어사이드-->
-				<aside class="col-sm-2">
-					<div class="aside-inner">
-						<div class="menu1">
-							<p>목록</p>
-							<ul>
-								<li>목록1</li>
-								<li>목록2</li>
-								<li>목록3</li>
-								<li>목록4</li>
-								<li>목록5</li>
-							</ul>
-							<button type="button" onclick="$('#snsDetail').modal('show')">테스트</button>
-						</div>
-					</div>
-				</aside>
+					
+				</div>
 			</div>
 		</div>
 	</section>
-	
+
 	<%@ include file="../include/footer.jsp" %>
 
 	<!-- 모달 -->
@@ -299,7 +311,6 @@
 							<a href="##"><i class="glyphicon glyphicon-thumbs-up"></i>좋아요</a>
 							<a href="##"><i class="glyphicon glyphicon-comment"></i>댓글달기</a> 
 							<a href="##"><i class="glyphicon glyphicon-share-alt"></i>공유하기</a>
-							
 						</div>
 						</div>
 					</div>
@@ -522,16 +533,6 @@
 	        readURL(this); //this는 #file자신 태그를 의미
 	    })
 	    
-	    
-	    //이거무한스크롤
-	    var page = 1;
-		$(window).scroll(function() {
-		    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-		      console.log(++page);
-		      $("#contentDiv").append("<h1>Page " + page + "</h1><BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~");
-		      
-			}
-		});
 	</script>
 	
 	
