@@ -22,17 +22,34 @@
                                 <li><a href="${pageContext.request.contextPath }/freeBoard/freeList">자유게시판</a></li>
                                 <li><a href="${pageContext.request.contextPath }/snsBoard/snsList">페이스북</a></li>
                             	
+                            	<li class="dropdown">
+                            	    <a class="dropdown-toggle" data-toggle="dropdown" href="#">언어</a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                        	<a href="${pageContext.request.contextPath }/lecture/java">자바</a>
+                                        	<a href="${pageContext.request.contextPath }/lecture/java/1"><i class="glyphicon glyphicon-minus"></i>변수</a>
+                                        	<a href="${pageContext.request.contextPath }/lecture/java/2"><i class="glyphicon glyphicon-minus"></i>변수</a>
+                                        	<a href="${pageContext.request.contextPath }/lecture/java/3"><i class="glyphicon glyphicon-minus"></i>변수</a>
+                                        	<a href="${pageContext.request.contextPath }/lecture/java/4"><i class="glyphicon glyphicon-minus"></i>변수</a>
+                                        	<a href="${pageContext.request.contextPath }/lecture/java/5"><i class="glyphicon glyphicon-minus"></i>변수</a>
+                                        </li>
+                                        <li><a href="${pageContext.request.contextPath }/lecture/C">C언어</a></li>
+                                    </ul>
+                            	</li>
+                            	<%-- 
                             	<li class="dropdown drophover" ><!--drophover클래스를 주면 호버기능이 들어갑니다-->
-                                    <a class="dropdown-toggle" id="dropdownMenu1" href="#">강의</a>
+                                    <a class="dropdown-toggle" id="dropdownMenu1" href="">강의</a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li><a href="${pageContext.request.contextPath }/lecture/java">강의</a></li>
-                                        <li><a href="${pageContext.request.contextPath }/lecture/java">강의</a></li>
-                                        <li><a href="${pageContext.request.contextPath }/lecture/java">강의</a></li>
-                                        <li><a href="${pageContext.request.contextPath }/lecture/java">강의</a></li>
-                                        <li><a href="${pageContext.request.contextPath }/lecture/java">강의</a></li>
+                                        <li>
+                                        	<a href="${pageContext.request.contextPath }/lecture/java">JAVA</a>
+                                        	<a href="${pageContext.request.contextPath }/lecture/java">JAVA</a>
+                                        </li>
+                                        <li>
+                                        	<a href="${pageContext.request.contextPath }/lecture/java">C언어</a>
+                                        </li>
                                     </ul>
                                 </li>
-                            
+                            	 --%>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <!--드롭다운으로 로그인 추가 -->

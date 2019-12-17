@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.team404.command.UserVO;
@@ -20,16 +21,24 @@ public class LectureController {
 	@Qualifier("userService")
 	private UserService userService;
 	
-	
 	@RequestMapping("/java")
-	public String java(HttpSession session,  Model model) {
+	public String javaMain(HttpSession session, Model model) {
+		if(session.getAttribute("user_id") != null) {
+			String user_id = (String)session.getAttribute("user_id");
+			UserVO userVO = userService.userInfo(user_id);
+			model.addAttribute("userVO", userVO);
+		}
+		return "lecture/java";
+	}
+	
+	@RequestMapping("/java/${value}")
+	public String java(HttpSession session, @PathVariable("value") String value, Model model) {
 		
 		if(session.getAttribute("user_id") != null) {
 			String user_id = (String)session.getAttribute("user_id");
 			UserVO userVO = userService.userInfo(user_id);
 			model.addAttribute("userVO", userVO);
 		}
-		
-		return "lecture/java";
+		return "lecture/java/" + value;
 	}
 }

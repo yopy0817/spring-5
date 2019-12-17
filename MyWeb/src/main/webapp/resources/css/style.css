@@ -91,6 +91,14 @@ header .container {
 .nav .open>a:focus {
 	background-color: #304047;
 }
+/*부트스트랩의 드롭다운시 a태그 색상변경  */
+@media (max-width:767px) {
+	.dropdown-menu > li > a {
+		color: #f5f5f5;
+	}	
+}
+
+
 /*부트스트랩 li의 drophover클래스 호버시에 드롭다운 적용코드*/
 ul.nav li.drophover:hover > ul.dropdown-menu {
     display: block; 
@@ -444,6 +452,15 @@ footer .footer-menu li a {
 	text-decoration: none;
 	color: #777;
 	float: right;
+}
+/*댓글창 포커스시 서서히 보이기 */
+.reply-content textarea {
+	height: 50px;
+	transition: height .4s ease-in-out;
+}
+
+.reply-content textarea:focus {
+	height: 150px;
 }
 
 /*==========토글탭 mypage==========*/

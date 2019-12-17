@@ -47,7 +47,7 @@
 
                             <div class="form-group">
                                 <label>내용</label>
-                                <textarea class="form-control" rows="10" name='content' readonly>${boardVO.content }</textarea>
+                                <textarea class="form-control" rows="10" name='content' placeholder="댓글입력" readonly>${boardVO.content }</textarea>
                             </div>
 							
 							<!-- 반드시 타입-버튼 id추가 -->
@@ -84,7 +84,7 @@
 
                         <!--여기에접근 반복-->
                         <div id="replyList">
-                        	<!-- 
+                        	<%--
 	                        <div class='reply-wrap'>
 	                            <div class='reply-image'>
 	                                <img src='../resources/img/profile.png'>
@@ -100,7 +100,7 @@
 	                                <p class='clearfix'>여기는 댓글영역</p>
 	                            </div>
 	                        </div>
-	                         -->
+	                         --%>
                         </div>
                         
 	                    <button type="button" class="form-control" id="moreList">더보기</button>
@@ -202,27 +202,30 @@
                    				return;//함수종료
                    			}
                    			
+                			var strAdd = ""; //2nd
                    			for(var i = 0; i < list.length; i++) {
-                   				console.log(list[i]);
-								
-								
-                   				str += "<div class='reply-wrap'>";
-                   				str += "<div class='reply-image'>";
-                   				str += "<img src='../resources/img/profile.png'>";
-                   				str += "</div>";
-                   				str += "<div class='reply-content'>";
-                            	str += "<div class='reply-group'>";
-                            	str += "<strong class='left'>"+ list[i].replyId +"</strong> ";
-                                str += "<small class='left'>"+ timeStamp(list[i].replydate) +"</small>";			 
-                                str += "<a href='"+ list[i].rno+"' class='right' id='replyModify'><span class='glyphicon glyphicon-pencil'></span>수정</a>";    		 
-								str += "<a href='"+ list[i].rno+"' class='right' id='replyDelete'><span class='glyphicon glyphicon-remove'></span>삭제</a>";                                    		
-                                str += "</div>";
-                                str += "<p class='clearfix'>"+list[i].reply +"</p>";    	 
-                                str += "</div>";
-                            	str += "</div>";
+                   				strAdd += "<div class='reply-wrap' style='display:none;'>"; //2nd
+                   				strAdd += "<div class='reply-image'>";
+                   				strAdd += "<img src='../resources/img/profile.png'>";
+                   				strAdd += "</div>";
+                   				strAdd += "<div class='reply-content'>";
+                   				strAdd += "<div class='reply-group'>";
+                   				strAdd += "<strong class='left'>"+ list[i].replyId +"</strong> ";
+                   				strAdd += "<small class='left'>"+ timeStamp(list[i].replydate) +"</small>";			 
+                   				strAdd += "<a href='"+ list[i].rno+"' class='right' id='replyModify'><span class='glyphicon glyphicon-pencil'></span>수정</a>";    		 
+                   				strAdd += "<a href='"+ list[i].rno+"' class='right' id='replyDelete'><span class='glyphicon glyphicon-remove'></span>삭제</a>";                                    		
+                   				strAdd += "</div>";
+                   				strAdd += "<p class='clearfix'>"+list[i].reply +"</p>";    	 
+                   				strAdd += "</div>";
+                   				strAdd += "</div>";
                    			}
-                   			$("#replyList").html(str); //문자열을 통째로 추가한다
-                   			
+                   			//1st:문자열을 통째로 추가한다
+                            //$("#replyList").html(str); 
+                          	//2nd: 기존의 replyList의 뒤쪽에 새로운 댓글을 추가적으로 더하고 서서히 보이게 처리
+                          	//		단. 화면을 그릴때 style="display:none;" 처리	
+                            $("#replyList").append(strAdd);
+                            $(".reply-wrap").fadeIn(500);
+                          	
                 		}
                 	)
         		} //게시물 목록처리 끝
@@ -335,7 +338,7 @@
         			*/
         	        var date = new Date();//오늘날짜
         			var gap = date.getTime() - millis; //시간차이
-        	        console.log("경과밀리초:" + gap);
+        	        //console.log("경과밀리초:" + gap);
 
         	        var time; //리턴할 시간
         	        if(gap < 1000 * 60 * 60 * 24) {  //1일 이하인 경우
@@ -355,7 +358,6 @@
         	            var second = today.getSeconds();//초
         	            time = year +"년"+month+"월"+day+"일" +hour+":"+minute+":"+second;
         	        }
-        	        console.log(time);
         	        return time;
         		}
         		
