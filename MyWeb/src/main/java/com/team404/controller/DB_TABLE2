@@ -12,6 +12,26 @@ create table lecture_list(
     leclistcomment varchar2(500), --코멘트
     likes number(10, 0), --좋아요
     bookmark number(10, 0), --즐겨찾기
-    leclistregdate date DEFAULT sysdate
+    regdate date DEFAULT sysdate
 );
 alter table lecture_list add CONSTRAINT lecture_list_leclistno_pk PRIMARY KEY (leclistno);
+
+//더미데이터
+insert into lecture(lecno, lecname) values(100, '자바');
+insert into lecture(lecno, lecname) values(200, '자바스크립트');
+insert into lecture_list(lecno, leclistno, leclistname) values(100, 100, '수업소개');
+insert into lecture_list(lecno, leclistno, leclistname) values(100, 101, '주석 식별자');
+insert into lecture_list(lecno, leclistno, leclistname) values(100, 102, '변수');
+insert into lecture_list(lecno, leclistno, leclistname) values(100, 103, '데이터타입');
+insert into lecture_list(lecno, leclistno, leclistname) values(100, 104, '형변환');
+insert into lecture_list(lecno, leclistno, leclistname) values(100, 105, '연산자');
+insert into lecture_list(lecno, leclistno, leclistname) values(100, 106, '배열');
+insert into lecture_list(lecno, leclistno, leclistname) values(100, 107, '출력(스캐너)');
+insert into lecture_list(lecno, leclistno, leclistname) values(100, 108, '조건문');
+insert into lecture_list(lecno, leclistno, leclistname) values(100, 109, '반복문');
+insert into lecture_list(lecno, leclistno, leclistname) values(100, 110, '탈출문');
+insert into lecture_list(lecno, leclistno, leclistname) values(200, 20, '수업소개');
+insert into lecture_list(lecno, leclistno, leclistname) values(200, 201, '주석');
+insert into lecture_list(lecno, leclistno, leclistname) values(200, 202, '변수');
+insert into lecture_list(lecno, leclistno, leclistname) values(200, 203, '데이터타입');
+insert into lecture_list(lecno, leclistno, leclistname) values(200, 204, '연산자');
