@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<aside class="col-sm-3 col-md-2">
+<aside class="col-xs-12 col-sm-3 col-md-3">
+	<%-- 
 	<div class="menu1">
 		<c:choose>
 			<c:when test="${sessionScope.user_id != null }">
@@ -19,12 +20,13 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
+	--%>
 	<div class="menu2">
 		<div class="depth0">${lecVO.lecName }</div>
 		<ul>
 			<c:forEach var="vo" items="${lecVO.lectureListVO }">
 				<li	class="depth1 ${vo.lecListName eq lecListVO.lecListName ? 'select':'' }">
-					<a href="${vo.lecListNo}"><span	class="glyphicon glyphicon-minus">${vo.lecListName }</span></a>
+					<a href="${vo.lecListNo}">${vo.lecListName }</a>
 				</li>
 			</c:forEach>
 		</ul>

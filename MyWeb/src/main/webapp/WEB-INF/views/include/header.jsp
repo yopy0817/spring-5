@@ -40,21 +40,9 @@
                             	<li class="dropdown">
                             	    <a class="dropdown-toggle" data-toggle="dropdown" href="#">언어</a>
                                     <ul class="dropdown-menu">
-                                        <li>
-                                        	<a href="${pageContext.request.contextPath }/lecture/100/100">Java</a>
-                                        	<a href="${pageContext.request.contextPath }/lecture/100/101"><i class="glyphicon glyphicon-minus"></i>주석 식별자</a>
-                                        	<a href="${pageContext.request.contextPath }/lecture/100/102"><i class="glyphicon glyphicon-minus"></i>변수</a>
-                                        	<a href="${pageContext.request.contextPath }/lecture/100/103"><i class="glyphicon glyphicon-minus"></i>데이터타입</a>
-                                        	<a href="${pageContext.request.contextPath }/lecture/100/104"><i class="glyphicon glyphicon-minus"></i>형변환</a>
-                                        	<a href="${pageContext.request.contextPath }/lecture/100/105"><i class="glyphicon glyphicon-minus"></i>연산자</a>
-                                        	<a href="${pageContext.request.contextPath }/lecture/100/105"><i class="glyphicon glyphicon-minus"></i>배열</a>
-                                        	<a href="${pageContext.request.contextPath }/lecture/100/105"><i class="glyphicon glyphicon-minus"></i>출력(스캐너)</a>
-                                        	<a href="${pageContext.request.contextPath }/lecture/100/105"><i class="glyphicon glyphicon-minus"></i>조건문</a>
-                                        	<a href="${pageContext.request.contextPath }/lecture/100/105"><i class="glyphicon glyphicon-minus"></i>반복문</a>
-                                        	<a href="${pageContext.request.contextPath }/lecture/100/105"><i class="glyphicon glyphicon-minus"></i>탈출문</a>
-                                        </li>
+                                        <li><a href="${pageContext.request.contextPath }/lecture/100/100">Java</a></li>
                                         <li><a href="${pageContext.request.contextPath }/lecture/200/200">JavaScript</a></li>
-                                    	
+                                    	<li><a href="${pageContext.request.contextPath }/lecture/300/300">테스트</a></li>
                                     </ul>
                             	</li>
                             	

@@ -30,7 +30,7 @@ insert into lecture_list(lecno, leclistno, leclistname) values(100, 107, '출력
 insert into lecture_list(lecno, leclistno, leclistname) values(100, 108, '조건문');
 insert into lecture_list(lecno, leclistno, leclistname) values(100, 109, '반복문');
 insert into lecture_list(lecno, leclistno, leclistname) values(100, 110, '탈출문');
-insert into lecture_list(lecno, leclistno, leclistname) values(200, 20, '수업소개');
+insert into lecture_list(lecno, leclistno, leclistname) values(200, 200, '수업소개');
 insert into lecture_list(lecno, leclistno, leclistname) values(200, 201, '주석');
 insert into lecture_list(lecno, leclistno, leclistname) values(200, 202, '변수');
 insert into lecture_list(lecno, leclistno, leclistname) values(200, 203, '데이터타입');

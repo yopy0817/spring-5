@@ -85,54 +85,8 @@
         /*767미만 사이즈에서 해당 css가 적용됨*/
         /*xs가 767사이즈   */
         @media (max-width:767px){
-            aside {
-                display: none;
-            }
+            /* aside {display: none;} */
         }
-        
- 		/* 파일업로드 버튼 바꾸기 */
- 		.filebox label {
-		  display: inline-block;
-		  padding: 6px 10px;
-		  color: #fff;
-		  font-size: inherit;
-		  line-height: normal;
-		  vertical-align: middle;
-		  background-color: #5cb85c;
-		  cursor: pointer;
-		  border: 1px solid #4cae4c;
-		  border-radius: none;
-		  -webkit-transition: background-color 0.2s;
-		  transition: background-color 0.2s;
-		}
-		.filebox label:hover {
-		  background-color: #6ed36e;
-		}
-		.filebox label:active {
-		  background-color: #367c36;
-		}
-		.filebox input[type="file"] {
-		  position: absolute;
-		  width: 1px;
-		  height: 1px;
-		  padding: 0;
-		  margin: -1px;
-		  overflow: hidden;
-		  clip: rect(0, 0, 0, 0);
-		  border: 0;
-		}
-		
-		/* sns파일 업로드시 미리보기  */
-		.fileDiv {
-			height: 100px;
-			width: 200px;
-			display: none;
-			margin-bottom: 10px;
-		}
-		.fileDiv img {
-			width: 100%;
-			height: 100%;
-		}
 		/* 모달창 조절 */
 		.modal-body {
 			padding: 0px;
@@ -170,7 +124,7 @@
 			<div class="row">
 				<!-- 목록영역 -->
 				<%@ include file="../../include/aside.jsp" %>
-				<div class="col-xs-12 col-sm-9 col-md-10 section-inner">
+				<div class="col-xs-12 col-sm-9 col-md-9 section-inner">
 					<!-- 강의영역 -->
 					<div class="contentDiv" id="contentDiv">
 	                    <div class="titlebox">
@@ -268,8 +222,5 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	
 </body>
 </html>
