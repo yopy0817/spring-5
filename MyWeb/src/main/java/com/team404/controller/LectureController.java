@@ -9,7 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.team404.command.LectureListVO;
+import com.team404.command.LectureVO;
 import com.team404.command.UserVO;
+import com.team404.lecture.service.LectureService;
 import com.team404.user.service.UserService;
 
 @Controller
@@ -21,24 +24,32 @@ public class LectureController {
 	@Qualifier("userService")
 	private UserService userService;
 	
-	@RequestMapping("/java")
-	public String javaMain(HttpSession session, Model model) {
-		if(session.getAttribute("user_id") != null) {
-			String user_id = (String)session.getAttribute("user_id");
-			UserVO userVO = userService.userInfo(user_id);
-			model.addAttribute("userVO", userVO);
-		}
-		return "lecture/java";
-	}
+	//강의정보
+	@Autowired
+	@Qualifier("lectureService")
+	private LectureService lectureService;
 	
-	@RequestMapping("/java/${value}")
-	public String java(HttpSession session, @PathVariable("value") String value, Model model) {
+	@RequestMapping("/{lecNo}/{lecListNo}")
+	public void javaMain(HttpSession session, 
+						   @PathVariable("lecNo") int lecNo, 
+						   @PathVariable("lecListNo") int lecListNo,
+						   Model model) {
 		
 		if(session.getAttribute("user_id") != null) {
 			String user_id = (String)session.getAttribute("user_id");
 			UserVO userVO = userService.userInfo(user_id);
 			model.addAttribute("userVO", userVO);
 		}
-		return "lecture/java/" + value;
+
+		//강의목록가져오기
+		LectureVO lecVO = lectureService.getLectureList(lecNo); 
+		model.addAttribute("lecVO", lecVO);
+		
+		LectureListVO lecListVO = lectureService.getDetail(lecListNo);
+		model.addAttribute("lecListVO", lecListVO);
+		
+		System.out.println(lecVO.toString());
+
 	}
+
 }

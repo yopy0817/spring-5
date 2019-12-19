@@ -1,0 +1,17 @@
+create table lecture(
+    lecno number(10, 0),
+    lecname varchar2(50),
+    lecregdate date DEFAULT sysdate
+);
+alter table lecture add CONSTRAINT lecture_lecno_pk PRIMARY KEY (lecno);
+
+create table lecture_list(
+    lecno number(10, 0), --fk
+    leclistno number(10, 0), --pk    
+    leclistname varchar2(50), --강의이름
+    leclistcomment varchar2(500), --코멘트
+    likes number(10, 0), --좋아요
+    bookmark number(10, 0), --즐겨찾기
+    leclistregdate date DEFAULT sysdate
+);
+alter table lecture_list add CONSTRAINT lecture_list_leclistno_pk PRIMARY KEY (leclistno);

@@ -21,21 +21,43 @@
                                 <li class="active"><a href="${pageContext.request.contextPath }">Main</a></li>
                                 <li><a href="${pageContext.request.contextPath }/freeBoard/freeList">자유게시판</a></li>
                                 <li><a href="${pageContext.request.contextPath }/snsBoard/snsList">페이스북</a></li>
-                            	
+                            	<%--
+                            	<li class="dropdown">
+                            	    <a class="dropdown-toggle" data-toggle="dropdown" href="#">언어</a>
+	                            	<ul class="dropdown-menu">
+				                        <li class="dropdown-submenu">
+				                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
+				                            <ul class="dropdown-menu">
+				                                <li><a href="#">Action</a></li>
+				                                <li><a href="#">Another action</a></li>
+				                                <li><a href="#">Something else here</a></li>
+				                            </ul>
+				                        </li>
+				                    </ul>
+                            	</li>
+                            	--%>
+                            	<!-- 1중드롭다운 -->
                             	<li class="dropdown">
                             	    <a class="dropdown-toggle" data-toggle="dropdown" href="#">언어</a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                        	<a href="${pageContext.request.contextPath }/lecture/java">자바</a>
-                                        	<a href="${pageContext.request.contextPath }/lecture/java/1"><i class="glyphicon glyphicon-minus"></i>변수</a>
-                                        	<a href="${pageContext.request.contextPath }/lecture/java/2"><i class="glyphicon glyphicon-minus"></i>변수</a>
-                                        	<a href="${pageContext.request.contextPath }/lecture/java/3"><i class="glyphicon glyphicon-minus"></i>변수</a>
-                                        	<a href="${pageContext.request.contextPath }/lecture/java/4"><i class="glyphicon glyphicon-minus"></i>변수</a>
-                                        	<a href="${pageContext.request.contextPath }/lecture/java/5"><i class="glyphicon glyphicon-minus"></i>변수</a>
+                                        	<a href="${pageContext.request.contextPath }/lecture/100/100">Java</a>
+                                        	<a href="${pageContext.request.contextPath }/lecture/100/101"><i class="glyphicon glyphicon-minus"></i>주석 식별자</a>
+                                        	<a href="${pageContext.request.contextPath }/lecture/100/102"><i class="glyphicon glyphicon-minus"></i>변수</a>
+                                        	<a href="${pageContext.request.contextPath }/lecture/100/103"><i class="glyphicon glyphicon-minus"></i>데이터타입</a>
+                                        	<a href="${pageContext.request.contextPath }/lecture/100/104"><i class="glyphicon glyphicon-minus"></i>형변환</a>
+                                        	<a href="${pageContext.request.contextPath }/lecture/100/105"><i class="glyphicon glyphicon-minus"></i>연산자</a>
+                                        	<a href="${pageContext.request.contextPath }/lecture/100/105"><i class="glyphicon glyphicon-minus"></i>배열</a>
+                                        	<a href="${pageContext.request.contextPath }/lecture/100/105"><i class="glyphicon glyphicon-minus"></i>출력(스캐너)</a>
+                                        	<a href="${pageContext.request.contextPath }/lecture/100/105"><i class="glyphicon glyphicon-minus"></i>조건문</a>
+                                        	<a href="${pageContext.request.contextPath }/lecture/100/105"><i class="glyphicon glyphicon-minus"></i>반복문</a>
+                                        	<a href="${pageContext.request.contextPath }/lecture/100/105"><i class="glyphicon glyphicon-minus"></i>탈출문</a>
                                         </li>
-                                        <li><a href="${pageContext.request.contextPath }/lecture/C">C언어</a></li>
+                                        <li><a href="${pageContext.request.contextPath }/lecture/200/200">JavaScript</a></li>
+                                    	
                                     </ul>
                             	</li>
+                            	
                             	<%-- 
                             	<li class="dropdown drophover" ><!--drophover클래스를 주면 호버기능이 들어갑니다-->
                                     <a class="dropdown-toggle" id="dropdownMenu1" href="">강의</a>
@@ -49,7 +71,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                            	 --%>
+                            	--%>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <!--드롭다운으로 로그인 추가 -->

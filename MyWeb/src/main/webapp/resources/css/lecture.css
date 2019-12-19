@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+/* 강의디자인 */
+.section-inner .contentDiv,
+.section-inner .write-wrap {
+	margin: 0 40px;
+	margin-bottom: 60px;
+}
+@media (max-width:767px){
+.section-inner .contentDiv,
+.section-inner .write-wrap {
+	margin: 0;
+	margin-bottom: 60px;
+	}
+}
+
+aside {border-left: 1px solid #ddd; }
+aside a,
+aside a:hover {text-decoration: none; color: #333;}
+aside[class*=col-sm]  {padding: 0;}
+.menu2 .depth0,
+.menu2 .depth1 {width: 100%; padding: 8px 15px;}
+
+.menu2 ul li:hover {background-color: #3c9;}
+.select {background-color: #3c9;}
+			
