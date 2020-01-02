@@ -7,20 +7,21 @@
 	margin-bottom: 60px;
 }
 @media (max-width:767px){
-.section-inner .contentDiv,
-.section-inner .write-wrap {
-	margin: 0;
-	margin-bottom: 60px;
-	}
+	.section-inner .contentDiv,
+	.section-inner .write-wrap {
+		margin: 0;
+		margin-bottom: 60px;
+		}
+	aside {display: inline;}/* XS에서 어사이드바변경 */
+	.menu2 .depth1 {width:50%; float: left; border:1px solid #ddd;}	
 }
 
 aside {border-left: 1px solid #ddd; }
 aside a,
 aside a:hover {text-decoration: none; color: #333;}
 aside[class*=col-sm]  {padding: 0;}
-.menu2 .depth0,
-.menu2 .depth1 {width: 100%; padding: 8px 15px;}
-
+.menu2 .depth0 {padding: 8px 15px; font-weight:900}
+.menu2 .depth1 {padding: 8px 15px 8px 20px;}
 .menu2 ul li:hover {background-color: #3c9;}
 .select {background-color: #3c9;}
 			

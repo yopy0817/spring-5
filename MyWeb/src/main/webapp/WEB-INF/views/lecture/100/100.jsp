@@ -85,81 +85,8 @@
         /*767미만 사이즈에서 해당 css가 적용됨*/
         /*xs가 767사이즈   */
         @media (max-width:767px){
-            aside {
-                display: none;
-            }
+            /* aside {display: none;} */
         }
-        
- 		/* 파일업로드 버튼 바꾸기 */
- 		.filebox label {
-		  display: inline-block;
-		  padding: 6px 10px;
-		  color: #fff;
-		  font-size: inherit;
-		  line-height: normal;
-		  vertical-align: middle;
-		  background-color: #5cb85c;
-		  cursor: pointer;
-		  border: 1px solid #4cae4c;
-		  border-radius: none;
-		  -webkit-transition: background-color 0.2s;
-		  transition: background-color 0.2s;
-		}
-		.filebox label:hover {
-		  background-color: #6ed36e;
-		}
-		.filebox label:active {
-		  background-color: #367c36;
-		}
-		.filebox input[type="file"] {
-		  position: absolute;
-		  width: 1px;
-		  height: 1px;
-		  padding: 0;
-		  margin: -1px;
-		  overflow: hidden;
-		  clip: rect(0, 0, 0, 0);
-		  border: 0;
-		}
-		
-		/* sns파일 업로드시 미리보기  */
-		.fileDiv {
-			height: 100px;
-			width: 200px;
-			display: none;
-			margin-bottom: 10px;
-		}
-		.fileDiv img {
-			width: 100%;
-			height: 100%;
-		}
-		/* 모달창 조절 */
-		.modal-body {
-			padding: 0px;
-		}
-		.modal-content > .row {
-			margin: 0px;
-		}
-		.modal-body > .modal-img {
-			padding: 0px;
-		}
-		.modal-body > .modal-con {
-			padding: 15px;
-		}
-		.modal-inner {
-            position: relative;
-        }
-        .modal-inner .profile{
-            position: absolute;/*부모기준으로 위치지정 릴레이티브*/
-            top: 0px;
-            left: 0px;
-        }
-        .modal-inner .title {
-            padding-left: 50px;
-        }
-		.modal-inner p {
-			margin: 0px;
-		}
 	</style>
 	
 </head>
@@ -170,7 +97,7 @@
 			<div class="row">
 				<!-- 목록영역 -->
 				<%@ include file="../../include/aside.jsp" %>
-				<div class="col-xs-12 col-sm-9 col-md-10 section-inner">
+				<div class="col-xs-12 col-sm-9 col-md-9 section-inner">
 					<!-- 강의영역 -->
 					<div class="contentDiv" id="contentDiv">
 	                    <div class="titlebox">
@@ -218,10 +145,10 @@
 							<div class='reply-content'>
 								<div class='reply-group'>
 									<strong class='left'>honggildong</strong> <small class='left'>2019/12/10</small>
-									<a href='#' class='right' id="replyModify"><span
-										class='glyphicon glyphicon-pencil'></span>수정</a> <a href='#'
-										class='right' id="replyDelete"><span
-										class='glyphicon glyphicon-remove'></span>삭제</a>
+									<a href='#' class='right' id="replyModify">
+									<span class='glyphicon glyphicon-pencil'></span>수정</a> 
+									<a href='#'	class='right' id="replyDelete">
+									<span class='glyphicon glyphicon-remove'></span>삭제</a>
 								</div>
 								<p class='clearfix'>여기는 댓글영역</p>
 							</div>
@@ -238,38 +165,50 @@
 	<%@ include file="../../include/footer.jsp" %>
 
 	<!-- 모달 -->
-	<div class="modal fade" id="snsModal" role="dialog">
-			<div class="modal-dialog modal-lg">
+	<div class="modal fade" id="replyModal" role="dialog">
+		<div class="modal-dialog modal-md">
 			<div class="modal-content">
-				<div class="modal-body row">
-					<div class="modal-img col-sm-8 col-xs-6" >
-						<img src="../../resources/img2/img_ready.png" id="snsImg" width="100%">
-					</div>
-					<div class="modal-con col-sm-4 col-xs-6">
-						<div class="modal-inner">
-						<div class="profile">
-							<img src="../../resources/img/profile.png">
-						</div>
-						<div class="title">
-							<p id="snsWriter">테스트</p>
-							<small id="snsRegdate">21시간전</small>
-						</div>
-						<div class="content-inner">
-							<p id="snsContent">삶이 우리를 끝없이 시험하기에 고어텍스는 한계를 테스트합니다</p>
-						</div>
-						<div class="link-inner">
-							<a href="##"><i class="glyphicon glyphicon-thumbs-up"></i>좋아요</a>
-							<a href="##"><i class="glyphicon glyphicon-comment"></i>댓글달기</a> 
-							<a href="##"><i class="glyphicon glyphicon-share-alt"></i>공유하기</a>
-						</div>
+				<div class="modal-header">
+					<button type="button" class="btn btn-default pull-right"
+						data-dismiss="modal">닫기</button>
+					<h4 class="modal-title">댓글수정</h4>
+				</div>
+				<div class="modal-body">
+					<!-- 수정폼 id값을 확인하세요-->
+					<div class="reply-content">
+						<textarea class="form-control" rows="4" id="modalReply"
+							placeholder="내용입력"></textarea>
+						<div class="reply-group">
+							<div class="reply-input">
+								<input type="hidden" id="modalRno"> <input
+									type="password" class="form-control" placeholder="비밀번호"
+									id="modalPw">
+							</div>
+							<button class="right btn btn-info" id="modalModBtn">수정하기</button>
+							<button class="right btn btn-info" id="modalDelBtn">삭제하기</button>
 						</div>
 					</div>
+					<!-- 수정폼끝 -->
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	
+	<script>
+
+		let replyRegist = document.querySelector("#replyModify");
+		replyRegist.addEventListener("click", modalOpen);
+		
+		function modalOpen() {
+			event.preventDefault();
+			$("#replyModal").modal("show");	
+		}
+		
+		(function() {
+			
+			
+		})();
+	</script>
 	
 </body>
 </html>
