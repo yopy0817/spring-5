@@ -1,7 +1,8 @@
 create table lecture(
     lecno number(10, 0),
     lecname varchar2(50),
-    lecregdate date DEFAULT sysdate
+    lecregdate date DEFAULT sysdate,
+    lecImg varchar2(50)
 );
 alter table lecture add CONSTRAINT lecture_lecno_pk PRIMARY KEY (lecno);
 
