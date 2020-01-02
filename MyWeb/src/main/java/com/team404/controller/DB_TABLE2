@@ -11,8 +11,8 @@ create table lecture_list(
     leclistno number(10, 0), --pk    
     leclistname varchar2(50), --강의이름
     leclistcomment varchar2(500), --코멘트
-    likes number(10, 0), --좋아요
-    bookmark number(10, 0), --즐겨찾기
+    likes number(10, 0) default 0, --좋아요
+    bookmark number(10, 0) default 0, --즐겨찾기
     regdate date DEFAULT sysdate
 );
 alter table lecture_list add CONSTRAINT lecture_list_leclistno_pk PRIMARY KEY (leclistno);
