@@ -10,11 +10,11 @@ create table freeboard(
 
 ////////////서브쿼리뒤에 엘리에스가 반드시 들어가야됨
 select * 
-from (select @rownum as rn, bno, writer, title, content, regdate, updatedate
+from (select @rownum := @rownum + 1 as rn, bno, writer, title, content, regdate, updatedate
       from (select * 
             from freeboard 
             order by bno desc
-            ) as sub2
+            ) as sub2, (select @rownum:=0) as rn
 ) as sub2 
 where rn > 0 and rn <= 10;
 
