@@ -10,16 +10,66 @@
   	<!-- CDATA는 부등호를 사용하기 위한 선언 --> 
   	<insert id="regist">
   		<![CDATA[
-  		  	insert into freeboard( title, content, writer)
-  		  	values( #{title}, #{content}, #{writer})
+  		  	insert into freeboard(bno, title, content, writer)
+  		  	values(freeboard_seq.nextval, #{title}, #{content}, #{writer})
   		]]>  		
   	</insert>
-
-	<!-- mysql에서 rownum은 @rownum := @rownum + 1 로 얻음, 그리고 서브쿼리절에서 (select @rownum:=0) as rn -->
+  	
+  	<!-- select구문은 반드시 resultType이 존재해야 합니다 -->
+  	<!-- resultType에는 반환에 사용되는 전체경로가 들어갑니다 -->
+  	<!-- 만약 마이바티스 설정 파일에 typeAlias를 선언했다면 줄여서 간단하게 사용이 가능합니다 -->
+  	<!-- 
+  	<select id="getList" resultType="FreeBoardVO">
+  		select * from freeboard order by bno desc
+  	</select>
+	-->
+	<!-- 
+	<select id="getList" resultType="FreeBoardVO">
+		<![CDATA[
+			select * 
+			from (select rownum as rn, bno, writer, title, content, regdate, updatedate
+			      from (select * 
+			            from freeboard 
+			            order by bno desc
+			            )
+			) where rn > (#{pageNum}-1) * #{amount} and rn <= (#{pageNum}* #{amount})	
+		]]>
+	</select>
+	 -->
+	<!--  
 	<select id="getList" resultType="FreeBoardVO">
 		<![CDATA[
 		select * 
-		from(select @rownum := @rownum+1 as rn,
+		from (select rownum as rn, bno, writer, title, content, regdate, updatedate
+		      from (select * 
+		            from freeboard
+		            where 
+		]]>
+					<if test="searchType == 'title' ">title like '%'||#{searchName}||'%'</if>
+					<if test="searchType == 'content' ">content like '%'||#{searchName}||'%'</if>
+					<if test="searchType == 'writer' ">writer like '%'||#{searchName}||'%'</if>
+					<if test="searchType == 'titcont' ">title like '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'</if>							
+					<if test="searchType == null or searchType == '' ">1=1</if>
+					
+					<choose>
+						<when test="searchType == 'title' ">title like '%'||#{searchName}||'%'</when>
+						<when test="searchType == 'content' ">content like '%'||#{searchName}||'%'</when>
+						<when test="searchType == 'writer' ">writer like '%'||#{searchName}||'%'</when>
+						<when test="searchType == 'titcont' ">title like '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'</when>
+						<otherwise>1 = 1</otherwise>
+					</choose>
+						            
+		<![CDATA[	             
+		            order by bno desc
+		            )
+		) where rn > (#{pageNum}-1) * #{amount} and rn <= (#{pageNum}* #{amount})	
+		]]>
+	</select>
+	-->
+	<select id="getList" resultType="FreeBoardVO">
+		<![CDATA[
+		select * 
+		from(select rownum as rn,
            	 bno,
 			 title,
            	 content, 
@@ -33,7 +83,7 @@
                           writer,
                           regdate,
                           updatedate,
-                          IFNULL(total, 0) as total
+                          NVL(total, 0) as total
                    from freeboard a LEFT OUTER JOIN (select count(*) as total, bno from freereply group by bno) b on a.bno = b.bno
 				   where
 		]]>
@@ -44,9 +94,8 @@
 				   <if test="searchType == null or searchType == '' ">1=1</if>
 		<![CDATA[	             
 		           order by bno desc
-		           ) as sub1 , (select @rownum:=0) as rn
-		) as sub2
-		where rn > (#{pageNum}-1) * #{amount} and rn <= (#{pageNum}* #{amount})	
+		           )
+		) where rn > (#{pageNum}-1) * #{amount} and rn <= (#{pageNum}* #{amount})	
 		]]>
 	</select>
 	
@@ -71,7 +120,7 @@
 			set title = #{title}, 
 			content = #{content}, 
 			writer = #{writer}, 
-			updatedate = CURRENT_TIMESTAMP
+			updatedate = sysdate
 		where bno = #{bno}
 		
 	</update>

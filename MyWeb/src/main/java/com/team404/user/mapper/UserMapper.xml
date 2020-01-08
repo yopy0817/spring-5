@@ -4,7 +4,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <!-- VO의 등록을 마이바티스 설정파일에 하세요 -->
+  <!-- mysql버전 -->
   <mapper namespace="com.team404.user.mapper.UserMapper">
   	
   	<!-- 아이디중복확인 --><!-- 닉네임중복확인 -->
@@ -28,7 +28,7 @@
   		  	   #{addrZipNum}, 
   		  	   #{addrBasic}, 
   		  	   #{addrDetail}, 
-  		  	   sysdate
+  		  	   CURRENT_TIMESTAMP
   		  	   )
   	</insert>
   	<!-- 로그인 -->
