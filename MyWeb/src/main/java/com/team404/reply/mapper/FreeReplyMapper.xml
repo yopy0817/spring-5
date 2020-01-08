@@ -7,8 +7,8 @@
   <mapper namespace="com.team404.reply.mapper.FreeReplyMapper">
   
   	<insert id="regist">
-  		insert into freeReply (rno, bno, reply, replyId, replyPw)
-  		values (freeReply_seq.nextval, #{bno}, #{reply}, #{replyId}, #{replyPw})
+  		insert into freeReply ( bno, reply, replyId, replyPw)
+  		values ( #{bno}, #{reply}, #{replyId}, #{replyPw})
   	</insert>
   	
   	<!-- 마이바티스 컨피그에 등록 -->
@@ -17,17 +17,21 @@
   		select * from freereply where bno = #{bno} order by rno desc
   	</select>
   	 -->
+  	 
+  	 
   	<!-- 더보기 -->
+  	<!-- mysql에서 rownum은 @rownum := @rownum + 1 로 얻음, 그리고 서브쿼리절에서 (select @rownum:=0) as rn -->
   	<select id="getList" resultType="ReplyVO" >
   		<![CDATA[
   		select * 
-			from(select  rownum as rn, rno, bno, reply, replyId, replyPw, replyDate  
+			from(select @rownum := @rownum+1 as rn, rno, bno, reply, replyId, replyPw, replyDate  
 			     from(select * 
 			          from freereply 
 			          where bno = #{bno} 
 			          order by rno desc
-			          )
-		) where rn > (#{cri.pageNum}-1)*#{cri.amount} and rn <= #{cri.pageNum} * #{cri.amount}
+			          ) as sub1, (select @rownum:=0) as rn
+		) as sub2
+		where rn > (#{cri.pageNum}-1)*#{cri.amount} and rn <= #{cri.pageNum} * #{cri.amount}
 		]]>
   	</select>
   	<select id="getCount" resultType="int">
@@ -49,7 +53,7 @@
   	
   	<!-- 댓글수정 -->
   	<update id="update">
-  		update freereply set reply = #{reply}, updatedate = sysdate where rno = ${rno} 
+  		update freereply set reply = #{reply}, updatedate = CURRENT_TIMESTAMP where rno = ${rno} 
   	</update>
   	
   </mapper>

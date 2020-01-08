@@ -6,8 +6,8 @@
   <mapper namespace="com.team404.snsboard.mapper.SnsBoardMapper">
   	<!-- 등록하기 -->
   	<insert id="insert">
-  		insert into snsboard( writer, uploadPath, fileLoca, fileName, fileRealName, content)
-  			values( #{writer}, #{uploadPath}, #{fileLoca}, #{fileName}, #{fileRealName}, #{content})
+  		insert into snsboard(bno, writer, uploadPath, fileLoca, fileName, fileRealName, content)
+  			values(snsboard_seq.nextval, #{writer}, #{uploadPath}, #{fileLoca}, #{fileName}, #{fileRealName}, #{content})
   	</insert>	
   	<!-- 전체목록 -->
   	<select id="getList" resultType="SnsBoardVO">

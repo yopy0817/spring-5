@@ -1,0 +1,55 @@
+///////////mysql타입 int, varchar, datetime
+create table freeboard(
+    bno int primary key auto_increment,
+    title varchar(200) not null,
+    content varchar(2000) not null,
+    writer varchar(50) not null,
+    regdate datetime DEFAULT CURRENT_TIMESTAMP,
+    updatedate datetime DEFAULT CURRENT_TIMESTAMP
+);
+
+////////////서브쿼리뒤에 엘리에스가 반드시 들어가야됨
+select * 
+from (select @rownum := @rownum + 1 as rn, bno, writer, title, content, regdate, updatedate
+      from (select * 
+            from freeboard 
+            order by bno desc
+            ) as sub2, (select @rownum:=0) as rn
+) as sub2 
+where rn > 0 and rn <= 10;
+
+create table freereply (
+
+    rno int primary key auto_increment,
+    bno int,
+    reply varchar(1000),
+    replyId varchar(50),
+    replyPw varchar(50),
+    replydate datetime default CURRENT_TIMESTAMP,
+    updatedate datetime default CURRENT_TIMESTAMP
+);
+
+create table users(
+    userId varchar(50) primary key,
+    userPw varchar(50) not null,
+    userName varchar(50) not null,
+    userPhone1 varchar(50) not null,
+    userPhone2 varchar(50) not null,
+    userEmail1 varchar(50) not null,
+    userEmail2 varchar(50) not null,
+    addrZipNum varchar(50) not null,
+    addrBasic varchar(300) not null,
+    addrDetail varchar(300) not null,
+    regDate datetime default CURRENT_TIMESTAMP
+);
+
+create table snsboard(
+    bno int primary key AUTO_INCREMENT,
+    writer varchar(50) not null,
+    uploadpath varchar(100) not null,
+    fileloca varchar(100) not null,
+    fileName varchar(50) not null,
+    filerealName varchar(50) not null,
+    content varchar(2000),
+    regdate datetime default CURRENT_TIMESTAMP
+);

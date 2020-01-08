@@ -204,7 +204,7 @@
                    			
                 			var strAdd = ""; //2nd
                    			for(var i = 0; i < list.length; i++) {
-                   				strAdd += "<div class='reply-wrap' style='display:none;'>"; //2nd
+                   				strAdd += "<div class='reply-wrap'>"; //2nd
                    				strAdd += "<div class='reply-image'>";
                    				strAdd += "<img src='../resources/img/profile.png'>";
                    				strAdd += "</div>";
@@ -220,11 +220,13 @@
                    				strAdd += "</div>";
                    			}
                    			//1st:문자열을 통째로 추가한다
-                            //$("#replyList").html(str); 
-                          	//2nd: 기존의 replyList의 뒤쪽에 새로운 댓글을 추가적으로 더하고 서서히 보이게 처리
+                            $("#replyList").html(strAdd); 
+                          	
+                   			//안돼요.수정요망
+                   			//2nd: 기존의 replyList의 뒤쪽에 새로운 댓글을 추가적으로 더하고 서서히 보이게 처리
                           	//		단. 화면을 그릴때 style="display:none;" 처리	
-                            $("#replyList").append(strAdd);
-                            $(".reply-wrap").fadeIn(500);
+							//$("#replyList").append(strAdd);
+                            //$(".reply-wrap").fadeIn(500);
                           	
                 		}
                 	)
