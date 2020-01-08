@@ -1,4 +1,4 @@
-///////////mysql타입 int, varchar, datetime
+////////////mysql타입 int, varchar, datetime
 create table freeboard(
     bno int primary key auto_increment,
     title varchar(200) not null,
