@@ -21,7 +21,7 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-7 col-xs-10 login-form">
+                <div class="col-lg-4 col-md-6 col-xs-12 login-form">
                     <div class="titlebox">
                        	 로그인
                     </div>
