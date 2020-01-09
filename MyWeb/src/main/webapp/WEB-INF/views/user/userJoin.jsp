@@ -23,7 +23,7 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-9 col-sm-12 join-form">
+                <div class="col-lg-4 col-md-4 col-sm-12 join-form">
                     <div class="titlebox">
                        	 회원가입
                     </div>

@@ -375,7 +375,7 @@
 				$.getJSON(
 					"getList",
 					function(list) {
-						console.log( JSON.stringify(list) );
+						//console.log( JSON.stringify(list) );
 						
 						for(var i = 0; i < list.length; i++) {
 							str += "<div class='title-inner'>";
@@ -420,7 +420,7 @@
 				$.getJSON(
 					"../snsBoard/getDetail/" + bno,
 					function(data) {
-						console.log(data)
+						//console.log(data)
 						var img = "display?fileLoca="+data.fileLoca +"&fileName="+data.fileName;
 						$("#snsImg").attr("src", img); //이미지경로처리
 						$("#snsWriter").html(data.writer); //글쓴이처리
@@ -474,7 +474,7 @@
     		function timeStamp(millis) {
     	        var date = new Date();//오늘날짜
     			var gap = date.getTime() - millis; //시간차이
-    	        console.log("경과밀리초:" + gap);
+    	        //console.log("경과밀리초:" + gap);
 
     	        var time; //리턴할 시간
     	        if(gap < 1000 * 60 * 60 * 24) {  //1일 이하인 경우
@@ -494,7 +494,7 @@
     	            var second = today.getSeconds();//초
     	            time = year +"년"+month+"월"+day+"일" +hour+":"+minute+":"+second;
     	        }
-    	        console.log(time);
+    	        //console.log(time);
     	        return time;
     		}
 		})
@@ -521,17 +521,7 @@
 		$("#file").change(function() {
 	        readURL(this); //this는 #file자신 태그를 의미
 	    })
-	    
-	    
-	    //이거무한스크롤
-	    var page = 1;
-		$(window).scroll(function() {
-		    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-		      console.log(++page);
-		      $("#contentDiv").append("<h1>Page " + page + "</h1><BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~");
-		      
-			}
-		});
+
 	</script>
 	
 	

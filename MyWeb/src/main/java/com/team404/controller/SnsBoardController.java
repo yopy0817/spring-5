@@ -80,12 +80,13 @@ public class SnsBoardController {
 			//저장할폴더
 			//String uploadPath = "C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileLoca;
 			//String uploadPath = "D:\\jsp\\upload\\" + fileLoca;
-			String uploadPath = "C:\\Users\\kimsh\\Desktop\\spring\\upload\\" + fileLoca;
+			//String uploadPath = "C:\\Users\\kimsh\\Desktop\\spring\\upload\\" + fileLoca;
+			String uploadPath = "/var/upload/" + fileLoca;
 			
 			//File folder = new File(uploadPath); //날짜별 파일생성
 			//File folder = new File("D:\\jsp\\upload\\" + fileLoca); //날짜별 파일생성
-			File folder = new File("C:\\Users\\kimsh\\Desktop\\spring\\upload\\" + fileLoca); //날짜별 파일생성
-			
+			//File folder = new File("C:\\Users\\kimsh\\Desktop\\spring\\upload\\" + fileLoca); //날짜별 파일생성
+			File folder = new File("/var/upload/" + fileLoca);
 			if(!folder.exists()) {
 				folder.mkdir();
 			}
@@ -112,7 +113,8 @@ public class SnsBoardController {
 			String fileName = uuids + fileExtension;
 			System.out.println("변경해서저장할파일명:" + fileName);
 			
-			File saveFile = new File(uploadPath + "\\" + fileName);
+			//File saveFile = new File(uploadPath + "\\" + fileName);
+			File saveFile = new File(uploadPath + "/" + fileName);
 			file.transferTo(saveFile); //스프링의 실제 파일 저장 메서드(FileWriter작업을 손쉽게 한방에 처리해준다)
 			
 			//서비스단에서 DB에 insert작업
@@ -172,7 +174,8 @@ public class SnsBoardController {
 		System.out.println("fileLoca: " + fileLoca);
 		//File file = new File("C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileLoca + "\\" + fileName);
 		//File file = new File("D:\\jsp\\upload\\" + fileLoca + "\\" + fileName);
-		File file = new File("C:\\Users\\kimsh\\Desktop\\spring\\upload\\" + fileLoca + "\\" + fileName);
+		//File file = new File("C:\\Users\\kimsh\\Desktop\\spring\\upload\\" + fileLoca + "\\" + fileName);
+		File file = new File("/var/upload/" + fileLoca + "/" + fileName);
 		System.out.println("file: " + file);
 		
 		
@@ -210,7 +213,9 @@ public class SnsBoardController {
 		
 		boolean result = snsBoardService.delete(bno);//DB삭제메서드 실행
 		if(result) {
-			File file = new File(vo.getUploadPath() + "\\" + vo.getFileName());
+			//File file = new File(vo.getUploadPath() + "\\" + vo.getFileName());
+			File file = new File(vo.getUploadPath() + "/" + vo.getFileName());
+			
 			return file.delete() ? "success" : "fail"; //파일삭제 메서드
 		} else {
 			return "fail"; //DB삭제 실패시 fail리턴
@@ -224,7 +229,8 @@ public class SnsBoardController {
 											@RequestParam("fileName")String fileName) {
 		//File file = new File("C:\\Users\\Park\\Desktop\\spring\\upload\\" + fileLoca + "\\" + fileName);
 		//File file = new File("D:\\jsp\\upload\\" + fileLoca + "\\" + fileName);
-		File file = new File("C:\\Users\\kimsh\\Desktop\\spring\\upload\\" + fileLoca + "\\" + fileName);
+		//File file = new File("C:\\Users\\kimsh\\Desktop\\spring\\upload\\" + fileLoca + "\\" + fileName);
+		File file = new File("/var/upload/" + fileLoca + "/" + fileName);
 		
 		ResponseEntity<byte[]> result = null;
 		try {
@@ -249,16 +255,7 @@ public class SnsBoardController {
 		return result;
 		
 		
-		//헤더설정이 안되서 처리가 안됌
-//		byte[] result = null;
-//		try {
-//			//스프링의 파일데이터를 읽어서 바이트배열형으로 리턴하는 메서드 (매개변수로 File타입을 받는다)
-//			result = FileCopyUtils.copyToByteArray(file); 
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		return result;
-				
+
 	}
 	
 }
