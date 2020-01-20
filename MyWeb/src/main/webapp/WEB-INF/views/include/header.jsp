@@ -21,22 +21,8 @@
                                 <li class="active"><a href="${pageContext.request.contextPath }">Main</a></li>
                                 <li><a href="${pageContext.request.contextPath }/freeBoard/freeList">자유게시판</a></li>
                                 <li><a href="${pageContext.request.contextPath }/snsBoard/snsList">페이스북</a></li>
-                            	<%--
-                            	<li class="dropdown">
-                            	    <a class="dropdown-toggle" data-toggle="dropdown" href="#">언어</a>
-	                            	<ul class="dropdown-menu">
-				                        <li class="dropdown-submenu">
-				                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-				                            <ul class="dropdown-menu">
-				                                <li><a href="#">Action</a></li>
-				                                <li><a href="#">Another action</a></li>
-				                                <li><a href="#">Something else here</a></li>
-				                            </ul>
-				                        </li>
-				                    </ul>
-                            	</li>
-                            	--%>
-                            	<!-- 1중드롭다운 -->
+                            	<!-- 1중드롭다운(개발테스트중) -->
+                            	<%-- 
                             	<li class="dropdown">
                             	    <a class="dropdown-toggle" data-toggle="dropdown" href="#">언어</a>
                                     <ul class="dropdown-menu">
@@ -45,6 +31,9 @@
                                     	<li><a href="${pageContext.request.contextPath }/lecture/300/300">테스트</a></li>
                                     </ul>
                             	</li>
+                            	--%>
+                            	
+                            	
                             	
                             	<%-- 
                             	<li class="dropdown drophover" ><!--drophover클래스를 주면 호버기능이 들어갑니다-->

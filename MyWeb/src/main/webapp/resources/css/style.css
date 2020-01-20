@@ -309,7 +309,7 @@ footer .footer-menu li a {
 	padding: 60px 60px; /*위아래, 좌우*/
 	/*박스 쉐도우: 그림자가 가로로떨어진간격, 세로로떨어진 간격, 흐릿정도, 그림자색상*/
 	box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
-	margin-bottom: 174px; /*화면에 딱맞게 밀어준다*/
+	margin-bottom: 174px; /*화면에 딱맞게 밀r어준다*/
 }
 
 /*========회원정보 디자인=========*/
@@ -319,7 +319,7 @@ footer .footer-menu li a {
 }
 
 .m-control .form-control {
-	width: 200px;
+	width: 180px;
 	display: inline; /*인라인요소로 변경한다*/
 }
 /*개발자 도구에서 input-sm의 정렬을 푼다*/
@@ -333,7 +333,7 @@ footer .footer-menu li a {
 }
 
 .m-control .add {
-	width: 400px;
+	width: 285px;
 }
 
 .titlefoot {
@@ -368,11 +368,11 @@ footer .footer-menu li a {
 }
 
 .search-input {
-	width: 200px;
+	width: 180px;
 }
 
 .search-select {
-	width: 100px;
+	width: 80px;
 }
 
 /*제목에 클래스를 줘서 강제로 크기 고정*/
