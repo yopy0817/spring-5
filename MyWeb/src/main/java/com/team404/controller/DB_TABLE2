@@ -5,7 +5,7 @@ create table lecture(
     lecImg varchar2(50)
 );
 alter table lecture add CONSTRAINT lecture_lecno_pk PRIMARY KEY (lecno);
-
+ 
 create table lecture_list(
     lecno number(10, 0), --fk
     leclistno number(10, 0), --pk    
