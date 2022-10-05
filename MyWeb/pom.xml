@@ -183,7 +183,7 @@
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
-		    <version>2.9.8</version>
+		    <version>2.12.6.1</version>
 		</dependency>
 		
 		<!-- aop관련 설정은 위쪽에 있으며, aop위버 라이브러리를 통해 동작함 반드시 추가 -->
